@@ -13,3 +13,4 @@ lrn
 .grifter/
 .env
 *.pem
+*.swp
