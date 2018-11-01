@@ -25,15 +25,15 @@ func PushPayloadHandler(c buffalo.Context) error {
     head := c.Request.params.Header
 
     return c.Render(201, r.String("pong"))
-    eventType := head['X-GitHub-Event']
+    eventType := head["X-GitHub-Event"]
     if eventType == "" {
         //Not a git event
     }else{
         switch eventType{
-            case 'ping':
-                output := Response{'pong'}
+            case "ping":
+                output := Response{"pong"}
                 return c.Render(201, r.JSON(output))
-            case 'push':
+            case "push":
                 //do push things
         }
     }
@@ -44,8 +44,8 @@ func PushPayloadHandler(c buffalo.Context) error {
 
     pullCMD := exec.Command("git", "-C /home/www-go/go/src/github.com/cileonard/lrn", "pull", "git@github.com:CILeonard/lrn")
 
-    if err := pullCMD.run(); err != nil{
-        fmt.println("Couldnt pull the git")
+    if err := pullCMD.Run(); err != nil{
+        fmt.Println("Couldnt pull the git")
     }
 
     return nil
