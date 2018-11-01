@@ -38,7 +38,7 @@ func PushPayloadHandler(c buffalo.Context) error {
                 if err := pullCMD.Run(); err != nil {
                     return c.Render(500, r.String(err.Error()))
                 }
-                output := & Response{"Succesful Pull"}
+                output := & Response{"Succesful Pull!"}
                 return c.Render(201, r.JSON(output))
             default:
                 return c.Render(500, r.String("Not a handled Event"))
