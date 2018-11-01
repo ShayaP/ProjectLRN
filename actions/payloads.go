@@ -24,6 +24,7 @@ type Response struct{
 func PushPayloadHandler(c buffalo.Context) error {
     head := c.request.params.Header
 
+    return c.Render(201, r.String("pong"))
     eventType := head['X-GitHub-Event']
     if eventType == "" {
         //Not a git event
