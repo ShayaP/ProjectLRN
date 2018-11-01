@@ -11,10 +11,34 @@ type PushReq struct{
     Repo    string
 }
 
+type GitPing struct{
+    Zen     string
+    Hook_ID string
+    Hook    string
+}
+
+type Response struct{
+    msg     string
+}
+
 func PushPayloadHandler(c buffalo.Context) error {
+    head := c.request.params.Header
+
+    eventType := head['X-GitHub-Event']
+    if eventType == "" {
+        //Not a git event
+    }else{
+        switch eventType{
+            case 'ping':
+                output := Response{'pong'}
+                return c.Render(201, r.JSON(output))
+            case 'push':
+                //do push things
+        }
+    }
     req := &PushReq{}
     if err := c.Bind(req); err != nil {
-        return err
+        return c.Render(500, r.String(err.Error()))
     }
 
     pullCMD := exec.Command("git", "-C /home/www-go/go/src/github.com/cileonard/lrn", "pull", "git@github.com:CILeonard/lrn")
