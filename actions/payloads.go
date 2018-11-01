@@ -1,7 +1,7 @@
 package actions
 
 import "github.com/gobuffalo/buffalo"
-import "encoding/json"
+//import "encoding/json"
 import "os/exec"
 import "fmt"
 
@@ -22,7 +22,7 @@ type Response struct{
 }
 
 func PushPayloadHandler(c buffalo.Context) error {
-    head := c.request.params.Header
+    head := c.Request.params.Header
 
     return c.Render(201, r.String("pong"))
     eventType := head['X-GitHub-Event']

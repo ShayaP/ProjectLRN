@@ -14,3 +14,4 @@ lrn
 .env
 *.pem
 *.swp
+database.yml
