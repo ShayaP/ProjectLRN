@@ -25,7 +25,6 @@ func PushPayloadHandler(c buffalo.Context) error {
     head := c.Request().Header
     eventType := head.Get("X-GitHub-Event")
     if eventType == "" {
-        //Not a git event
         return c.Render(500, r.String("Not a GitHub Event"))
     }else{
         switch eventType{
