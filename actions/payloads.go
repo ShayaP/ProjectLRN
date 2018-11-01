@@ -1,10 +1,11 @@
 package actions
 
-import "github.com/gobuffalo/buffalo"
-//import "encoding/json"
-import "os/exec"
-import "fmt"
-
+import (
+    "github.com/gobuffalo/buffalo"
+    //import "encoding/json"
+    "os/exec"
+    "fmt"
+)
 type PushReq struct{
     Author  string
     Message string
@@ -22,12 +23,11 @@ type Response struct{
 }
 
 func PushPayloadHandler(c buffalo.Context) error {
-    head := c.Request.Header
-
-    return c.Render(201, r.String("pong"))
-    eventType := head["X-GitHub-Event"]
+    head := c.Request().Header
+    eventType := head.Get("X-GitHub-Event")
     if eventType == "" {
         //Not a git event
+        return c.Render(500, r.String("Not a GitHub Event"))
     }else{
         switch eventType{
             case "ping":
