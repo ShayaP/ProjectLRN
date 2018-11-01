@@ -12,3 +12,4 @@ lrn
 .vscode/
 .grifter/
 .env
+*.pem
