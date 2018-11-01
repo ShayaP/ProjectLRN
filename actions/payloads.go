@@ -22,7 +22,7 @@ type Response struct{
 }
 
 func PushPayloadHandler(c buffalo.Context) error {
-    head := c.Request.params.Header
+    head := c.Request.Header
 
     return c.Render(201, r.String("pong"))
     eventType := head["X-GitHub-Event"]
