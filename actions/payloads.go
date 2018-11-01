@@ -4,7 +4,6 @@ import (
     "github.com/gobuffalo/buffalo"
     //import "encoding/json"
     "os/exec"
-    "fmt"
 )
 type PushReq struct{
     Author  string
