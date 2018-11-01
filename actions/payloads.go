@@ -2,7 +2,6 @@ package actions
 
 import (
     "github.com/gobuffalo/buffalo"
-    //import "encoding/json"
     "os/exec"
 )
 type PushReq struct{
