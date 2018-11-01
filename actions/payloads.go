@@ -3,6 +3,7 @@ package actions
 import (
     "github.com/gobuffalo/buffalo"
     "os/exec"
+    "fmt"
 )
 type PushReq struct{
     Author  string
