@@ -33,7 +33,7 @@ func PushPayloadHandler(c buffalo.Context) error {
                 return c.Render(201, r.JSON(output))
             case "push":
                 fmt.Println("Push received")
-                pullCMD := exec.Command("git", "-C /home/www-go/go/src/github.com/cileonard/lrn", "pull", "git@github.com:CILeonard/lrn.git")
+                pullCMD := exec.Command("git", "-C", "/home/www-go/go/src/github.com/cileonard/lrn", "pull", "git@github.com:CILeonard/lrn.git")
                 if err := pullCMD.Run(); err != nil {
                     fmt.Println("Error pulling")
                     return c.Render(500, r.String(err.Error()))
