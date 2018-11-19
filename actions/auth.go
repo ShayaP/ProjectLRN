@@ -36,6 +36,7 @@ import (
 	"encoding/json"
 	"encoding/base64"
 	"io/ioutil"
+	"github.com/gobuffalo/envy"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -70,9 +71,9 @@ func (u lrnUser) printUserInfo(w http.ResponseWriter, r *http.Request) {
 
 func init() {
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL: "http://lrn-cse100/callback",
-		ClientID: ENV.Get("CLIENT_ID"),
-		ClientSecret: Env.Get("SECRET_KEY"),
+		RedirectURL: "http://lrn-cse110.me/callback",
+		ClientID: envy.Get("CLIENT_ID"),
+		ClientSecret: envy.Get("SECRET_KEY"),
 		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint: google.Endpoint,
 	}
