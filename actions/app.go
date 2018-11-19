@@ -62,11 +62,11 @@ func App() *buffalo.App {
 
 		app.GET("/", HomeHandler)
         app.POST("/payload", PushPayloadHandler)
-        app.GET("/login", handleLogin)
+        //app.GET("/login", LoginHandler)
 
 		auth := app.Group("/auth")
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
-		auth.GET("/{provider}/callback", AuthCallback)
+		//auth.GET("/{provider}/callback", AuthCallback)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

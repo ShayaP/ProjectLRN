@@ -72,8 +72,8 @@ func (u lrnUser) printUserInfo(w http.ResponseWriter, r *http.Request) {
 func init() {
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL: "http://lrn-cse110.me/callback",
-		ClientID: envy.Get("CLIENT_ID"),
-		ClientSecret: envy.Get("SECRET_KEY"),
+		ClientID: envy.Get("CLIENT_ID",""),
+		ClientSecret: envy.Get("SECRET_KEY",""),
 		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint: google.Endpoint,
 	}
@@ -132,12 +132,12 @@ func init() {
 // 	fmt.Fprint(w, html)
 // }
 
-func handleLogin(w http.ResponseWriter, r *http.Request) {
-	oauthState := generateStateOauthCookie(w)
-	url := googleOauthConfig.AuthCodeURL(oauthState)
-	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
+//func LoginHandler(c buffalo.Context) {
+	//oauthState := generateStateOauthCookie(w)
+	//url := googleOauthConfig.AuthCodeURL(oauthState)
+	//http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 
-}
+//}
 
 func generateStateOauthCookie(w http.ResponseWriter) string {
 	var expiration = time.Now().Add(365 * 24 * time.Hour)
