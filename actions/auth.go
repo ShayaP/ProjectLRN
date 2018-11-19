@@ -30,7 +30,6 @@ package actions
 
 import (
 	"net/http"
-	"os"
 	"fmt"
 	"math/rand"
 	"time"
@@ -70,12 +69,10 @@ func (u lrnUser) printUserInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
-	// os.Setenv("CLIENT_ID", "190043352193-6gosbi41ard6f1itomqnd3u9kb831gtg.apps.googleusercontent.com")
- //    os.Setenv("SECRET_KEY", "mqkCA9p7dY1eej9TqmhkzFQx")
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL: "http://lrn-cse100/callback",
-		ClientID: envy.Get("CLIENT_ID"),
-		ClientSecret: envy.Get("SECRET_KEY"),
+		ClientID: ENV.Get("CLIENT_ID"),
+		ClientSecret: Env.Get("SECRET_KEY"),
 		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email"},
 		Endpoint: google.Endpoint,
 	}
