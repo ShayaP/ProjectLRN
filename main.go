@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/cileonard/test/actions"
+	"github.com/cileonard/lrn/actions"
 )
 
 // main is the starting point for your Buffalo application.
