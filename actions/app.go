@@ -61,8 +61,10 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
-        app.POST("/payload", PushPayloadHandler)
-        //app.GET("/login", LoginHandler)
+		app.GET("/profile", ProfileHandler)
+		app.GET("/update-profile", UpdateProfileHandler)
+        	app.POST("/payload", PushPayloadHandler)
+        	//app.GET("/login", LoginHandler)
 
 		auth := app.Group("/auth")
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))

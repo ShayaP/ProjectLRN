@@ -10,7 +10,17 @@
     <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
   </head>
   <body>
+	<!--A basic navigation bar so we can link to the different
+		pages until the home page is built
+	-->
+   	 <nav>
+		<a href="profilePath()">MyProfile</a>
+		<a href="/#">Messages</a>
+		<a href="/#">Find</a>
+		<a href="/#">MyRequests</a>
+		<a href="/#">MyReviews</a>
 
+	</nav>
     <div class="container">
       <%= partial("flash.html") %>
       <%= yield %>
