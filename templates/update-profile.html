@@ -1,0 +1,211 @@
+      <div class="row">
+
+        <div class="col-lg-3">
+          <h1 class="my-4"></h1>
+          <div class="list-group  m_cFixed m_cBlock">
+            <a href="#m_iPersonalInfo" class="list-group-item active">Personal Information</a>
+            <a href="#m_iSubjects" class="list-group-item" title="Jump to subjects">Subjects</a>
+            <a href="#m_iLanguages" class="list-group-item" title="Jump to languages">Languages</a>
+            <a href="#m_iTutorSess" class="list-group-item" title="Jump to tutoring sessions">Tutoring Sessions</a>
+            <a href="#" class="btn btn-success" title="Save changes">Save</a>
+            <a href="#" class="btn btn-warning" title="Cancel changes">Cancel</a>
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+            <h2 class="card-title">MyProfile</h2>
+            <div class="m_cMulticontainer">
+              <div class="m_cHalfpiece">
+              <img class="card-img-top img-fluid m_cImg" src="<%= assetPath("images/selfie.png") %>" alt="user profile picture">
+              </div>
+                <div class="card-header halfpiece m_cCenterBox">
+                  <div class="card-header">
+                    <h1 >Bobby Tefla</h1>
+                  </div>
+                </div>
+                <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                4.0 stars-->
+            </div>
+          </div>
+          <!-- /.card -->
+
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              <h2 id="m_iPersonalInfo" class="card-title">Personal Information</h2>
+            </div>
+            <div class="card-body">
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                <h4>Address</h4>
+                <label for="m_iStreet" class="m_cLabel ">Street</label>
+                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="645 Mt. Yosemite dr">
+                <label for="m_iCity" class="m_cLabel">City</label>
+                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="San Diego">
+                <label for="m_iState" class="m_cLabel">State</label>
+                <select id="m_iState" class="m_cInput">
+                  <option selected>CA</option>
+                  <option value="1">MD</option>
+                  <option value="2">NY</option>
+                </select>
+                <label for="m_iZip" class="m_cLabel">Zip Code</label>
+                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="92084">
+                </div>
+                <hr>
+                <div class="m_cHalfpiece">
+                <h4>Phone</h4>
+                <label for="m_iPhone" class="m_cLabel">Phone Number</label>
+                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="951&dash;824&dash;6895">
+                </div>
+                <hr>
+              </div>
+              <hr>
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                  <h4>Contact Email</h4>
+                  <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="bobby_tefla@yahoo.com">
+                </div>
+                <hr>
+                <div class="m_cHalfpiece">
+                <h4>Account Email</h4>
+                <p class="card-text">btefla@gmail.com</p>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              <h2 id="m_iSubjects">Subjects</h2>
+              <small class="text-muted">Subjects you need help in</small>
+            </div>
+            <div class="card-body">
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                  <h4>Mathematics</h4>
+                  <ul>
+                    <li >Linear Algebra</li>
+                    <li>Differential Equations</li>
+                  </ul>
+                </div>
+                <div class="m_cHalfpiece">
+                  <h2>Chemistry</h2>
+                  <ul>
+                    <li>Introduction to Chemistry</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              <h2 id="m_iLanguages">Languages</h2>
+              <small class="text-muted">Languages you're comfortable learning in</small>
+            </div>
+            <div class="card-body">
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                  <div class="group-checkbox">
+                    <input name="L1" id="L1" class="lang-checkbox" type="checkbox" checked>
+                    <label for="L1" class="">English</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L2" id="L2" class="lang-checkbox" type="checkbox">
+                    <label for="L2" class="">Arabic</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L3" id="L3" class="lang-checkbox" type="checkbox"  >
+                    <label for="L3" class="">Armenian</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L4" id="L4" class="lang-checkbox" type="checkbox"  >
+                    <label for="L4" class="">Austronesian</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L5" id="L5" class="lang-checkbox" type="checkbox"  checked>
+                    <label for="L5" class="">Chinese</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L6" id="L6" class="lang-checkbox" type="checkbox"  >
+                    <label for="L6" class="">French</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L7" id="L7" class="lang-checkbox" type="checkbox"  >
+                    <label for="L7" class="">German</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L8" id="L8" class="lang-checkbox" type="checkbox"  >
+                    <label for="L8" class="">Hindi</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L9" id="L9" class="lang-checkbox" type="checkbox"  >
+                    <label for="L9" class="">Japanese</label>
+                  </div>
+                </div>
+                <div class="m_cHalfpiece">
+                  <div class="group-checkbox">
+                    <input name="L10" id="L10" class="lang-checkbox" type="checkbox">
+                    <label for="L10" class="">Korean</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L11" id="L11" class="lang-checkbox" type="checkbox">
+                    <label for="L11" class="">Persian</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L12" id="L12" class="lang-checkbox" type="checkbox"  >
+                    <label for="L12" class="">Portuguese</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L13" id="L13" class="lang-checkbox" type="checkbox"  >
+                    <label for="L13" class="">Punjabi</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L14" id="L14" class="lang-checkbox" type="checkbox"  >
+                    <label for="L14" class="">Russian</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L15" id="L15" class="lang-checkbox" type="checkbox"  >
+                    <label for="L15" class="">Spanish</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L16" id="L16" class="lang-checkbox" type="checkbox"  >
+                    <label for="L16" class="">Tagalog</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L17" id="L17" class="lang-checkbox" type="checkbox" >
+                    <label for="L17" class="">Tai&dash;Ka</label>
+                  </div>
+                  <div class="group-checkbox">
+                    <input name="L18" id="L18" class="lang-checkbox" type="checkbox" >
+                    <label for="L18" class="">Vietnamese</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+              <h2 id="m_iTutorSess">Tutoring Sessions</h2>
+              <small class="text-muted">TODO</small>
+            </div>
+            <div class="card-body">
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                </div>
+                <div class="m_cHalfpiece">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<small class="text-muted">Posted by Anonymous on 3/1/17</small>-->
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+

@@ -41,7 +41,6 @@ func AuthDestroy(c buffalo.Context) error {
 	c.Flash().Add("success", "Logged out!")
 	return c.Redirect(302, "/")
 }
-
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if user := c.Session().Get("current_user"); user != nil {
