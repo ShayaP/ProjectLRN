@@ -7,6 +7,7 @@ import (
 
 var r *render.Engine
 var assetsBox = packr.NewBox("../public")
+
 func init() {
 	r = render.New(render.Options{
 		// HTML layout to be used for all HTML requests:

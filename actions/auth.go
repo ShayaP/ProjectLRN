@@ -29,33 +29,34 @@
 package actions
 
 import (
-	"net/http"
-	"fmt"
-	"math/rand"
-	"time"
-	"encoding/json"
 	"encoding/base64"
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"math/rand"
+	"net/http"
+	"time"
+
 	"github.com/gobuffalo/envy"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
 
 type lrnUser struct {
-	user_fname string
-	user_lname string
-	user_phone string
-	user_age string
+	user_fname    string
+	user_lname    string
+	user_phone    string
+	user_age      string
 	user_location string
-	user_role string
-	user_gender string
-	user_id string
-	user_email string
+	user_role     string
+	user_gender   string
+	user_id       string
+	user_email    string
 }
 
 var (
-	googleOauthConfig *oauth2.Config 
-	user lrnUser
+	googleOauthConfig *oauth2.Config
+	user              lrnUser
 )
 
 func (u lrnUser) printUserInfo(w http.ResponseWriter, r *http.Request) {
@@ -65,17 +66,17 @@ func (u lrnUser) printUserInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "email: %s\n", u.user_email)
 	fmt.Fprintf(w, "location: %s\n", u.user_location)
 	fmt.Fprintf(w, "gender: %s\n", u.user_gender)
-	fmt.Fprintf(w ,"phone: %s\n", u.user_phone)
+	fmt.Fprintf(w, "phone: %s\n", u.user_phone)
 	fmt.Fprintf(w, "age: %s\n", u.user_age)
 }
 
 func init() {
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL: "http://lrn-cse110.me/callback",
-		ClientID: envy.Get("CLIENT_ID",""),
-		ClientSecret: envy.Get("SECRET_KEY",""),
-		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email"},
-		Endpoint: google.Endpoint,
+		RedirectURL:  "http://lrn-cse110.me/callback",
+		ClientID:     envy.Get("CLIENT_ID", ""),
+		ClientSecret: envy.Get("SECRET_KEY", ""),
+		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
+		Endpoint:     google.Endpoint,
 	}
 }
 
@@ -133,9 +134,9 @@ func init() {
 // }
 
 //func LoginHandler(c buffalo.Context) {
-	//oauthState := generateStateOauthCookie(w)
-	//url := googleOauthConfig.AuthCodeURL(oauthState)
-	//http.Redirect(w, r, url, http.StatusTemporaryRedirect)
+//oauthState := generateStateOauthCookie(w)
+//url := googleOauthConfig.AuthCodeURL(oauthState)
+//http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 
 //}
 
@@ -181,7 +182,7 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 	user.user_fname = guser["given_name"].(string)
 	user.user_lname = guser["family_name"].(string)
 	user.user_email = guser["email"].(string)
-	
+
 }
 
 func getUserDataFromGoogle(code string) ([]byte, error) {
@@ -192,7 +193,7 @@ func getUserDataFromGoogle(code string) ([]byte, error) {
 		return nil, fmt.Errorf("could not get token: %s\n", err.Error())
 	}
 
-	resp, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token="+token.AccessToken)
+	resp, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
 	if err != nil {
 		return nil, fmt.Errorf("could not get request: %s\n", err.Error())
 	}

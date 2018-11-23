@@ -5,5 +5,6 @@ import "github.com/gobuffalo/buffalo"
 // ProfileHandler is a default handler to serve up
 // a profile page.
 func ProfileHandler(c buffalo.Context) error {
-	return c.Render(200, r.HTML("profile.html", "blank.html"))
+    c.Set("title", "Profile")
+	return c.Render(200, r.HTML("profile.html"))
 }
