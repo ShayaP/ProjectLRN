@@ -59,17 +59,16 @@ func App() *buffalo.App {
 		app.Use(popmw.Transaction(models.DB))
 		app.Use(SetCurrentUser)
 
+		app.Use(Authorize)
 		// Setup and use translations:
 		app.Use(translations())
-		app.Use(Authorize)
 
 		app.GET("/", HomeHandler)
-        app.POST("/payload", PushPayloadHandler)
-        app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler)
+		app.POST("/payload", PushPayloadHandler)
+		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler)
 
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
-		app.POST("/payload", PushPayloadHandler)
 
 		auth := app.Group("/auth")
 		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)
@@ -77,6 +76,7 @@ func App() *buffalo.App {
 		auth.GET("/{provider}/callback", AuthCallback)
 		auth.DELETE("", AuthDestroy)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
+		app.GET("/register", RegisterHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

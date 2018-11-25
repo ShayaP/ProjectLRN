@@ -23,13 +23,18 @@ func AuthCallback(c buffalo.Context) error {
 		return c.Error(401, err)
 	}
 	c.Session().Set("current_user", user.Name)
-	err = c.Session().Save()
+	c.Session().Set("userObj", user)
+    err = c.Session().Save()
+	fmt.Println("======")
+	fmt.Println(c.Session().Get("userObj"))
+    fmt.Println(user)
+	fmt.Println("~~~~~~")
 	if err != nil {
 		return c.Error(401, err)
 	}
 	// Do something with the user, maybe register them/sign them in
 	c.Flash().Add("success", "Logged in!")
-	return c.Redirect(302, "/")
+	return c.Redirect(302, "/register")
 }
 
 func AuthDestroy(c buffalo.Context) error {
@@ -46,6 +51,7 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 		if user := c.Session().Get("current_user"); user != nil {
 			name := user
 			c.Set("name", name)
+            c.Set("userObj", c.Session().Get("userObj"))
 		}
 		return next(c)
 	}

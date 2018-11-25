@@ -1,0 +1,46 @@
+      <div class="row">
+
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+          <div class="card card-outline-secondary my-4">
+            <div class="card-body">
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                <h4>Name</h4>
+                <label for="m_iNameF" class="m_cLabel">First Name</label>
+                <input name="m_iNameF" id="m_iNameF" class="m_cInput " type="text" placeholder="First Name" value="<%= userObj.FirstName %>">
+                <label for="m_iNameL" class="m_cLabel">Last Name</label>
+                <input name="m_iNameL" id="m_iNameL" class="m_cInput " type="text" placeholder="Last Name" value="<%= userObj.LastName %>">
+                </div>
+                <hr>
+                <div class="m_cHalfpiece">
+                <h4>Phone</h4>
+                <label for="m_iPhone" class="m_cLabel">Phone Number</label>
+                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="951&dash;824&dash;6895">
+                </div>
+                <hr>
+              </div>
+              <hr>
+              <div class="m_cMulticontainer">
+                <div class="m_cHalfpiece">
+                  <h4>Contact Email</h4>
+                  <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="<%= userObj.Email %>">
+                </div>
+                <hr>
+                <div class="m_cHalfpiece">
+                <h4>Account Email</h4>
+                <p class="card-text"><%= userObj.Email %></p>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+

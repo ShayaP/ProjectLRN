@@ -26,8 +26,9 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+            <%= if (user) {%>
             <li class="nav-item">
-              <a class="nav-link" href="#">MyProfile</a>
+                <a class="nav-link" href="#"> <%= user.FirstName %> Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Messages</a>
@@ -35,6 +36,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Find</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth" data-method="DELETE">Logout</a>
+            </li>
+            <% } else {%>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/google">Login</a>
+            </li>
+            <% } %>
           </ul>
         </div>
       </div>
