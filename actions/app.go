@@ -42,6 +42,7 @@ func App() *buffalo.App {
 			SessionName: "_lrn_session",
 		})
 
+		// app.Use(middleware.SessionSaver)
 		// Automatically redirect to SSL
 		app.Use(forceSSL())
 
@@ -56,17 +57,26 @@ func App() *buffalo.App {
 		//  c.Value("tx").(*pop.Connection)
 		// Remove to disable this.
 		app.Use(popmw.Transaction(models.DB))
+		app.Use(SetCurrentUser)
 
+		app.Use(Authorize)
 		// Setup and use translations:
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
-        app.POST("/payload", PushPayloadHandler)
-        //app.GET("/login", LoginHandler)
+		app.POST("/payload", PushPayloadHandler)
+		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler)
+
+		app.GET("/profile", ProfileHandler)
+		app.GET("/update-profile", UpdateProfileHandler)
 
 		auth := app.Group("/auth")
-		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
-		//auth.GET("/{provider}/callback", AuthCallback)
+		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)
+		auth.GET("/{provider}", bah)
+		auth.GET("/{provider}/callback", AuthCallback)
+		auth.DELETE("", AuthDestroy)
+		auth.Middleware.Skip(Authorize, bah, AuthCallback)
+		app.GET("/register", RegisterHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

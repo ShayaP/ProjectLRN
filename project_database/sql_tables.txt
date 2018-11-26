@@ -1,0 +1,259 @@
+/* 
+ * (1) USER TABLE 
+ *
+ * COPY AND PASTE BELOW INTO DATABASE*/
+CREATE TABLE IF NOT EXISTS users (
+   id TEXT NOT NULL PRIMARY KEY,
+   first_name TEXT NOT NULL,
+   last_name TEXT NOT NULL,
+   phone_number TEXT,
+   email TEXT NOT NULL,
+   user_name TEXT,
+   user_password TEXT,
+   image BLOB,
+   location BLOB NOT NULL,
+   gender INTEGER NOT NULL,
+   other_specify TEXT,
+   tutor_id TEXT,
+   tutee_id TEXT,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createUser(first_name, last_name, phone, email, user_name, user_password, gender);
+getUser(id);
+
+
+/* 
+ * (2) TUTOR TABLE 
+ *
+ */
+CREATE TABLE IF NOT EXISTS tutors  (
+   id TEXT NOT NULL PRIMARY KEY,
+   avg_rating REAL NOT NULL,
+   user_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createTutor();
+getTutor();
+
+
+/*
+ * (3) TUTOR SUBJECTS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutor_subjects (
+   id TEXT NOT NULL PRIMARY KEY,
+   subject_name TEXT NOT NULL,
+   proficiency INTEGER NOT NULL,
+   tutor_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTutorSubject();
+getTutorSubject();
+
+
+/* 
+ * (4) TUTOR COURSES TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutor_courses (
+   id TEXT NOT NULL PRIMARY KEY,
+   course_name TEXT NOT NULL,
+   course_instructor TEXT NOT NULL,
+   course_subject TEXT NOT NULL,
+   tutor_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTutorSubject();
+getTutorCourse();
+
+/*
+ * (5) TUTOR REVIEWS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutor_reviews (
+   id TEXT NOT NULL PRIMARY KEY,
+   rating INTEGER NOT NULL,
+   description TEXT NOT NULL,
+   tutor_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createTutorReview();
+getTutorReview();
+
+
+/* 
+ * (6) TUTOR LANGUAGES TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutor_languages (
+   id TEXT NOT NULL PRIMARY KEY,
+   language TEXT NOT NULL,
+   proficiency INTEGER NOT NULL,
+   tutor_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTutorLanguage();
+getTutorLanguage();
+
+
+/*
+ * (7) TUTEE TABLE 
+ *
+ */
+CREATE TABLE IF NOT EXISTS tutees (
+   id TEXT NOT NULL PRIMARY KEY,
+   avg_rating REAL NOT NULL,
+   price REAL NOT NULL,
+   user_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createTutee();
+getTutee();
+
+/* 
+ * (8) TUTEE SUBJECTS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutee_subjects (
+   id TEXT NOT NULL PRIMARY KEY,
+   subject_name TEXT NOT NULL,
+   proficiency INTEGER NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTuteeSubject();
+getTuteeSubject();
+
+
+/* 
+ * (9) TUTEE COURSES TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutee_courses (
+   id TEXT NOT NULL PRIMARY KEY,
+   course_name TEXT NOT NULL,
+   course_instructor TEXT NOT NULL,
+   course_subject TEXT NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTuteeCourse();
+getTuteeCourse();
+
+ 
+/*
+ * (10) TUTEE REVIEWS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutee_reviews (
+   id TEXT NOT NULL PRIMARY KEY,
+   rating INTEGER NOT NULL,
+   description TEXT NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createTuteeReview();
+getTuteeReview();
+
+
+/*
+ * (11) TUTEE LANGUAGES TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutee_languages (
+   id TEXT NOT NULL PRIMARY KEY,
+   language TEXT NOT NULL,
+   proficiency INTEGER NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+addTuteeLanguage();
+getTuteeLanguage();
+
+
+/* 
+ * (12) TUTORING SESSIONS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS tutoring_sessions (
+   id TEXT NOT NULL PRIMARY KEY,
+   num_of_sessions INTEGER NOT NULL,
+   tutor_id TEXT NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createTutoringSession();
+getTutoringSession();
+
+
+/*
+ * (13) MESSAGES TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS messages (
+   id TEXT NOT NULL PRIMARY KEY,
+   message TEXT NOT NULL,
+   tutor_id TEXT NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related functions */
+createMessage();
+getMessage();
+
+
+/* 
+ * (14) REQUESTS TABLE 
+ *
+ **/
+CREATE TABLE IF NOT EXISTS requests (
+   id TEXT NOT NULL PRIMARY KEY,
+   status INTEGER NOT NULL,
+   tutor_id TEXT NOT NULL,
+   tutee_id TEXT NOT NULL,
+   created_at DATETIME NOT NULL,
+   updated_at DATETIME NOT NULL
+);
+
+/* Related Functions */
+createRequest()
+/* getRequest() */
+
