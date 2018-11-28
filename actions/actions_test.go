@@ -20,5 +20,7 @@ func Test_ActionSuite(t *testing.T) {
 	as := &ActionSuite{
 		Action: action,
 	}
+	//as := &ActionSuite{suite.NewAction(App())}
+
 	suite.Run(t, as)
 }

@@ -1,1 +1,1 @@
-module github.com/cileonard/test
+module github.com/cileonard/lrn

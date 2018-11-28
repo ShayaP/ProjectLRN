@@ -2,7 +2,7 @@ package actions
 
 func (as *ActionSuite) Test_Login() {
 	//put a user into the session to simulate login
-	as.Session().Set("current_user", "Shaya Parsa")
+	as.Session.Set("current_user", "Shaya Parsa")
 	res := as.HTML("/").Get()
 	as.Equal(200, res.Code)
 
@@ -12,7 +12,7 @@ func (as *ActionSuite) Test_Login() {
 
 func (as *ActionSuite) Test_Logout() {
 	//session is empty so we need to see the login screen
-	as.Session().Clear()
+	as.Session.Clear()
 	res := as.HTML("/").Get()
 	as.Equal(200, res.Code)
 
