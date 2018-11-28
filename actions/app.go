@@ -66,6 +66,7 @@ func App() *buffalo.App {
 		app.GET("/", HomeHandler)
 		app.GET("/find", FindHandler)
 		app.GET("/requestpage", RequestPageHandler)
+		app.GET("/reviewspage", RequestPageHandler)
 		app.POST("/payload", PushPayloadHandler)
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler, FindHandler, RequestPageHandler)
 
