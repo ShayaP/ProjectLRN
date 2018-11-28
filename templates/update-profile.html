@@ -8,7 +8,7 @@
             <a href="#m_iLanguages" class="list-group-item" title="Jump to languages">Languages</a>
             <a href="#m_iTutorSess" class="list-group-item" title="Jump to tutoring sessions">Tutoring Sessions</a>
             <a href="#" class="btn btn-success" title="Save changes">Save</a>
-            <a href="#" class="btn btn-warning" title="Cancel changes">Cancel</a>
+            <a href="profilePath()" class="btn btn-warning" title="Cancel changes">Cancel</a>
           </div>
         </div>
         <!-- /.col-lg-3 -->
@@ -208,4 +208,7 @@
         <!-- /.col-lg-9 -->
 
       </div>
-
+	
+      <% contentFor("extraStyle") { %>
+	<%= stylesheetTag("css/update-profile.css") %>
+      <% } %>

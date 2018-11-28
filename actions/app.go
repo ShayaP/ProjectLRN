@@ -68,10 +68,10 @@ func App() *buffalo.App {
 		app.GET("/requestpage", RequestPageHandler)
 		app.GET("/reviewspage", RequestPageHandler)
 		app.POST("/payload", PushPayloadHandler)
-		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler, FindHandler, RequestPageHandler)
-
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
+		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler, FindHandler, RequestPageHandler, ProfileHandler, UpdateProfileHandler)
+
 		app.GET("/login", LoginHandler)
 		auth := app.Group("/auth")
 		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)

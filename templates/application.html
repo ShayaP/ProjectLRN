@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <title>Lrn - <%= title %> </title>
     <%= stylesheetTag("application.css") %>
+    <%= contentOf("extraStyle") %>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
-    <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
   </head>
   <body>
 	<!--A basic navigation bar so we can link to the different
