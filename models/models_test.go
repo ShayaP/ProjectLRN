@@ -1,9 +1,9 @@
-package models_test
+package models
 
 import (
 	"testing"
 
-	"github.com/gobuffalo/packr"
+    "github.com/gobuffalo/packr"
 	"github.com/gobuffalo/suite"
 )
 
@@ -16,9 +16,9 @@ func Test_ModelSuite(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	as := &ModelSuite{
+	ms := &ModelSuite{
 		Model: model,
 	}
-	suite.Run(t, as)
+	//ms := &ModelSuite{suite.NewModel()}
+	suite.Run(t, ms)
 }
