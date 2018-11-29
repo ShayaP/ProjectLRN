@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Lrn - <%= title %> </title>
     <%= stylesheetTag("application.css") %>
-    <%= contentOf("extraStyle") %>
+    <%= contentOf("extraHeadArgs") %>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
   </head>
@@ -49,6 +49,8 @@
         </div>
       </div>
     </nav>
+
+              <a class="nav-link js-scroll-trigger" href="<%= aboutPath() %>">About</a>
   -->
     <div class="container">
       <%= partial("flash.html") %>
@@ -63,19 +65,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+              <a class="nav-link js-scroll-trigger" href="<%= aboutPath() %>">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="find">Find</a>
+              <a class="nav-link js-scroll-trigger" href="<%= findPath() %>">Find</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="reviewspage">Review</a>
+              <a class="nav-link js-scroll-trigger" href="<%= reviewspagePath() %> ">Review</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="profile">Profile</a>
+              <a class="nav-link js-scroll-trigger" href="<%= profilePath() %>">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="requestpage">Requests</a>
+              <a class="nav-link js-scroll-trigger" href="<%= requestpagePath() %>">Requests</a>
             </li>
             <%= if (user) {%>
             <li class="nav-item">
@@ -101,7 +103,5 @@
       </div>
       <!-- /.container -->
     </footer>
-    <%= javascriptTag("application.js") %>
-    <%= javascriptTag("Chart.min.js") %>
   </body>
 </html>

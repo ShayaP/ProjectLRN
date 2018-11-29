@@ -118,6 +118,10 @@
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
 
+    <% contentFor("extraHeadArgs") { %>
+	<%= stylesheetTag("css/creative.css") %>
+    <% } %>
+
   </body>
 
 </html>
