@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"time"
-
+    "strings"
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
@@ -17,8 +17,6 @@ type User struct {
 	FirstName    string    `json:"first_name" db:"first_name"`
 	LastName     string    `json:"last_name" db:"last_name"`
 	PhoneNumber  string    `json:"phone_number" db:"phone_number"`
-	TutorID      int       `json:"tutor_id" db:"tutor_id"`
-	TuteeID      int       `json:"tutee_id" db:"tutee_id"`
 	GoogleID     string    `json:"google_id" db:"google_id"`
 	Email        string    `json:"email" db:"email"`
 	Gender       int       `json:"gender" db:"gender"`
@@ -47,8 +45,6 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: u.FirstName, Name: "FirstName"},
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
 		&validators.StringIsPresent{Field: u.PhoneNumber, Name: "PhoneNumber"},
-		&validators.IntIsPresent{Field: u.TutorID, Name: "TutorID"},
-		&validators.IntIsPresent{Field: u.TuteeID, Name: "TuteeID"},
 		&validators.StringIsPresent{Field: u.GoogleID, Name: "GoogleID"},
 		&validators.StringIsPresent{Field: u.Email, Name: "Email"},
 		&validators.IntIsPresent{Field: u.Gender, Name: "Gender"},
@@ -67,4 +63,18 @@ func (u *User) ValidateCreate(tx *pop.Connection) (*validate.Errors, error) {
 func (u *User) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }
+
+func (u *User) Create(tx *pop.Connection) (*validate.Errors, error){
+    u.Email = strings.ToLower(strings.TrimSpace(u.Email))
+    u.FirstName = strings.Title(u.FirstName)
+    u.LastName = strings.Title(u.LastName)
+    return tx.ValidateAndCreate(u)
+}
+
+//func GetUser(tx) (*User, error){
+
+//}
+
+
+
 

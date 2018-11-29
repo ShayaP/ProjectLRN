@@ -1,7 +1,8 @@
 package models
 
 import (
-	"errors"
+    "strconv"
+    "errors"
 )
 
 func GetUser(tokenID string) (*User, error) {
@@ -17,7 +18,7 @@ func GetUser(tokenID string) (*User, error) {
 func CreateUserEntry(user *User) error {
 	verrs, err := DB.ValidateAndCreate(user)
 	if len(verrs.Errors) != 0 {
-		return errors.New(string(len(verrs.Errors)) + " erros in validation")
+		return errors.New(strconv.Itoa(len(verrs.Errors)) + " errors in validation")
 	}
 	return err
 }

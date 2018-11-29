@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 "first_name" TEXT NOT NULL,
 "last_name" TEXT NOT NULL,
 "phone_number" TEXT NOT NULL,
-"tutor_id" INTEGER NOT NULL,
-"tutee_id" INTEGER NOT NULL,
 "google_id" TEXT NOT NULL,
 "email" TEXT NOT NULL,
 "gender" INTEGER NOT NULL,
@@ -16,5 +14,4 @@ CREATE TABLE IF NOT EXISTS "users" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE UNIQUE INDEX "users_tutor_id_idx" ON "users" (tutor_id);
-CREATE UNIQUE INDEX "users_tutee_id_idx" ON "users" (tutee_id);
+CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
