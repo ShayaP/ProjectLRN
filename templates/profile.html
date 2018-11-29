@@ -24,7 +24,7 @@
               </div>
                 <div class="card-header halfpiece m_cCenterBox">
                   <div class="card-header">
-                    <h1 >Bobby Tefla</h1>
+                    <h1 > <%= username %> </h1>
                   </div>
                 </div>
                 <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
@@ -41,13 +41,16 @@
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
-                <p class="card-text"> 645 Mt. Yosemite dr <br>
-                  San Diego, CA 92084</p>
+                <p class="card-text"> 
+		<%= street %>
+		  <br>
+                <%= city %>, <%= state %> <%= zip %>
+                </p>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
-                <p class="card-text">951&dash;824&dash;6895</p>
+                <p class="card-text"><%= phone %></p>
                 </div>
                 <hr>
               </div>
@@ -55,12 +58,12 @@
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
                 <h4>Contact Email</h4>
-                <p class="card-text">bobby_tefla@yahoo.com</p>
+                <p class="card-text"><%= contactEmail %></p>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Account Email</h4>
-                <p class="card-text">btefla@gmail.com</p>
+                <p class="card-text"><%= accountEmail %></p>
                 </div>
                 <hr>
               </div>
@@ -70,41 +73,42 @@
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
               <h2 id="m_iSubjects">Subjects</h2>
-              <small class="text-muted">Subjects you need help in</small>
+              <small class="text-muted"><%= subjectDescription %></small>
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
+		<%= for (mainSubject) in mainSubjects { %>
                 <div class="m_cHalfpiece">
-                  <h4>Mathematics</h4>
+                  <h4><%= mainSubject %></h4>
                   <ul>
-                    <li >Linear Algebra</li>
-                    <li>Differential Equations</li>
+		   <%= for (aClass) in subjectsAndClasses[mainSubject] { %>
+                    <li><%= aClass %></li>
+		   <% } %>
                   </ul>
                 </div>
-                <div class="m_cHalfpiece">
-                  <h2>Chemistry</h2>
-                  <ul>
-                    <li>Introduction to Chemistry</li>
-                  </ul>
-                </div>
+		<% } %>
               </div>
             </div>
           </div>
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
               <h2 id="m_iLanguages">Languages</h2>
-              <small class="text-muted">Languages you're comfortable learning in</small>
+              <small class="text-muted"><%= langDescription%></small>
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
                   <ul>
-                    <li>English</li>
+		    <%= for (lang) in languages1 { %>
+                    	<li><%= lang %></li>
+		    <% } %>
                   </ul>
                 </div>
                 <div class="m_cHalfpiece">
                   <ul>
-                    <li>Chinese</li>
+		    <%= for (lang) in languages2 { %>
+                    	<li><%= lang %></li>
+		    <% } %>
                   </ul>
                 </div>
               </div>
@@ -124,7 +128,6 @@
               </div>
             </div>
           </div>
-          <!--<small class="text-muted">Posted by Anonymous on 3/1/17</small>-->
           <!-- /.card -->
 
         </div>
