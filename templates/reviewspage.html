@@ -20,8 +20,6 @@
     <!-- Page level plugin CSS-->
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
 
   </head>
 
@@ -380,6 +378,24 @@
     <script src="js/demo/datatables-demo.js"></script>
     <script src="js/demo/chart-area-demo.js"></script>
 
+<!--
+If your page additionally needs its own styling, add the styles here!
+Example (warning! pseudo-syntax):
+
+contentFor(“extrHeadArgs”) {
+	stylesheetTag(“css/customstyle.css”) 
+} 
+
+(Note that in order for customstyle.css to be found, it must be inside “public/assets/css”).
+ Otherwise, keep the contentFor block looking like so:
+
+contentFor(“extrHeadArgs”) {
+	
+} 
+-->
+    <% contentFor("extraHeadArgs") { %>
+	<%= stylesheetTag("css/sb-admin.css") %>
+    <% } %>
   </body>
 
 </html>
