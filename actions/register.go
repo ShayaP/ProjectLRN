@@ -9,3 +9,7 @@ func RegisterHandler(c buffalo.Context) error {
 	c.Set("title", "Register")
 	return c.Render(200, r.HTML("register.html"))
 }
+
+func RegisterPOSTHandler(c buffalo.Context) error {
+    return c.Render(500, r.HTML("blank.html"))
+}

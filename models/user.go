@@ -2,8 +2,9 @@ package models
 
 import (
 	"encoding/json"
+	"strings"
 	"time"
-    "strings"
+
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
@@ -21,6 +22,8 @@ type User struct {
 	Email        string    `json:"email" db:"email"`
 	Gender       int       `json:"gender" db:"gender"`
 	OtherSpecify string    `json:"other_specify" db:"other_specify"`
+    AvgRating    float32   `json:"avg_rating" db:"avg_rating"`
+    NumRatings   int       `json:"num_ratings" db:"num_ratings"`
 }
 
 // String is not required by pop and may be deleted
@@ -64,17 +67,13 @@ func (u *User) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }
 
-func (u *User) Create(tx *pop.Connection) (*validate.Errors, error){
-    u.Email = strings.ToLower(strings.TrimSpace(u.Email))
-    u.FirstName = strings.Title(u.FirstName)
-    u.LastName = strings.Title(u.LastName)
-    return tx.ValidateAndCreate(u)
+func (u *User) Create(tx *pop.Connection) (*validate.Errors, error) {
+	u.Email = strings.ToLower(strings.TrimSpace(u.Email))
+	u.FirstName = strings.Title(u.FirstName)
+	u.LastName = strings.Title(u.LastName)
+	return tx.ValidateAndCreate(u)
 }
 
 //func GetUser(tx) (*User, error){
 
 //}
-
-
-
-

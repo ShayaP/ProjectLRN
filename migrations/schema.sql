@@ -11,7 +11,42 @@ CREATE TABLE IF NOT EXISTS "users" (
 "email" TEXT NOT NULL,
 "gender" INTEGER NOT NULL,
 "other_specify" TEXT NOT NULL,
+"avg_rating" REAL NOT NULL,
+"num_ratings" INTEGER NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
 CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
+CREATE TABLE IF NOT EXISTS "requests" (
+"id" TEXT PRIMARY KEY,
+"status" INTEGER NOT NULL,
+"tutorid" char(36) NOT NULL,
+"tuteeid" char(36) NOT NULL,
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "reviews" (
+"id" TEXT PRIMARY KEY,
+"rating" INTEGER NOT NULL,
+"description" TEXT NOT NULL,
+"user" char(36) NOT NULL,
+"astutor" INTEGER NOT NULL,
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "courses" (
+"id" TEXT PRIMARY KEY,
+"name" TEXT NOT NULL,
+"instructor" TEXT NOT NULL,
+"subject" TEXT NOT NULL,
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "subjects" (
+"id" TEXT PRIMARY KEY,
+"name" INTEGER NOT NULL,
+"prof" INTEGER NOT NULL,
+"used_id" char(36) NOT NULL,
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL
+);

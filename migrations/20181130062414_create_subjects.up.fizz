@@ -1,0 +1,6 @@
+create_table("subjects") {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("name", "integer", {})
+	t.Column("prof", "integer", {})
+	t.Column("used_id", "uuid", {})
+}

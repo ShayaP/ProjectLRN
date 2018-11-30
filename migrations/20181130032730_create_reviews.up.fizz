@@ -1,0 +1,7 @@
+create_table("reviews") {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("rating", "integer", {})
+	t.Column("description", "string", {})
+	t.Column("user", "uuid", {})
+	t.Column("astutor", "integer", {})
+}

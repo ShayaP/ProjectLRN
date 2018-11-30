@@ -3,7 +3,7 @@ package models
 import (
 	"testing"
 
-    "github.com/gobuffalo/packr"
+	"github.com/gobuffalo/packr"
 	"github.com/gobuffalo/suite"
 )
 

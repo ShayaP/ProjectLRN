@@ -68,12 +68,13 @@ func App() *buffalo.App {
 		app.GET("/find", FindHandler)
 		app.GET("/requestpage", RequestPageHandler)
 		app.GET("/reviewspage", ReviewHandler)
+		app.POST("/submit", RegisterPOSTHandler)
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
-				FindHandler, RequestPageHandler, ProfileHandler,
-				UpdateProfileHandler, AboutHandler, ReviewHandler)
+			FindHandler, RequestPageHandler, ProfileHandler,
+			UpdateProfileHandler, AboutHandler, ReviewHandler)
 
 		app.GET("/login", LoginHandler)
 		auth := app.Group("/auth")
