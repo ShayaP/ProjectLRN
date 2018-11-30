@@ -1,8 +1,8 @@
 package models
 
 import (
-    "strconv"
-    "errors"
+	"errors"
+	"strconv"
 )
 
 func GetUser(tokenID string) (*User, error) {

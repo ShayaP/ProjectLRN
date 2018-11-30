@@ -2,22 +2,22 @@
 	<div style="box-sizing: border-box; display: inline-block; width: auto; max-width: 560px; background-color: lavender; border: 4px solid; border-radius: 8px; #0361A8; margin:50px">
 	<div style="background: #0361A8; border-radius: 5px 5px 0px 0px; padding: 15px;"><span style="font-family: verdana; color: #D4D4D4; font-size: 3.00em; font-weight:bold;">Enter User Information</span></div>
 </style>
-<form method="post" action="https://www.lrn.com/Login/" name="aform" target="_top">
-<input type="hidden" name="action" value="email">
-<input type="hidden" name="hide" value="fullname">
-<input type="hidden" name="action" value="login">
-<input type="hidden" name="hide" value="">
+<%= if (errors) {%>
 
-<table class='center'>
-	<tr><td>Email:</td><td><input type="text" name="email"></td></tr>
-	<tr><td>Re-enter email:</td><td><input type="text" name="email"></td></tr>
-	<tr><td>Full name:</td><td><input type="text" name="fullname"></td></tr>
+<%= for (key, err) in errors.Errors {%>
+    <div> <%= err %> </div>
+<% } %>
 
-	<tr><td>Username:</td><td><input type="text" name="login"></td></tr>
-<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
-<tr><td>Re-Enter Password:</td><td><input type="password" name="password"></td></tr>
-<tr><td>&nbsp;</td><td><input type="submit" value="Register"> </td></tr>
-
+<%}%>
+<%= form({method:"POST"}){%>
+<%= f.InputTag({name:"Email", value: userObj.Email }) %>
+<%= f.InputTag({name:"FirstName", value: userObj.FirstName }) %>
+<%= f.InputTag({name:"LastName", value: userObj.LastName }) %>
+<%= f.InputTag({name:"PhoneNumber"}) %>
+<%= f.SelectTag({ name:"Gender", options: {"Female": 1, "Male": 2, "Other": 3}}) %>
+<%= f.InputTag({name:"OtherSpecify"}) %>
+<%= f.SubmitTag()%>
+<%}%>
 <!--
 If your page additionally needs its own styling, add the styles here!
 Example (warning! pseudo-syntax):

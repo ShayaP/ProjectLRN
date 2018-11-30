@@ -72,8 +72,8 @@ func App() *buffalo.App {
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
-				FindHandler, RequestPageHandler, ProfileHandler,
-				UpdateProfileHandler, AboutHandler, ReviewHandler)
+			FindHandler, RequestPageHandler, ProfileHandler,
+			UpdateProfileHandler, AboutHandler, ReviewHandler)
 
 		app.GET("/login", LoginHandler)
 		auth := app.Group("/auth")
@@ -83,6 +83,7 @@ func App() *buffalo.App {
 		auth.DELETE("", AuthDestroy)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		app.GET("/register", RegisterHandler)
+		app.POST("/register", RegisterPOSTHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
