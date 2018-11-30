@@ -5,27 +5,40 @@ import "github.com/gobuffalo/buffalo"
 // ProfileHandler is a default handler to serve up
 // a profile page.
 func ProfileHandler(c buffalo.Context) error {
+	// all the user's personal info that needs to be dynamically set
 	var isTutor = true
+	var username = "Bobby Tefla"
+	var street = "645 Mt. Yosemite dr"
+	var city = "San Diego"
+	var state = "CA"
+	var zip = "92084"
+	var phone = "951-842-6895"
+	var contactEmail = "bobby_tefla@yahoo.com"
+	var accountEmail = "btefla@gmail.com"
+	var ttrSubjectDescription = "Subjects you can help with"
+	var tteSubjectDescription = "Subjects you need help in"
+	var ttrLangDescription = "Languages you are comfortable teaching in"
+	var tteLangDescription = "Languages you are comfortable learning in"
 	c.Set("title", "Profile")
 	//display user's name
-	c.Set("username", "Bobby Tefla")
+	c.Set("username", username)
 	// address of user
-	c.Set("street", "645 Mt. Yosemite dr")
-	c.Set("city", "San Diego")
-	c.Set("state", "CA")
-	c.Set("zip", "92084")
+	c.Set("street", street)
+	c.Set("city", city)
+	c.Set("state", state)
+	c.Set("zip", zip)
 	// phone number
-	c.Set("phone", "951-842-6895")
+	c.Set("phone", phone)
 	// email
-	c.Set("contactEmail", "bobby_tefla@yahoo.com")
-	c.Set("accountEmail", "btefla@gmail.com")
+	c.Set("contactEmail", contactEmail)
+	c.Set("accountEmail", accountEmail)
 	//Subjects and Languages - help description
 	if(isTutor){
-		c.Set("subjectDescription", "Subjects you can help with")
-		c.Set("langDescription", "Languages you are comfortable teaching in")
+		c.Set("subjectDescription", ttrSubjectDescription)
+		c.Set("langDescription", ttrLangDescription)
 	} else {
-		c.Set("subjectDescription", "Subjects you need help in")
-		c.Set("langDescription", "Languages you are comfortable learning in")
+		c.Set("subjectDescription", tteSubjectDescription)
+		c.Set("langDescription", tteLangDescription)
 	}
 	//Subjects 
 	// list of the subjects that a student might need help in 
