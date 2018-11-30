@@ -68,7 +68,6 @@ func App() *buffalo.App {
 		app.GET("/find", FindHandler)
 		app.GET("/requestpage", RequestPageHandler)
 		app.GET("/reviewspage", ReviewHandler)
-		app.POST("/submit", RegisterPOSTHandler)
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
@@ -84,6 +83,7 @@ func App() *buffalo.App {
 		auth.DELETE("", AuthDestroy)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		app.GET("/register", RegisterHandler)
+		app.POST("/register", RegisterPOSTHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

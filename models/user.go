@@ -71,6 +71,8 @@ func (u *User) Create(tx *pop.Connection) (*validate.Errors, error) {
 	u.Email = strings.ToLower(strings.TrimSpace(u.Email))
 	u.FirstName = strings.Title(u.FirstName)
 	u.LastName = strings.Title(u.LastName)
+    u.AvgRating = 0;
+    u.NumRatings = 0;
 	return tx.ValidateAndCreate(u)
 }
 
