@@ -1,7 +1,7 @@
 package actions
 
 import (
-    "fmt"
+    //"fmt"
 
     //"github.com/pkg/errors"
 
@@ -18,25 +18,20 @@ func RegisterHandler(c buffalo.Context) error {
 }
 
 func RegisterPOSTHandler(c buffalo.Context) error {
-    fmt.Println("Here we are")
     u := &models.User{}
     if err := c.Bind(u); err != nil{
-        fmt.Println("--------------")
         return c.Render(500, r.String(err.Error()))
     }
     userPrev := c.Session().Get("userObj").(*models.User)
     u.GoogleID = userPrev.GoogleID
 
-    fmt.Println("~~~~~~~~")
     tx := c.Value("tx").(*pop.Connection)
     verrs, err := u.Create(tx)
-    fmt.Println("////////////")
     if err != nil { //Error creating the account
         return c.Render(500, r.String(err.Error()))
         //return errors.WithStack(err)
     }
 
-    fmt.Println("$$$$$$$$$$$")
     if verrs.HasAny() {
         c.Set("user", u)
         c.Set("errors", verrs)
