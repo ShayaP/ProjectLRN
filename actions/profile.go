@@ -34,8 +34,8 @@ func ProfileHandler(c buffalo.Context) error {
 	c.Set("accountEmail", accountEmail)
 	//Subjects and Languages - help description
 	if isTutor {
-		c.Set("subjectDescription", "Subjects you can help with")
-		c.Set("langDescription", "Languages you are comfortable teaching in")
+		c.Set("subjectDescription", ttrSubjectDescription)
+		c.Set("langDescription", ttrLangDescription)
 	} else {
 		c.Set("subjectDescription", tteSubjectDescription)
 		c.Set("langDescription", tteLangDescription)
