@@ -23,7 +23,7 @@
               </div>
                 <div class="card-header halfpiece m_cCenterBox">
                   <div class="card-header">
-                    <h1 >Bobby Tefla</h1>
+                    <h1 ><%= username %></h1>
                   </div>
                 </div>
                 <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
@@ -43,9 +43,9 @@
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
                 <label for="m_iStreet" class="m_cLabel ">Street</label>
-                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="645 Mt. Yosemite dr">
+                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="<%= street %>">
                 <label for="m_iCity" class="m_cLabel">City</label>
-                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="San Diego">
+                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>">
                 <label for="m_iState" class="m_cLabel">State</label>
                 <select id="m_iState" class="m_cInput">
                   <option selected>CA</option>
@@ -53,13 +53,13 @@
                   <option value="2">NY</option>
                 </select>
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
-                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="92084">
+                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>">
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="951&dash;824&dash;6895">
+                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="<%= phone %>">
                 </div>
                 <hr>
               </div>
@@ -68,12 +68,12 @@
                 <div class="m_cHalfpiece">
                   <h4>Contact Email</h4>
                   <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
-                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="bobby_tefla@yahoo.com">
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="<%= contactEmail %>">
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Account Email</h4>
-                <p class="card-text">btefla@gmail.com</p>
+                <p class="card-text"><%= accountEmail %></p>
                 </div>
                 <hr>
               </div>
@@ -83,7 +83,7 @@
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
               <h2 id="m_iSubjects">Subjects</h2>
-              <small class="text-muted">Subjects you need help in</small>
+              <small class="text-muted"><%= subjectDescription %></small>
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
@@ -106,7 +106,7 @@
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
               <h2 id="m_iLanguages">Languages</h2>
-              <small class="text-muted">Languages you're comfortable learning in</small>
+              <small class="text-muted"><%= langDescription %></small>
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
