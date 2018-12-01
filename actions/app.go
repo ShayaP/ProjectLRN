@@ -84,6 +84,7 @@ func App() *buffalo.App {
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		app.GET("/register", RegisterHandler)
 		app.POST("/register", RegisterPOSTHandler)
+        app.Middleware.Skip(Authorize, RegisterHandler, RegisterPOSTHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

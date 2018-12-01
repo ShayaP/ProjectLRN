@@ -25,14 +25,14 @@ func AuthCallback(c buffalo.Context) error {
 	if err != nil {
 		return c.Error(401, err)
 	}
-	c.Session().Set("current_user", user.Name)
     u := &models.User{
         FirstName:  user.FirstName,
         LastName:   user.LastName,
         Email:      user.Email,
         GoogleID:   user.UserID,
     }
-	c.Session().Set("userObj", u)
+	c.Session().Set("user", u)
+    c.Session().Set("current_user", u.FirstName)
     //return c.Render(200, r.JSON(user))
 	err = c.Session().Save()
 	if err != nil {
@@ -40,7 +40,8 @@ func AuthCallback(c buffalo.Context) error {
 	}
 	// Do something with the user, maybe register them/sign them in
 	c.Flash().Add("success", "Logged in!")
-	return c.Redirect(302, "/register")
+    userMap := {"userObj": u, "NoShow": true}
+	return c.Redirect(302, "/register", userMap)
 }
 
 func AuthDestroy(c buffalo.Context) error {
@@ -57,7 +58,7 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 		if user := c.Session().Get("current_user"); user != nil {
 			name := user
 			c.Set("name", name)
-			c.Set("userObj", c.Session().Get("userObj"))
+			c.Set("user", c.Session().Get("user"))
 		}
 		return next(c)
 	}
@@ -67,7 +68,6 @@ func Authorize(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if user := c.Session().Get("current_user"); user == nil {
 			c.Flash().Add("danger", "You must be logged in to see that page!")
-            fmt.Println("AAAAAAAAAAAAAAAAAAAAaaaa")
 			return c.Redirect(302, "/")
 		}
 		return next(c)
