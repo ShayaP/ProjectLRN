@@ -39,8 +39,7 @@ func AuthCallback(c buffalo.Context) error {
 		if err != nil {
 			return c.Error(401, err)
 		}
-		// // Do something with the user, maybe register them/sign them in
-		// c.Flash().Add("success", "Logged in!")
+		// Do something with the user, maybe register them/sign them in
 		return c.Redirect(302, "/")
 	}
 }
@@ -59,7 +58,6 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 func Authorize(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if user := c.Session().Get("current_user"); user == nil {
-			c.Flash().Add("danger", "You must be logged in to see that page!")
             fmt.Println("AAAAAAAAAAAAAAAAAAAAaaaa")
 		}
 		return next(c)
