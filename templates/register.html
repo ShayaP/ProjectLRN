@@ -10,9 +10,9 @@
 
 <%}%>
 <%= form({method:"POST"}){%>
-<%= f.InputTag({name:"Email", value: userObj.Email }) %>
-<%= f.InputTag({name:"FirstName", value: userObj.FirstName }) %>
-<%= f.InputTag({name:"LastName", value: userObj.LastName }) %>
+<%= f.InputTag({name:"Email", value: userRequest.Email }) %>
+<%= f.InputTag({name:"FirstName", value: userRequest.FirstName }) %>
+<%= f.InputTag({name:"LastName", value: userRequest.LastName }) %>
 <%= f.InputTag({name:"PhoneNumber"}) %>
 <%= f.SelectTag({ name:"Gender", options: {"Female": 1, "Male": 2, "Other": 3}}) %>
 <%= f.InputTag({name:"OtherSpecify"}) %>

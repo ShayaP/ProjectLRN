@@ -10,6 +10,7 @@ import (
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/google"
+	"github.com/gobuffalo/pop"
 )
 
 func init() {
@@ -21,43 +22,61 @@ func init() {
 }
 
 func AuthCallback(c buffalo.Context) error {
-	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
+	gu, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
 		return c.Error(401, err)
 	}
-	c.Session().Set("current_user", user.Name)
-    u := &models.User{
-        FirstName:  user.FirstName,
-        LastName:   user.LastName,
-        Email:      user.Email,
-        GoogleID:   user.UserID,
-    }
-	c.Session().Set("userObj", u)
-    //return c.Render(200, r.JSON(user))
-	err = c.Session().Save()
+	tx := c.Value("tx").(*pop.Connection)
+    u, err := models.GetUserByGID(tx, gu.UserID)
+
 	if err != nil {
-		return c.Error(401, err)
+	    fmt.Println(err.Error())
+        u.FirstName = gu.FirstName
+        u.LastName = gu.LastName
+        u.GoogleID = gu.UserID
+        u.Email = gu.Email
+        c.Session().Set("userID", gu.UserID)
+		fmt.Println("aksjbfljasdbfljasdb")
+		c.Session().Set("userRequest", u)
+		return c.Redirect(302, "/auth/register")
+	} else {
+		c.Session().Set("user", u)
+		err = c.Session().Save()
+		if err != nil {
+			return c.Error(401, err)
+		}
+		// Do something with the user, maybe register them/sign them in
+		return c.Redirect(302, "/")
 	}
-	// Do something with the user, maybe register them/sign them in
-	c.Flash().Add("success", "Logged in!")
-	return c.Redirect(302, "/register")
 }
 
-func AuthDestroy(c buffalo.Context) error {
-	c.Session().Clear()
-	err := c.Session().Save()
-	if err != nil {
-		return c.Error(401, err)
-	}
-	c.Flash().Add("success", "Logged out!")
-	return c.Redirect(302, "/")
+// func AuthDestroy(c buffalo.Context) error {
+// 	c.Session().Clear()
+// 	err := c.Session().Save()
+// 	if err != nil {
+// 		return c.Error(401, err)
+// 	}
+// 	c.Flash().Add("success", "Logged out!")
+// 	return c.Redirect(302, "/")
+// }
+
+func MoveUserObject(next buffalo.Handler) buffalo.Handler {
+    fmt.Println("test")
+    return func(c buffalo.Context) error{
+        if userObj := c.Session().Get("userRequest"); userObj != nil {
+            u := userObj.(*models.User)
+            c.Set("userRequest", u)
+            //c.Set("userID", u.GoogleID)
+            //fmt.Println(u.GoogleID)
+        }
+        return next(c)
+    }
 }
+
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
-		if user := c.Session().Get("current_user"); user != nil {
-			name := user
-			c.Set("name", name)
-			c.Set("userObj", c.Session().Get("userObj"))
+		if user := c.Session().Get("user"); user != nil {
+			c.Set("user", user)
 		}
 		return next(c)
 	}
@@ -65,9 +84,8 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 
 func Authorize(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
-		if user := c.Session().Get("current_user"); user == nil {
-			c.Flash().Add("danger", "You must be logged in to see that page!")
-            fmt.Println("AAAAAAAAAAAAAAAAAAAAaaaa")
+		if user := c.Session().Get("user"); user == nil {
+			fmt.Println("GONNA REDIRECT YOU")
 			return c.Redirect(302, "/")
 		}
 		return next(c)

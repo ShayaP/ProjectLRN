@@ -1,8 +1,11 @@
 package actions
 
 import (
+    "html/template"
+
 	"github.com/gobuffalo/buffalo/render"
 	"github.com/gobuffalo/packr"
+    "github.com/gobuffalo/plush"
 )
 
 var r *render.Engine
@@ -22,6 +25,10 @@ func init() {
 			// uncomment for non-Bootstrap form helpers:
 			// "form":     plush.FormHelper,
 			// "form_for": plush.FormForHelper,
+            "csrf": func(helper plush.HelperContext) template.HTML{
+                t, _ := helper.Render("<input name=\"authenticity_token\" value=\"<%= authenticity_token %>\" type=\"hidden\">")
+                return template.HTML(t)
+            },
 		},
 	})
 }
