@@ -1,0 +1,93 @@
+{
+	"language": [
+		{
+			"id": "1",
+			"name": "English"
+		},
+
+		{
+			"id": "2",
+			"name": "Arabic"
+		},
+
+		{
+			"id": "3",
+			"name": "Armenian"
+		},
+
+		{
+			"id": "4",
+			"name": "Austronesian"
+		},
+
+		{
+			"id": "5",
+			"name": "Chinese"
+		},
+
+		{
+			"id": "6",
+			"name": "French"
+		},
+
+		{
+			"id": "7",
+			"name": "German"
+		},
+
+		{
+			"id": "8",
+			"name": "Hindi"
+		},
+
+		{
+			"id": "9",
+			"name": "Japanese"
+		},
+
+		{
+			"id": "10",
+			"name": "Korean"
+		},
+
+		{
+			"id": "11",
+			"name": "Persian"
+		},
+
+		{
+			"id": "12",
+			"name": "Portugese"
+		},
+
+		{
+			"id": "13",
+			"name": "Punjabi"
+		},
+
+		{
+			"id": "14",
+			"name": "Russian"
+		},
+
+		{
+			"id": "15",
+			"name": "Spanish"
+		},
+
+		{
+			"id": "16",
+			"name": "Tagalog"
+		},
+
+		{
+			"id": "17",
+			"name": "Tai-Ka"
+		},
+
+		{
+			"id": "18",
+			"name": "Vietnamese"
+		}
+	]
+}

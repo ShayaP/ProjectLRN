@@ -154,7 +154,7 @@ func ProfileGetSubjects(c buffalo.Context) []string {
 //Parameters:	c - a context
 //Return:	returns a pre-fabricated list of languages  
 func ProfileGetLanguages(c buffalo.Context) []string {
-	languages := []string{"English","Chinese", "Japanese"}
+	languages := []string{"English","Chinese", "Japanese", "Korean"}
 	return languages
 }
 

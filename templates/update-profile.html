@@ -96,7 +96,7 @@
                   </ul>
                 </div>
                 <div class="m_cHalfpiece">
-                  <h2>Chemistry</h2>
+                  <h4>Chemistry</h4>
                   <ul>
                     <li>Introduction to Chemistry</li>
                   </ul>
@@ -112,80 +112,21 @@
             <div class="card-body">
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
-                  <div class="group-checkbox">
-                    <input name="L1" id="L1" class="lang-checkbox" type="checkbox" checked>
-                    <label for="L1" class="">English</label>
+                  <%= for (language) in languages1 {%>
+		  <% checked %>
+		  <div class="group-checkbox">
+                    <input name="<%=language %>" id="<%= language %>" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
+                    <label for="<%=language %>" class=""><%= language %></label>
                   </div>
-                  <div class="group-checkbox">
-                    <input name="L2" id="L2" class="lang-checkbox" type="checkbox">
-                    <label for="L2" class="">Arabic</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L3" id="L3" class="lang-checkbox" type="checkbox"  >
-                    <label for="L3" class="">Armenian</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L4" id="L4" class="lang-checkbox" type="checkbox"  >
-                    <label for="L4" class="">Austronesian</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L5" id="L5" class="lang-checkbox" type="checkbox"  checked>
-                    <label for="L5" class="">Chinese</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L6" id="L6" class="lang-checkbox" type="checkbox"  >
-                    <label for="L6" class="">French</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L7" id="L7" class="lang-checkbox" type="checkbox"  >
-                    <label for="L7" class="">German</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L8" id="L8" class="lang-checkbox" type="checkbox"  >
-                    <label for="L8" class="">Hindi</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L9" id="L9" class="lang-checkbox" type="checkbox"  >
-                    <label for="L9" class="">Japanese</label>
-                  </div>
+		  <% } %>
                 </div>
                 <div class="m_cHalfpiece">
-                  <div class="group-checkbox">
-                    <input name="L10" id="L10" class="lang-checkbox" type="checkbox">
-                    <label for="L10" class="">Korean</label>
+                  <%= for (language) in languages2 {%>
+		  <div class="group-checkbox">
+		    <input name="<%=language %>" id="<%= language %>" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
+                    <label for="<%=language %>" class=""><%= language %></label>
                   </div>
-                  <div class="group-checkbox">
-                    <input name="L11" id="L11" class="lang-checkbox" type="checkbox">
-                    <label for="L11" class="">Persian</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L12" id="L12" class="lang-checkbox" type="checkbox"  >
-                    <label for="L12" class="">Portuguese</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L13" id="L13" class="lang-checkbox" type="checkbox"  >
-                    <label for="L13" class="">Punjabi</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L14" id="L14" class="lang-checkbox" type="checkbox"  >
-                    <label for="L14" class="">Russian</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L15" id="L15" class="lang-checkbox" type="checkbox"  >
-                    <label for="L15" class="">Spanish</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L16" id="L16" class="lang-checkbox" type="checkbox"  >
-                    <label for="L16" class="">Tagalog</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L17" id="L17" class="lang-checkbox" type="checkbox" >
-                    <label for="L17" class="">Tai&dash;Ka</label>
-                  </div>
-                  <div class="group-checkbox">
-                    <input name="L18" id="L18" class="lang-checkbox" type="checkbox" >
-                    <label for="L18" class="">Vietnamese</label>
-                  </div>
+		  <% } %>
                 </div>
               </div>
             </div>
