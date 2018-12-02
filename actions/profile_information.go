@@ -138,7 +138,6 @@ func ProfileGetSubjects(c buffalo.Context) []string {
 	// subjects and classes  then extract the keys and return them
 	//subjsAndClasses := make(map[string][]string)
 	subjsAndClasses := ProfileGetSubjsAndClasses(c)
-	// store the keys in the map (Assumed max keys is 20)
 	subjectKeys := make([]string, 0, 10)
 	for key, _ := range subjsAndClasses {
 		subjectKeys = append(subjectKeys, key)

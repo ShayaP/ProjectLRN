@@ -12,6 +12,19 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
 				"German", "Hindi", "Japanese", "Korean", "Persian", "Portugese",
 				"Punjabi", "Russian","Spanish", "Tagalog", "Tai-Ka", "Vietnamese"}
+	// comprehensive list of courses user can choose
+	var subjsAndClasses = map[string][]string{
+		"Applied Arts" : {"Digital Media", "Film Production","Photography"},
+		"Biology": {"Botany", "Marine Biology", "Zoology"},
+		"Chemistry": {"Introduction to Chemistry", "Organic Chemistry"},
+	}
+
+	// slice of strings of all the subjects (Gets the names of all the subjects)
+	subjects := make([]string, 0, 15)
+	for key, _ := range subjsAndClasses {
+		subjects = append(subjects, key)
+	}
+
 	// retrieve the languages known by the user
 	userLangs := ProfileGetLanguages(c)
 	// Algorithm to put a check on each checkbox language user knows:
@@ -50,6 +63,8 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	//Subjects and Languages - help description
 	c.Set("subjectDescription", ProfileGetSubjectTip(c, isTutor))
 	c.Set("langDescription", ProfileGetLanguageTip(c, isTutor))
+	//Set subjects options
+	c.Set("subjects", subjects)
 	//Set the languages options (split in half for styling)
 	c.Set("languages1", languages[:len(languages)/2])
 	c.Set("languages2", languages[len(languages)/2:len(languages)])
