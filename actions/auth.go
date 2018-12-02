@@ -34,8 +34,13 @@ func AuthCallback(c buffalo.Context) error {
 	fmt.Println("==============")
 
 	if err != nil {
+        u.FirstName = gu.FirstName
+        u.LastName = gu.LastName
+        u.GoogleID = gu.UserID
+        u.Email = gu.Email
+        c.Session().Set("userID", gu.UserID)
 		fmt.Println("aksjbfljasdbfljasdb")
-		c.Session().Set("userRequest", gu)
+		c.Session().Set("userRequest", u)
 		return c.Redirect(302, "/auth/register")
 	} else {
 		c.Session().Set("user", u)
@@ -63,8 +68,10 @@ func MoveUserObject(next buffalo.Handler) buffalo.Handler {
     fmt.Println("test")
     return func(c buffalo.Context) error{
         if userObj := c.Session().Get("userRequest"); userObj != nil {
-            c.Set("userRequest", userObj)
-            fmt.Println("WEALWJAN:EFJNEF")
+            u := userObj.(*models.User)
+            c.Set("userRequest", u)
+            //c.Set("userID", u.GoogleID)
+            //fmt.Println(u.GoogleID)
         }
         return next(c)
     }
