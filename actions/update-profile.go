@@ -18,12 +18,21 @@ func UpdateProfileHandler(c buffalo.Context) error {
 		"Biology": {"Botany", "Marine Biology", "Zoology"},
 		"Chemistry": {"Introduction to Chemistry", "Organic Chemistry"},
 	}
-
+	//comprehensive list of states user can choose from
+	states := []string{"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
+				  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
+				  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
+				  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
+				  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
+	// address of the user 
+	address := ProfileGetAddress(c)
+	
 	// slice of strings of all the subjects (Gets the names of all the subjects)
 	subjects := make([]string, 0, 15)
 	for key, _ := range subjsAndClasses {
 		subjects = append(subjects, key)
 	}
+
 
 	// retrieve the languages known by the user
 	userLangs := ProfileGetLanguages(c)
@@ -45,15 +54,14 @@ func UpdateProfileHandler(c buffalo.Context) error {
 		mapULtoL[userLangs[i]] = "checked"
 	}
 
-	// address of the user 
-	address := ProfileGetAddress(c)
 	c.Set("title", "Update Profile")
 	//display user's name
 	c.Set("username", ProfileGetUsername(c))
 	// address of user
 	c.Set("street", address[0])
 	c.Set("city", address[1])
-	//c.Set("state", address[2])
+	c.Set("state", address[2])
+	c.Set("states", states)
 	c.Set("zip", address[3])
 	// phone number
 	c.Set("phone", ProfileGetPhone(c))

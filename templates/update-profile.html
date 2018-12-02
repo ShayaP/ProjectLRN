@@ -49,9 +49,16 @@
                 <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>" required>
                 <label for="m_iState" class="m_cLabel">State</label>
                 <select id="m_iState" class="m_cInput" required>
-                  <option selected>CA</option>
-                  <option value="1">MD</option>
-                  <option value="2">NY</option>
+                  <% state %>
+                  <% let stateCount = 1 %>
+		  <%= for (s) in states{ %>
+			<%= if (s == state) { %>
+			  <option selected><%= s %></option>
+		  	<% } else { %>
+                  	  <option value="<%= stateCount %>"><%= s %></option>
+		  	<% } %>
+			<% (stateCount = stateCount + 1) %>
+		  <% } %>
                 </select>
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
                 <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>" required>
