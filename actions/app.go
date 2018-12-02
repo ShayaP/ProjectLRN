@@ -72,8 +72,6 @@ func App() *buffalo.App {
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
 		app.GET("/logout", LogoutHandler)
-		app.GET("/register", RegisterHandler)
-		app.POST("/register", RegisterPOSTHandler)
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
 			FindHandler, RequestPageHandler, ProfileHandler,
 			UpdateProfileHandler, AboutHandler, ReviewHandler)
@@ -87,7 +85,7 @@ func App() *buffalo.App {
 		auth.GET("/{provider}/callback", AuthCallback)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		auth.Use(MoveUserObject)
-        app.Middleware.Skip(Authorize, RegisterHandler, RegisterPOSTHandler)
+        auth.Middleware.Skip(Authorize, RegisterHandler, RegisterPOSTHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
