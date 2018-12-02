@@ -26,13 +26,10 @@
                     <h1 ><%= username %></h1>
                   </div>
                 </div>
-                <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                4.0 stars-->
             </div>
           </div>
           <!-- /.card -->
 	
-	  <!-- TO DO: ADD form tag --> 
           <form>
               <%= csrf() %>
 	  <div class="card card-outline-secondary my-4">
@@ -67,7 +64,7 @@
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="<%= phone %>" required>
+                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="tel" placeholder="###-###-####" value="<%= phone %>" required>
                 </div>
                 <hr>
               </div>
@@ -76,7 +73,7 @@
                 <div class="m_cHalfpiece">
                   <h4>Contact Email</h4>
                   <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
-                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="<%= contactEmail %>" required>
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="email" placeholder="" value="<%= contactEmail %>" required>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
@@ -94,16 +91,33 @@
               <small class="text-muted"><%= subjectDescription %></small>
             </div>
             <div class="card-body">
-              <div class="m_cMulticontainer">
-                <label for="m_iSubject" class="m_cLabel">Subject</label>
-                <select id="m_iSubject" class="m_cInput" required>
-                  <option value="">Select a subject to view courses</option>
-		  <% let count = 1 %>
-                  <%= for (subject) in subjects {%>
-                  	<option value="<%= count %>"><%= subject %></option>
-		  	<% (count = count + 1) %>
-		  <% } %>
-                </select>
+              <div class="m_cMulticontainer searchList scrollingTable">
+	         <table class="table" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+			<%= subjsAndClasses %>
+			<%= courseChecked %>
+			<%= for (subject) in subjects { %>
+                          <tr class="searchable-subject" data-id="<%= subject %>">
+                          <td><%= subject %></td>
+                          </tr>
+			  <%= for (course) in subjsAndClasses[subject] { %>
+                            <tr class="searchable-course" data-id="<%= subject %>">
+                            <td ></td>
+                            <td >
+		    		<input name="<%= course %>" id="<%= course %>" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
+                    		<label for="<%= course %>" class=""><%= course %></label>
+			    </td>
+                            </tr>
+			  <% } %>
+			<% } %>
+                    </tbody>
+                </table>
 	      </div>
             </div>
           </div>

@@ -26,13 +26,44 @@ func UpdateProfileHandler(c buffalo.Context) error {
 				  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
 	// address of the user 
 	address := ProfileGetAddress(c)
-	
+	// get list of all the subjects asociated with the user
+	userSubjects := ProfileGetSubjects(c)
+	// all the subjects and courses affliated with user
+	userSubsAndClasses := ProfileGetSubjsAndClasses(c)
 	// slice of strings of all the subjects (Gets the names of all the subjects)
 	subjects := make([]string, 0, 15)
 	for key, _ := range subjsAndClasses {
 		subjects = append(subjects, key)
 	}
 
+	// maps the user courses to all courses
+	mapUCtoC := make(map[string]string)
+	for _, val := range subjsAndClasses {
+		for i:= 0; i < len(val); i++ {
+			mapUCtoC[val[i]] = "";
+		}
+	}
+
+	// Algorithm to put a check on each checkbox course user knows:
+	// 	for each subject in subjsAndClasses affliated with user,
+	//	Go through the user courses one at a time and	
+	// 	run through all the courses under that subject until the user
+	//	course is found
+	for i:=0; i < len(userSubjects); i++ {
+		// all courses under the subject affliated with user
+		var courses = subjsAndClasses[userSubjects[i]]
+		// all the courses the user took
+		var userCourses = userSubsAndClasses[userSubjects[i]]
+		for j:= 0; j < len(userCourses); j++ {
+			//search over all the course until find a match
+			for k := 0; k < len(courses); k++ {
+				if userCourses[j] == courses[k] {
+					mapUCtoC[userCourses[j]] = "checked"
+					break;
+				}
+			}
+		}
+	}
 
 	// retrieve the languages known by the user
 	userLangs := ProfileGetLanguages(c)
@@ -73,6 +104,8 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	c.Set("langDescription", ProfileGetLanguageTip(c, isTutor))
 	//Set subjects options
 	c.Set("subjects", subjects)
+	c.Set("subjsAndClasses", subjsAndClasses)
+	c.Set("courseChecked", mapUCtoC)
 	//Set the languages options (split in half for styling)
 	c.Set("languages1", languages[:len(languages)/2])
 	c.Set("languages2", languages[len(languages)/2:len(languages)])

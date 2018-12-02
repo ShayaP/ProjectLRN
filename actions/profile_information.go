@@ -121,7 +121,7 @@ func ProfileGetLanguageTip(c buffalo.Context, isTutor bool) string {
 func ProfileGetSubjsAndClasses(c buffalo.Context) map[string][]string {
 	// pairs the user's subject and specific classes under that subject together
 	subjectsAndClasses := make(map[string][]string)
-	subjectsAndClasses["Mathematics"] = []string{"Linear Algebra", "Differential Equations"}
+	subjectsAndClasses["Biology"] = []string{"Botany", "Zoology"}
 	subjectsAndClasses["Chemistry"] = []string{"Introduction to Chemistry"}
 
 	return subjectsAndClasses
