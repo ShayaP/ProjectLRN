@@ -10,6 +10,7 @@ import (
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/google"
+	"github.com/gobuffalo/pop"
 )
 
 func init() {
@@ -21,37 +22,29 @@ func init() {
 }
 
 func AuthCallback(c buffalo.Context) error {
-	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
+	gu, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
 		return c.Error(401, err)
 	}
-	c.Session().Set("current_user", user.Name)
-    u := &models.User{
-        FirstName:  user.FirstName,
-        LastName:   user.LastName,
-        Email:      user.Email,
-        GoogleID:   user.UserID,
-    }
-	c.Session().Set("userObj", u)
-    //return c.Render(200, r.JSON(user))
-	err = c.Session().Save()
+	tx := c.Value("tx").(*pop.Connection)
+	u := &models.User{}
+	err = tx.Find(u, gu.UserID)
+	fmt.Println(err.Error())
 	if err != nil {
-		return c.Error(401, err)
+		return c.Redirect(302, "/register")
+	} else {
+		c.Session().Set("userObj", u)
+		
+		err = c.Session().Save()
+		if err != nil {
+			return c.Error(401, err)
+		}
+		// // Do something with the user, maybe register them/sign them in
+		// c.Flash().Add("success", "Logged in!")
+		return c.Redirect(302, "/")
 	}
-	// Do something with the user, maybe register them/sign them in
-	c.Flash().Add("success", "Logged in!")
-	return c.Redirect(302, "/register")
 }
 
-func AuthDestroy(c buffalo.Context) error {
-	c.Session().Clear()
-	err := c.Session().Save()
-	if err != nil {
-		return c.Error(401, err)
-	}
-	c.Flash().Add("success", "Logged out!")
-	return c.Redirect(302, "/")
-}
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if user := c.Session().Get("current_user"); user != nil {
@@ -68,7 +61,6 @@ func Authorize(next buffalo.Handler) buffalo.Handler {
 		if user := c.Session().Get("current_user"); user == nil {
 			c.Flash().Add("danger", "You must be logged in to see that page!")
             fmt.Println("AAAAAAAAAAAAAAAAAAAAaaaa")
-			return c.Redirect(302, "/")
 		}
 		return next(c)
 	}

@@ -71,6 +71,9 @@ func App() *buffalo.App {
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
+		app.GET("/logout", LogoutHandler)
+		app.GET("/register", RegisterHandler)
+		app.POST("/register", RegisterPOSTHandler)
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
 			FindHandler, RequestPageHandler, ProfileHandler,
 			UpdateProfileHandler, AboutHandler, ReviewHandler)
@@ -80,10 +83,8 @@ func App() *buffalo.App {
 		bah := buffalo.WrapHandlerFunc(gothic.BeginAuthHandler)
 		auth.GET("/{provider}", bah)
 		auth.GET("/{provider}/callback", AuthCallback)
-		auth.DELETE("", AuthDestroy)
+		// auth.DELETE("", AuthDestroy)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
-		app.GET("/register", RegisterHandler)
-		app.POST("/register", RegisterPOSTHandler)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
