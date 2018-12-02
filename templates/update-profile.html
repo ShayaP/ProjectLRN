@@ -44,23 +44,30 @@
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
                 <label for="m_iStreet" class="m_cLabel ">Street</label>
-                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="<%= street %>">
+                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="<%= street %>" required>
                 <label for="m_iCity" class="m_cLabel">City</label>
-                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>">
+                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>" required>
                 <label for="m_iState" class="m_cLabel">State</label>
-                <select id="m_iState" class="m_cInput">
-                  <option selected>CA</option>
-                  <option value="1">MD</option>
-                  <option value="2">NY</option>
+                <select id="m_iState" class="m_cInput" required>
+                  <% state %>
+                  <% let stateCount = 1 %>
+		  <%= for (s) in states{ %>
+			<%= if (s == state) { %>
+			  <option selected><%= s %></option>
+		  	<% } else { %>
+                  	  <option value="<%= stateCount %>"><%= s %></option>
+		  	<% } %>
+			<% (stateCount = stateCount + 1) %>
+		  <% } %>
                 </select>
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
-                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>">
+                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>" required>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="<%= phone %>">
+                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="text" placeholder="###-###-####" value="<%= phone %>" required>
                 </div>
                 <hr>
               </div>
@@ -69,7 +76,7 @@
                 <div class="m_cHalfpiece">
                   <h4>Contact Email</h4>
                   <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
-                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="<%= contactEmail %>">
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="text" placeholder="" value="<%= contactEmail %>" required>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
@@ -88,20 +95,16 @@
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
-                <div class="m_cHalfpiece">
-                  <h4>Mathematics</h4>
-                  <ul>
-                    <li >Linear Algebra</li>
-                    <li>Differential Equations</li>
-                  </ul>
-                </div>
-                <div class="m_cHalfpiece">
-                  <h4>Chemistry</h4>
-                  <ul>
-                    <li>Introduction to Chemistry</li>
-                  </ul>
-                </div>
-              </div>
+                <label for="m_iSubject" class="m_cLabel">Subject</label>
+                <select id="m_iSubject" class="m_cInput" required>
+                  <option value="">Select a subject to view courses</option>
+		  <% let count = 1 %>
+                  <%= for (subject) in subjects {%>
+                  	<option value="<%= count %>"><%= subject %></option>
+		  	<% (count = count + 1) %>
+		  <% } %>
+                </select>
+	      </div>
             </div>
           </div>
           <div class="card card-outline-secondary my-4">
