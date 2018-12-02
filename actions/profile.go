@@ -8,7 +8,7 @@ func ProfileHandler(c buffalo.Context) error {
 	// all the user's personal info that needs to be dynamically set
 	// indicates whether user is a tutor
 	isTutor := true
-	// address of the user 
+	// address of the user
 	address := ProfileGetAddress(c)
 	c.Set("title", "Profile")
 	//display user's name
@@ -32,17 +32,17 @@ func ProfileHandler(c buffalo.Context) error {
 	//Languages
 	// these variables split the languages into two equal size parts (for styling)
 	languages := ProfileGetLanguages(c)
-	// styling: used to ensure that there are more or equal number of 
-	// languages displayed in the first of the two containers in profile 
+	// styling: used to ensure that there are more or equal number of
+	// languages displayed in the first of the two containers in profile
 	midpoint := 0
-	// when the number of languages known is 2k+1, put k+1 of them in the 
+	// when the number of languages known is 2k+1, put k+1 of them in the
 	// first half
-	if len(languages) % 2 != 0 {
+	if len(languages)%2 != 0 {
 		midpoint = len(languages)/2 + 1
 	} else {
-		// when the number of languages known is 2k, put k of them in the 
+		// when the number of languages known is 2k, put k of them in the
 		// first half
-		midpoint = len(languages)/2
+		midpoint = len(languages) / 2
 	}
 	c.Set("languages1", languages[:midpoint])
 	c.Set("languages2", languages[midpoint:len(languages)])
