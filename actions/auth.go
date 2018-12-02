@@ -29,11 +29,16 @@ func AuthCallback(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	u := &models.User{}
 	err = tx.Find(u, gu.UserID)
+	fmt.Println("==============")
 	fmt.Println(err.Error())
+	fmt.Println("==============")
+
 	if err != nil {
-		return c.Redirect(302, "/register")
+		fmt.Println("aksjbfljasdbfljasdb")
+		c.Session().Set("userRequest", gu)
+		return c.Redirect(302, "/auth/register")
 	} else {
-		c.Session().Set("userObj", u)
+		c.Session().Set("user", u)
 		
 		err = c.Session().Save()
 		if err != nil {
@@ -44,12 +49,31 @@ func AuthCallback(c buffalo.Context) error {
 	}
 }
 
+// func AuthDestroy(c buffalo.Context) error {
+// 	c.Session().Clear()
+// 	err := c.Session().Save()
+// 	if err != nil {
+// 		return c.Error(401, err)
+// 	}
+// 	c.Flash().Add("success", "Logged out!")
+// 	return c.Redirect(302, "/")
+// }
+
+func MoveUserObject(next buffalo.Handler) buffalo.Handler {
+    fmt.Println("test")
+    return func(c buffalo.Context) error{
+        if userObj := c.Session().Get("userRequest"); userObj != nil {
+            c.Set("userRequest", userObj)
+            fmt.Println("WEALWJAN:EFJNEF")
+        }
+        return next(c)
+    }
+}
+
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
-		if user := c.Session().Get("current_user"); user != nil {
-			name := user
-			c.Set("name", name)
-			c.Set("userObj", c.Session().Get("userObj"))
+		if user := c.Session().Get("user"); user != nil {
+			c.Set("user", user)
 		}
 		return next(c)
 	}
@@ -57,8 +81,9 @@ func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 
 func Authorize(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
-		if user := c.Session().Get("current_user"); user == nil {
-            fmt.Println("AAAAAAAAAAAAAAAAAAAAaaaa")
+		if user := c.Session().Get("user"); user == nil {
+			fmt.Println("GONNA REDIRECT YOU")
+			return c.Redirect(302, "/")
 		}
 		return next(c)
 	}

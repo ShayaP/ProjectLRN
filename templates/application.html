@@ -79,10 +79,14 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<%= requestpagePath() %>">Requests</a>
             </li>
-            <%= if (userObj) {%>
+            <%= if ((user) && (NoShow)) {%>
+            <li class="nav-item">
+                <!-- <a class="nav-link" href="/logout">Logout</a> -->
+                <a class="nav-link" href="#"> <%= user.FirstName %>'s Profile</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
-                <!-- <a class="nav-link" href="#"> <%= userObj.FirstName %>'s Profile</a> -->
+                <!-- <a class="nav-link" href="#"> <%= user.FirstName %>'s Profile</a> -->
             </li>
             <% } else {%>
             <li class="nav-item">
