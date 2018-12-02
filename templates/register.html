@@ -3,21 +3,23 @@
 	<div style="background: #0361A8; border-radius: 5px 5px 0px 0px; padding: 15px;"><span style="font-family: verdana; color: #D4D4D4; font-size: 3.00em; font-weight:bold;">Enter User Information</span></div>
 </style>
 <%= if (errors) {%>
-
 <%= for (key, err) in errors.Errors {%>
     <div> <%= err %> </div>
 <% } %>
+<%}%>
 
-<%}%>
-<%= form({method:"POST"}){%>
-<%= f.InputTag({name:"Email", value: userRequest.Email }) %>
-<%= f.InputTag({name:"FirstName", value: userRequest.FirstName }) %>
-<%= f.InputTag({name:"LastName", value: userRequest.LastName }) %>
-<%= f.InputTag({name:"PhoneNumber"}) %>
-<%= f.SelectTag({ name:"Gender", options: {"Female": 1, "Male": 2, "Other": 3}}) %>
-<%= f.InputTag({name:"OtherSpecify"}) %>
-<%= f.SubmitTag()%>
-<%}%>
+<form method="POST">
+    <%= csrf() %>
+<table class='center'>
+    <tr><td>Email:</td><td><input type="text" name="Email" value="<%= userRequest.Email%>"></td></tr>
+	<tr><td>First Name:</td><td><input type="text" name="FirstName" value="<%= userRequest.FirstName%>"></td></tr>
+	<tr><td>Last Name:</td><td><input type="text" name="LastName" value="<%= userRequest.LastName%>"></td></tr>
+	<tr><td>Phone Number:</td><td><input type="text" name="PhoneNumber"></td></tr>
+    <tr><td>Gender:</td><td><select name="Gender"><option value="1">Female</option><option value="2">Male</option><option value="3">Other</option></select></td></tr>
+	<tr><td>Specify If Other:</td><td><input type="text" name="OtherSpecify"></td></tr>
+
+<tr><td>&nbsp;</td><td><input type="submit" value="Register"> </td></tr>
+</form>
 <!--
 If your page additionally needs its own styling, add the styles here!
 Example (warning! pseudo-syntax):

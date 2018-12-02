@@ -30,13 +30,12 @@ func AuthCallback(c buffalo.Context) error {
     u, err := models.GetUserByGID(tx, gu.UserID)
 
 	if err != nil {
-	    fmt.Println(err.Error())
+        u := &models.User{}
         u.FirstName = gu.FirstName
         u.LastName = gu.LastName
         u.GoogleID = gu.UserID
         u.Email = gu.Email
         c.Session().Set("userID", gu.UserID)
-		fmt.Println("aksjbfljasdbfljasdb")
 		c.Session().Set("userRequest", u)
 		return c.Redirect(302, "/auth/register")
 	} else {
