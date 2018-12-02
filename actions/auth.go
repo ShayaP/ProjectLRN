@@ -27,13 +27,10 @@ func AuthCallback(c buffalo.Context) error {
 		return c.Error(401, err)
 	}
 	tx := c.Value("tx").(*pop.Connection)
-	u := &models.User{}
-	err = tx.Find(u, gu.UserID)
-	fmt.Println("==============")
-	fmt.Println(err.Error())
-	fmt.Println("==============")
+    u, err := models.GetUserByGID(tx, gu.UserID)
 
 	if err != nil {
+	    fmt.Println(err.Error())
         u.FirstName = gu.FirstName
         u.LastName = gu.LastName
         u.GoogleID = gu.UserID
@@ -44,7 +41,6 @@ func AuthCallback(c buffalo.Context) error {
 		return c.Redirect(302, "/auth/register")
 	} else {
 		c.Session().Set("user", u)
-		
 		err = c.Session().Save()
 		if err != nil {
 			return c.Error(401, err)
