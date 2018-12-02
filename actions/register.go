@@ -35,7 +35,7 @@ func RegisterPOSTHandler(c buffalo.Context) error {
     }
 
     if verrs.HasAny() {
-        c.Set("user", u)
+        c.Set("userRequest", u)
         c.Set("errors", verrs)
 	    c.Set("title", "Register - Error")
         return c.Render(200, r.HTML("register.html"))

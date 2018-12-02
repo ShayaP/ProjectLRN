@@ -31,7 +31,7 @@ func AuthCallback(c buffalo.Context) error {
         Email:      user.Email,
         GoogleID:   user.UserID,
     }
-	c.Session().Set("user", u)
+	c.Session().Set("userRequest", u)
     c.Session().Set("current_user", u.FirstName)
     //return c.Render(200, r.JSON(user))
 	err = c.Session().Save()
@@ -40,8 +40,7 @@ func AuthCallback(c buffalo.Context) error {
 	}
 	// Do something with the user, maybe register them/sign them in
 	c.Flash().Add("success", "Logged in!")
-    userMap := {"userObj": u, "NoShow": true}
-	return c.Redirect(302, "/register", userMap)
+    return c.Redirect(302, "/auth/register")
 }
 
 func AuthDestroy(c buffalo.Context) error {
@@ -53,6 +52,18 @@ func AuthDestroy(c buffalo.Context) error {
 	c.Flash().Add("success", "Logged out!")
 	return c.Redirect(302, "/")
 }
+
+func MoveUserObject(next buffalo.Handler) buffalo.Handler {
+    fmt.Println("test")
+    return func(c buffalo.Context) error{
+        if userObj := c.Session().Get("userRequest"); userObj != nil {
+            c.Set("userRequest", userObj)
+            fmt.Println("WEALWJAN:EFJNEF")
+        }
+        return next(c)
+    }
+}
+
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if user := c.Session().Get("current_user"); user != nil {
