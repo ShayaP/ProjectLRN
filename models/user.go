@@ -22,8 +22,8 @@ type User struct {
 	Email        string    `json:"email" db:"email"`
 	Gender       int       `json:"gender" db:"gender"`
 	OtherSpecify string    `json:"other_specify" db:"other_specify"`
-    AvgRating    float32   `json:"avg_rating" db:"avg_rating"`
-    NumRatings   int       `json:"num_ratings" db:"num_ratings"`
+	AvgRating    float32   `json:"avg_rating" db:"avg_rating"`
+	NumRatings   int       `json:"num_ratings" db:"num_ratings"`
 }
 
 // String is not required by pop and may be deleted
@@ -71,17 +71,17 @@ func (u *User) Create(tx *pop.Connection) (*validate.Errors, error) {
 	u.Email = strings.ToLower(strings.TrimSpace(u.Email))
 	u.FirstName = strings.Title(u.FirstName)
 	u.LastName = strings.Title(u.LastName)
-    u.AvgRating = 0;
-    u.NumRatings = 0;
+	u.AvgRating = 0
+	u.NumRatings = 0
 	return tx.ValidateAndCreate(u)
 }
 
-func GetUserByGID(tx *pop.Connection, gid string) (*User, error){
-    query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
-    u := &User{}
-    if err := query.First(u); err != nil {
-        return nil, err
-    }else{
-        return u, nil
-    }
+func GetUserByGID(tx *pop.Connection, gid string) (*User, error) {
+	query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
+	u := &User{}
+	if err := query.First(u); err != nil {
+		return nil, err
+	} else {
+		return u, nil
+	}
 }

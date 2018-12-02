@@ -1,6 +1,5 @@
 package models
 
-
 func (ms *ModelSuite) Test_User_Create() {
 	count, err := ms.DB.Count("users")
 	ms.NoError(err)
