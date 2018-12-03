@@ -20,6 +20,18 @@
     <!-- Page level plugin CSS-->
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
+form method="POST">
+    <%= csrf() %>
+<table class='center'>
+    <tr><td>Email:</td><td><input type="text" name="Email" value="<%= userRequest.Email%>"></td></tr>
+  <tr><td>First Name:</td><td><input type="text" name="FirstName" value="<%= userRequest.FirstName%>"></td></tr>
+  <tr><td>Last Name:</td><td><input type="text" name="LastName" value="<%= userRequest.LastName%>"></td></tr>
+  <tr><td>Phone Number:</td><td><input type="text" name="PhoneNumber"></td></tr>
+    <tr><td>Gender:</td><td><select name="Gender"><option value="1">Female</option><option value="2">Male</option><option value="3">Other</option></select></td></tr>
+  <tr><td>Specify If Other:</td><td><input type="text" name="OtherSpecify"></td></tr>
+
+<tr><td>&nbsp;</td><td><input type="submit" value="Register"> </td></tr>
+</form>
 
   </head>
 
