@@ -136,19 +136,11 @@
             <li class="breadcrumb-item active">Overview</li>
           </ol>
 
-    <form method="POST">
-    <%= csrf() %>
-    <tr><td>Email:</td><td><input type="text" name="Email" value="<%= userRequest.Email%>"></td></tr>
-  <tr><td>First Name:</td><td><input type="text" name="FirstName" value="<%= userRequest.FirstName%>"></td></tr>
-  <tr><td>Last Name:</td><td><input type="text" name="LastName" value="<%= userRequest.LastName%>"></td></tr>
-  <tr><td>Phone Number:</td><td><input type="text" name="PhoneNumber"></td></tr>
-    <tr><td>Gender:</td><td><select name="Gender"><option value="1">Female</option><option value="2">Male</option><option value="3">Other</option></select></td></tr>
-  <tr><td>Specify If Other:</td><td><input type="text" name="OtherSpecify"></td></tr>
 
-<tr><td>&nbsp;</td><td><input type="submit" value="Register"> </td></tr>
-</form>
 
           <!-- DataTables Example -->
+          <form method="POST">
+            <%= csrf() %>
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -162,6 +154,7 @@
                       <th>Rating</th>
                       <th>Feedback</th>
                       <th>Date</th>
+                      <th>Submit Review</th>>
 
                     </tr>
                   </thead>
@@ -170,24 +163,42 @@
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td>aaron</td>
-                      <td>0</td>
-                      <td>he was helpful!! but eh</td>
+                      <td>Josh</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
                       <td>10/14/21</td>
+                      <td><input type="submit" value="submit"> </td>
                     </tr>
                     
+                    <tr>
+                      <td>David</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
+                      <td>10/20/21</td>
+                      <td><input type="submit" value="submit"> </td>
                     </tr>
+                   
+                    <tr>
+                      <td>Shaya</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
+                      <td>10/28/20</td>
+                      <td><input type="submit" value="submit"> </td>
+                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
-
+          </form>
         </div>
 
 
           <!-- DataTables Example -->
+          <form method="GET">
+            <%= csrf() %>
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -214,6 +225,13 @@
                       <td>Shafeen fell asleep while tutoring!!</td>
                       <td>10/11/13</td>
                     </tr>
+
+                    <tr>
+                      <td>Vidya</td>
+                      <td>1</td>
+                      <td>Yeeeaaahh, Shafeen you need to like ... be less bad lol!</td>
+                      <td>10/11/13</td>
+                    </tr>
                     
                     </tr>
                   </tbody>
@@ -222,7 +240,7 @@
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
-
+          </form>
         </div>
 
 
