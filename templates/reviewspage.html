@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-
-
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Page level plugin CSS-->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-
-  </head>
-
-
     <div id="wrapper">
 
       <!-- Sidebar -->
@@ -67,6 +49,8 @@
           </ol>
 
           <!-- DataTables Example -->
+          <form method="POST">
+            <%= csrf() %>
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -80,6 +64,7 @@
                       <th>Rating</th>
                       <th>Feedback</th>
                       <th>Date</th>
+                      <th>Submit Review</th>>
 
                     </tr>
                   </thead>
@@ -88,24 +73,42 @@
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td>aaron</td>
-                      <td>0</td>
-                      <td>he was helpful!! but eh</td>
+                      <td>Josh</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
                       <td>10/14/21</td>
+                      <td><input type="submit" value="submit"> </td>
                     </tr>
                     
+                    <tr>
+                      <td>David</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
+                      <td>10/20/21</td>
+                      <td><input type="submit" value="submit"> </td>
                     </tr>
+                   
+                    <tr>
+                      <td>Shaya</td>
+                      <td><input type="text" name="Rating" value=""></td>
+                      <td><input type="text" name="Description" value=""></td>
+                      <td>10/28/20</td>
+                      <td><input type="submit" value="submit"> </td>
+                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
-
+          </form>
         </div>
 
 
           <!-- DataTables Example -->
+          <form method="GET">
+            <%= csrf() %>
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
@@ -144,7 +147,7 @@
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
-
+          </form>
         </div>
 
         <!-- /.container-fluid -->
