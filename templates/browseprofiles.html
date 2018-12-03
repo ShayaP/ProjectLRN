@@ -1,6 +1,8 @@
 </head>
 
   <body>
+<form method="POST">
+    <%= csrf() %>
 
     <!-- Page Content -->
     <div class="container">
@@ -11,24 +13,22 @@
       </h1>
 
    <div class="col-lg-12">
-          <h2 class="my-4">Results, send a request if you want to interact!</h2>
+          <h2 class="my-4">Results: Send a request if you want to interact!</h2>
         </div>
        
-      <!-- Browse Tutor and Tutee Profiles -->
+      <!-- Browse Tutor and Tutee Profiles   add this back in after demo --<p>"Bio, subjects"</p>
+ -->
      <%= for (result) in results { %>
      <% let count = 0 %>
 
       <div class="row">
-
-          <h3>John Smith
-            <small>Job Title</small>
+            <%=result%> 
           </h3>
-          <p>"Bio, subjects"</p>
-          <button class = "btn " role= "Request">Request</button>
+          <button class = "btn " type= "submit" role= "Request" name = "Send Request" value="true">Request</button>
           <h3> 
           </h3>
       </div>
         <% } %>
-
       <% contentFor("extraHeadArgs") { %>
       <% }  %>
+</form>
