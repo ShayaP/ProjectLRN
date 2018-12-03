@@ -14,14 +14,12 @@
         </div>
         <!-- /.col-lg-3 -->
 
+
         <div class="col-lg-9">
 
           <div class="card mt-4">
             <h2 class="card-title">MyProfile</h2>
             <div class="m_cMulticontainer">
-              <div class="m_cHalfpiece">
-              <img class="card-img-top img-fluid m_cImg" src="<%= assetPath("images/selfie.png") %>" alt="user profile picture">
-              </div>
                 <div class="card-header halfpiece m_cCenterBox">
                   <div class="card-header">
                     <h1 > <%= username %> </h1>
@@ -41,7 +39,7 @@
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
-                <p class="card-text"> 
+                <p class="card-text">
 		<%= street %>
 		  <br>
                 <%= city %>, <%= state %> <%= zip %>
@@ -134,8 +132,7 @@
         <!-- /.col-lg-9 -->
 
       </div>
-     
+
       <% contentFor("extraHeadArgs") { %>
 	<%= stylesheetTag("css/profile.css") %>
       <% }  %>
-
