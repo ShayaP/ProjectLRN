@@ -42,7 +42,7 @@
                 <label for="m_iCity" class="m_cLabel">City</label>
                 <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>" required>
                 <label for="m_iState" class="m_cLabel">State</label>
-                <select id="m_iState" class="m_cInput" required>
+                <select id="m_iState" name="stateId[]" class="m_cInput" required>
                   <% state %>
                   <% let stateCount = 1 %>
 		  <%= for (s) in states{ %>
