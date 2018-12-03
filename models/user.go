@@ -87,3 +87,43 @@ func GetUserByGID(tx *pop.Connection, gid string) (*User, error) {
 		return u, nil
 	}
 }
+
+func GetUserByName(tx *pop.Connection, name string) (*User, error) {
+	query := tx.RawQuery("SELECT * FROM users WHERE first_name = ?", name)
+	u := &User{}
+	if err := query.First(u); err != nil {
+		return nil, err
+	} else {
+		return u, nil
+	}
+}
+
+// func GetUserByLocation(tx *pop.Connection, gid string) (*User, error) {
+// 	query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
+// 	u := &User{}
+// 	if err := query.First(u); err != nil {
+// 		return nil, err
+// 	} else {
+// 		return u, nil
+// 	}
+// }
+
+// func GetUserByLanguage(tx *pop.Connection, gid string) (*User, error) {
+// 	query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
+// 	u := &User{}
+// 	if err := query.First(u); err != nil {
+// 		return nil, err
+// 	} else {
+// 		return u, nil
+// 	}
+// }
+
+// func GetUserByTopic(tx *pop.Connection, gid string) (*User, error) {
+// 	query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
+// 	u := &User{}
+// 	if err := query.First(u); err != nil {
+// 		return nil, err
+// 	} else {
+// 		return u, nil
+// 	}
+// }

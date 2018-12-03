@@ -49,24 +49,12 @@ func AuthCallback(c buffalo.Context) error {
 	}
 }
 
-// func AuthDestroy(c buffalo.Context) error {
-// 	c.Session().Clear()
-// 	err := c.Session().Save()
-// 	if err != nil {
-// 		return c.Error(401, err)
-// 	}
-// 	c.Flash().Add("success", "Logged out!")
-// 	return c.Redirect(302, "/")
-// }
-
 func MoveUserObject(next buffalo.Handler) buffalo.Handler {
 	fmt.Println("test")
 	return func(c buffalo.Context) error {
 		if userObj := c.Session().Get("userRequest"); userObj != nil {
 			u := userObj.(*models.User)
 			c.Set("userRequest", u)
-			//c.Set("userID", u.GoogleID)
-			//fmt.Println(u.GoogleID)
 		}
 		return next(c)
 	}

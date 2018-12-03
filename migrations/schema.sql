@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS "schema_migration" (
+CREATE TABLE "schema_migration" (
 "version" TEXT NOT NULL
 );
 CREATE UNIQUE INDEX "schema_migration_version_idx" ON "schema_migration" (version);
-CREATE TABLE IF NOT EXISTS "users" (
+CREATE TABLE "users" (
 "id" TEXT PRIMARY KEY,
 "first_name" TEXT NOT NULL,
 "last_name" TEXT NOT NULL,
@@ -13,13 +13,11 @@ CREATE TABLE IF NOT EXISTS "users" (
 "other_specify" TEXT NOT NULL,
 "avg_rating" REAL NOT NULL,
 "num_ratings" INTEGER NOT NULL,
-"is_tutor" INTEGER NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
 CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
-CREATE UNIQUE INDEX "users_google_id_idx" ON "users" (google_id);
-CREATE TABLE IF NOT EXISTS "requests" (
+CREATE TABLE "requests" (
 "id" TEXT PRIMARY KEY,
 "status" INTEGER NOT NULL,
 "tutorid" char(36) NOT NULL,
@@ -27,7 +25,7 @@ CREATE TABLE IF NOT EXISTS "requests" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "reviews" (
+CREATE TABLE "reviews" (
 "id" TEXT PRIMARY KEY,
 "rating" INTEGER NOT NULL,
 "description" TEXT NOT NULL,
@@ -36,7 +34,7 @@ CREATE TABLE IF NOT EXISTS "reviews" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "courses" (
+CREATE TABLE "courses" (
 "id" TEXT PRIMARY KEY,
 "name" TEXT NOT NULL,
 "instructor" TEXT NOT NULL,
@@ -44,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "courses" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "subjects" (
+CREATE TABLE "subjects" (
 "id" TEXT PRIMARY KEY,
 "name" INTEGER NOT NULL,
 "prof" INTEGER NOT NULL,
@@ -52,7 +50,7 @@ CREATE TABLE IF NOT EXISTS "subjects" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE TABLE IF NOT EXISTS "userinfoes" (
+CREATE TABLE "userinfoes" (
 "id" TEXT PRIMARY KEY,
 "google_id" char(36) NOT NULL,
 "languages" TEXT NOT NULL,
