@@ -112,3 +112,11 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	c.Set("checked", mapULtoL)
 	return c.Render(200, r.HTML("update-profile.html"))
 }
+
+func UpdateProfileHandlerPOSTHandler(c buffalo.Context) error {
+    return nil
+}
+
+
+
+

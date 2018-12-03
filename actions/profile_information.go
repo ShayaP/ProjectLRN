@@ -1,6 +1,58 @@
 package actions
 
-import "github.com/gobuffalo/buffalo"
+import (
+    "encoding/json"
+    "github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/packr"
+)
+/**
+type Lang struct {
+    ID      string  `json:"id"`
+    Name    string  `json:"name"`
+}
+type Langarray struct{
+    Languages   []Lang  `json:"language"`
+}
+
+type Course struct {
+    ID      string  `json:"id"`
+    Subject string  `json:"subject"`
+    Course  string  `json:"course"`
+}
+type Coursearray struct{
+    Courses   []Course  `json:"course"`
+}
+
+type State struct {
+    ID      string  `json:"id"`
+    Name    string  `json:"name"`
+}
+type Statearray struct{
+    States  []State `json:"state"`
+}
+*/
+var StaticCourses   map[string]string
+var StaticLangs     map[string]string
+var StaticStates    map[string]string
+
+func init() {
+    box := packr.NewBox("../static")
+    langBytes, _ := box.Find("language.json")
+    //var langMap Langarray
+    json.Unmarshal(langBytes, &StaticLangs)
+
+    courseBytes, _ := box.Find("course.json")
+    //var courseMap Coursearray
+    json.Unmarshal(courseBytes, &StaticCourses)
+
+    stateBytes, _ := box.Find("state.json")
+    //var stateMap Statearray
+    json.Unmarshal(stateBytes, &StaticStates)
+
+    //StaticCourses = courseMap.Courses
+    //StaticLangs = langMap.Languages
+    //StaticStates = stateMap.States
+}
 
 //Name: 	ProfileGetUserame
 //Purpose: 	gets the user's name to display
@@ -155,3 +207,4 @@ func ProfileGetLanguages(c buffalo.Context) []string {
 	languages := []string{"English", "Chinese", "Japanese", "Korean"}
 	return languages
 }
+
