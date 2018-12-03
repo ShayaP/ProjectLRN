@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -84,9 +84,8 @@
         </li>
       </ul>
 
-    </nav>
-
-    <div id="wrapper">
+    </nav> 
+   <div id="wrapper">
 
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
@@ -136,8 +135,6 @@
             <li class="breadcrumb-item active">Overview</li>
           </ol>
 
-
-
           <!-- DataTables Example -->
           <form method="POST">
             <%= csrf() %>
@@ -154,7 +151,7 @@
                       <th>Rating</th>
                       <th>Feedback</th>
                       <th>Date</th>
-                      <th>Submit Review</th>>
+                      <th>Submit Review</th>
 
                     </tr>
                   </thead>
@@ -219,21 +216,18 @@
                   
                   </tfoot>
                   <tbody>
+		    <% let nameIndex = 0 %>
+		    <% let rateIndex = 1 %>
+		    <% let fbIndex = 2 %>
+		    <% let dateIndex = 3 %>
+	   	    <%= for (rating) in pastRatings { %>
                     <tr>
-                      <td>Vidya</td>
-                      <td>3</td>
-                      <td>Shafeen fell asleep while tutoring!!</td>
-                      <td>10/11/13</td>
+                      <td><%= rating[nameIndex] %></td>
+                      <td><%= rating[rateIndex] %></td>
+                      <td><%= rating[fbIndex]  %></td>
+                      <td><%= rating[dateIndex] %></td>
                     </tr>
-
-                    <tr>
-                      <td>Vidya</td>
-                      <td>1</td>
-                      <td>Yeeeaaahh, Shafeen you need to like ... be less bad lol!</td>
-                      <td>10/11/13</td>
-                    </tr>
-                    
-                    </tr>
+                   <% } %> 
                   </tbody>
                 </table>
               </div>
@@ -243,82 +237,12 @@
           </form>
         </div>
 
-
-        <!-- datatable
-
-         <div class="card mb-3">
-            <div class="card-header">
-              <i class="fas fa-table"></i>
-             Your reviews!</div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Rating</th>
-                      <th>Feedback</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                  
-                  </tfoot>
-                  <tbody>
-                    <tr>
-                      <td>Vidya</td>
-                      <td>3</td>
-                      <td>Shafeen fell asleep while tutoring!!</td>
-                      <td>10/11/13</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
-
-        </div>-->
         <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © LRN 2018</span>
-            </div>
-          </div>
-        </footer>
-
       </div>
       <!-- /.content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -357,6 +281,3 @@ contentFor(“extrHeadArgs”) {
     <% contentFor("extraHeadArgs") { %>
 	<%= stylesheetTag("css/sb-admin.css") %>
     <% } %>
-  </body>
-
-</html>

@@ -29,7 +29,6 @@ func RegisterPOSTHandler(c buffalo.Context) error {
 		return c.Render(500, r.String(err.Error()))
 	}
 	//userPrev := c.Session().Get("user").(*models.User)
-	fmt.Println(c.Session().Get("userID"))
 	u.GoogleID = c.Session().Get("userID").(string)
 
     if u.Gender != 3 {

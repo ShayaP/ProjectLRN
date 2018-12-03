@@ -20,14 +20,19 @@
             <div class="m_cMulticontainer">
                 <div class="card-header halfpiece m_cCenterBox">
                   <div class="card-header">
-                    <h1 ><%= username %></h1>
+                    <h1 ><%= user.FirstName %></h1>
                   </div>
                 </div>
             </div>
           </div>
           <!-- /.card -->
 
-          <form>
+<%= if (errors) {%>
+<%= for (key, err) in errors.Errors {%>
+    <div> <%= err %> </div>
+<% } %>
+<%}%>
+        <form method="POST">
               <%= csrf() %>
 	  <div class="card card-outline-secondary my-4">
             <div class="card-header">
@@ -36,42 +41,44 @@
             <div class="card-body">
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
-                <h4>Address</h4>
+                <h4>Zip Code</h4>
+                <!--
                 <label for="m_iStreet" class="m_cLabel ">Street</label>
-                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="<%= street %>" required>
+                <input name="m_iStreet" id="m_iStreet" class="m_cInput " type="text" placeholder="Street" value="street " required>
                 <label for="m_iCity" class="m_cLabel">City</label>
-                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="<%= city %>" required>
+                <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="city" required>
                 <label for="m_iState" class="m_cLabel">State</label>
-                <select id="m_iState" class="m_cInput" required>
-                  <% state %>
-                  <% let stateCount = 1 %>
-		  <%= for (s) in states{ %>
-			<%= if (s == state) { %>
-			  <option value="<%= stateCount%>" selected><%= s %></option>
-		  	<% } else { %>
-                  	  <option value="<%= stateCount %>"><%= s %></option>
-		  	<% } %>
-			<% (stateCount = stateCount + 1) %>
-		  <% } %>
+                <select id="m_iState" name="stateId[]" class="m_cInput" required>
+                  < state >
+                  < let stateCount = 1 >
+		  <= for (s) in states{ >
+			<= if (s == state) { >
+			  <option value="<= stateCount>" selected><= s ></option>
+		  	< } else { >
+                  	  <option value="<= stateCount >"><= s ></option>
+		  	< } >
+			< (stateCount = stateCount + 1) >
+		  < } >
                 </select>
+                -->
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
-                <input name="m_iZip" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>" required>
+                <input name="Location" id="m_iZip" value="<%= zip %>" required>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="m_iPhone" id="m_iPhone" class="m_cInput" type="tel" placeholder="###-###-####" value="<%= phone %>" required>
+                <input name="PhoneNumber" id="m_iPhone" value="<%= phone %>" required>
                 </div>
                 <hr>
               </div>
               <hr>
               <div class="m_cMulticontainer">
-                <div class="m_cHalfpiece">
+                <!--<div class="m_cHalfpiece">
                   <h4>Contact Email</h4>
                   <label for="m_iContactEmail" class="m_cLabel">Contact Email</label>
-                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="email" placeholder="" value="<%= contactEmail %>" required>
-                </div>
+                  <input name="m_iContactEmail" id="m_iContactEmail" class="m_cInput" type="email" placeholder="" value="contactEmail" required>
+                </div> -->
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Account Email</h4>
@@ -108,7 +115,7 @@
                             <tr class="searchable-course" data-id="<%= subject %>">
                             <td ></td>
                             <td >
-		    		<input name="courseId[]" id="<%= course %>" value="courseCount" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
+                                <input name="Courses[]" id="<%= course %>" value="<%= course %>" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
                     		<label for="<%= course %>" class=""><%= course %></label>
 			    </td>
                             </tr>
@@ -132,8 +139,8 @@
                   <%= for (language) in languages1 {%>
 		  <% checked %>
 		  <div class="group-checkbox">
-                    <input name="languageId[]" id="<%= language %>" value="languageCount" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
-                    <label for="<%=language %>" class=""><%= language %></label>
+              <input name="Languages[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
+                    <label for="lang.<%= language %>" class=""><%= language %></label>
                   </div>
 		  <% (languageCount = languageCount + 1) %>
 		  <% } %>
@@ -141,8 +148,8 @@
                 <div class="m_cHalfpiece">
                   <%= for (language) in languages2 {%>
 		  <div class="group-checkbox">
-		    <input name="languageId[]" id="<%= language %>" value="languageCount" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
-                    <label for="<%=language %>" class=""><%= language %></label>
+              <input name="Languages[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
+                    <label for="lang.<%=language %>" class=""><%= language %></label>
                   </div>
 		  <% (languageCount = languageCount + 1) %>
 		  <% } %>
@@ -152,6 +159,7 @@
           </div>
          <!--<small class="text-muted">Posted by Anonymous on 3/1/17</small>-->
           <!-- /.card -->
+        <input type="submit" value="Register">
 	</form>
         </div>
         <!-- /.col-lg-9 -->

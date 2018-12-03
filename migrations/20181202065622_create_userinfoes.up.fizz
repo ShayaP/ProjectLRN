@@ -1,6 +1,6 @@
 create_table("userinfoes") {
 	t.Column("id", "uuid", {"primary": true})
-	t.Column("google_id", "uuid", {})
+	t.Column("google_id", "string", {})
 	t.Column("languages", "string", {})
 	t.Column("subjects", "string", {})
 	t.Column("courses", "string", {})

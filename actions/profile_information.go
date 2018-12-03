@@ -1,118 +1,37 @@
 package actions
 
 import (
-    "encoding/json"
-    "github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/packr"
+    //"fmt"
+    "sort"
+
+    "github.com/cileonard/lrn/models"
+
+    //"github.com/gobuffalo/buffalo"
 )
-/**
-type Lang struct {
-    ID      string  `json:"id"`
-    Name    string  `json:"name"`
-}
-type Langarray struct{
-    Languages   []Lang  `json:"language"`
-}
 
-type Course struct {
-    ID      string  `json:"id"`
-    Subject string  `json:"subject"`
-    Course  string  `json:"course"`
-}
-type Coursearray struct{
-    Courses   []Course  `json:"course"`
-}
+var subjs_and_classes map[string][]string
+var all_langs []string
 
-type State struct {
-    ID      string  `json:"id"`
-    Name    string  `json:"name"`
-}
-type Statearray struct{
-    States  []State `json:"state"`
-}
-*/
-var StaticCourses   map[string]string
-var StaticLangs     map[string]string
-var StaticStates    map[string]string
+func init(){
 
-func init() {
-    box := packr.NewBox("../static")
-    langBytes, _ := box.Find("language.json")
-    //var langMap Langarray
-    json.Unmarshal(langBytes, &StaticLangs)
+    outputMap := make(map[string][]string, len(models.StaticCourses))
+    for subj, courses := range models.StaticCourses{
+        outputMap[subj] = make([]string, len(courses))
+        for i, course := range courses {
+            outputMap[subj][i] = course.Course
+        }
+        sort.Strings(outputMap[subj])
+    }
+    subjs_and_classes = outputMap
 
-    courseBytes, _ := box.Find("course.json")
-    //var courseMap Coursearray
-    json.Unmarshal(courseBytes, &StaticCourses)
-
-    stateBytes, _ := box.Find("state.json")
-    //var stateMap Statearray
-    json.Unmarshal(stateBytes, &StaticStates)
-
-    //StaticCourses = courseMap.Courses
-    //StaticLangs = langMap.Languages
-    //StaticStates = stateMap.States
-}
-
-//Name: 	ProfileGetUserame
-//Purpose: 	gets the user's name to display
-//Description:	returns a pre-fabricated user name
-//Parameters:	c - a context
-//Return:	returns the user's name as a string
-func ProfileGetUsername(c buffalo.Context) string {
-	// all the user's personal info that needs to be dynamically set
-	var username = "Bobby Tefla"
-	return username
-}
-
-//Name: 	ProfileGetAddress
-//Purpose: 	gets the user's address (street, city, state, zip) to display
-//Description:	returns a pre-fabricated address
-//Parameters:	c - a context
-//Return:	returna string array of the users address in order:
-//		["street","city", "state", "zip"]
-func ProfileGetAddress(c buffalo.Context) []string {
-	// the user's address
-	street := "645 Mt. Yosemite dr"
-	city := "San Diego"
-	state := "CA"
-	zip := "92084"
-	address := []string{street, city, state, zip}
-	return address
-}
-
-//Name: 	ProfileGetPhone
-//Purpose: 	gets the user's phone number to
-//Description:	returns a pre-fabricated phone number
-//Parameters:	c - a context
-//Return:	returns phone number as string in format: xxx-xxx-xxxx
-func ProfileGetPhone(c buffalo.Context) string {
-	// user's phone number
-	phone := "951-842-6895"
-	return phone
-}
-
-//Name: 	ProfileGetContactEmail
-//Purpose: 	gets the user's contact email to display
-//Description:	returns a pre-fabricated contact email
-//Parameters:	c - a context
-//Return:	returns contact email as a string
-func ProfileGetContactEmail(c buffalo.Context) string {
-	// user's contact email
-	contactEmail := "bobby_tefla@yahoo.com"
-	//display user's contact email
-	return contactEmail
-}
-
-//Name: 	ProfileGetAccountEmail
-//Purpose: 	gets the user's account email to display
-//Description:	returns a pre-fabricated account email
-//Parameters:	c - a context
-//Return:	returns account email as a string
-func ProfileGetAccountEmail(c buffalo.Context) string {
-	// user's account email
-	accountEmail := "btefla@gmail.com"
-	return accountEmail
+	all_langs = make([]string, len(models.StaticLangs))
+    cnt := 0
+    for _,l := range models.StaticLangs {
+        all_langs[cnt] = l
+        cnt++
+    }
+    sort.Strings(all_langs)
+    //fmt.Println(all_langs)
 }
 
 //Name: 	ProfileGetSubjectTip
@@ -126,7 +45,7 @@ func ProfileGetAccountEmail(c buffalo.Context) string {
 //Return:	returns a description relevant to tutors if the user is
 //		a tutor or a description relevant to tutees if the user
 //		is a tutee
-func ProfileGetSubjectTip(c buffalo.Context, isTutor bool) string {
+func ProfileGetSubjectTip(isTutor bool) string {
 	// description of what the subjects section in profile means to tutors
 	ttrSubjectDescription := "Subjects you can help with"
 	// description of what the subjects section in profile means to tutees
@@ -150,7 +69,7 @@ func ProfileGetSubjectTip(c buffalo.Context, isTutor bool) string {
 //Return:	returns a description relevant to tutors if the user is
 //		a tutor or a description relevant to tutees if the user
 //		is a tutee
-func ProfileGetLanguageTip(c buffalo.Context, isTutor bool) string {
+func ProfileGetLanguageTip(isTutor bool) string {
 	// description of what the languages section in profile means to tutors
 	var ttrLangDescription = "Languages you are comfortable teaching in"
 	// description of what the languages section in profile means to tutees
@@ -170,13 +89,9 @@ func ProfileGetLanguageTip(c buffalo.Context, isTutor bool) string {
 //Parameters:	c - a context
 //Return:	returns a pre-fabricated map of key subjects and list of classes
 //			under each subject
-func ProfileGetSubjsAndClasses(c buffalo.Context) map[string][]string {
+func ProfileGetSubjsAndClasses() map[string][]string {
 	// pairs the user's subject and specific classes under that subject together
-	subjectsAndClasses := make(map[string][]string)
-	subjectsAndClasses["Biology"] = []string{"Botany", "Zoology"}
-	subjectsAndClasses["Chemistry"] = []string{"Introduction to Chemistry"}
-
-	return subjectsAndClasses
+	return subjs_and_classes
 }
 
 //Name: 	ProfileGetSubjects
@@ -185,16 +100,12 @@ func ProfileGetSubjsAndClasses(c buffalo.Context) map[string][]string {
 //Description:	returns a pre-fabricated list of subjects
 //Parameters:	c - a context
 //Return:	returns a pre-fabricated list of subjects
-func ProfileGetSubjects(c buffalo.Context) []string {
-	//  delegate to ProfileGetSubjectAndClasses to get a map of
-	// subjects and classes  then extract the keys and return them
-	//subjsAndClasses := make(map[string][]string)
-	subjsAndClasses := ProfileGetSubjsAndClasses(c)
-	subjectKeys := make([]string, 0, 10)
-	for key, _ := range subjsAndClasses {
+func ProfileGetSubjects() []string {
+	subjectKeys := make([]string, 0, len(subjs_and_classes))
+	for key, _ := range subjs_and_classes {
 		subjectKeys = append(subjectKeys, key)
 	}
-
+    sort.Strings(subjectKeys)
 	return subjectKeys
 }
 
@@ -203,8 +114,7 @@ func ProfileGetSubjects(c buffalo.Context) []string {
 //Description:	returns a pre-fabricated list of languages
 //Parameters:	c - a context
 //Return:	returns a pre-fabricated list of languages
-func ProfileGetLanguages(c buffalo.Context) []string {
-	languages := []string{"English", "Chinese", "Japanese", "Korean"}
-	return languages
+func ProfileGetLanguages() []string {
+	return all_langs
 }
 

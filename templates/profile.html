@@ -40,9 +40,10 @@
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
                 <p class="card-text">
-		<%= street %>
+                <!--<= street >-->
 		  <br>
-                <%= city %>, <%= state %> <%= zip %>
+          <!--<= city >, <= state > <%= zip %> -->
+          <%= zip %>
                 </p>
                 </div>
                 <hr>
@@ -54,11 +55,6 @@
               </div>
               <hr>
               <div class="m_cMulticontainer">
-                <div class="m_cHalfpiece">
-                <h4>Contact Email</h4>
-                <p class="card-text"><%= contactEmail %></p>
-                </div>
-                <hr>
                 <div class="m_cHalfpiece">
                 <h4>Account Email</h4>
                 <p class="card-text"><%= accountEmail %></p>
@@ -75,16 +71,22 @@
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
-		<%= for (mainSubject) in mainSubjects { %>
+		<!--<= for (mainSubject) in mainSubjects { >
                 <div class="m_cHalfpiece">
-                  <h4><%= mainSubject %></h4>
+                  <h4><= mainSubject ></h4>
                   <ul>
-		   <%= for (aClass) in subjectsAndClasses[mainSubject] { %>
+		   <= for (aClass) in subjectsAndClasses[mainSubject] { >
+                    <li><= aClass ></li>
+		   < } >
+                  </ul>
+                </div>
+                < } > -->
+                  <ul>
+		   <%= for (aClass) in subjectsAndClasses { %>
                     <li><%= aClass %></li>
 		   <% } %>
                   </ul>
                 </div>
-		<% } %>
               </div>
             </div>
           </div>
