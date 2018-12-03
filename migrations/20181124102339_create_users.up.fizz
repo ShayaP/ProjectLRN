@@ -9,6 +9,7 @@ create_table("users") {
 	t.Column("other_specify", "string", {})
     t.Column("avg_rating", "float", {})
     t.Column("num_ratings", "integer", {})
+    t.Column("is_tutor", "integer", {})
 }
 
 add_index("users", "email", {"unique": true})

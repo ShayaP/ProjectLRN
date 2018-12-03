@@ -13,10 +13,12 @@ CREATE TABLE IF NOT EXISTS "users" (
 "other_specify" TEXT NOT NULL,
 "avg_rating" REAL NOT NULL,
 "num_ratings" INTEGER NOT NULL,
+"is_tutor" INTEGER NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
 CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
+CREATE UNIQUE INDEX "users_google_id_idx" ON "users" (google_id);
 CREATE TABLE IF NOT EXISTS "requests" (
 "id" TEXT PRIMARY KEY,
 "status" INTEGER NOT NULL,
@@ -50,3 +52,14 @@ CREATE TABLE IF NOT EXISTS "subjects" (
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
+CREATE TABLE IF NOT EXISTS "userinfoes" (
+"id" TEXT PRIMARY KEY,
+"google_id" char(36) NOT NULL,
+"languages" TEXT NOT NULL,
+"subjects" TEXT NOT NULL,
+"courses" TEXT NOT NULL,
+"address" TEXT NOT NULL,
+"created_at" DATETIME NOT NULL,
+"updated_at" DATETIME NOT NULL
+);
+CREATE UNIQUE INDEX "userinfoes_google_id_idx" ON "userinfoes" (google_id);
