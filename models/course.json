@@ -1,291 +1,65 @@
 {
-	"course": [
-		{
-			"id": "1",
-			"subject": "English Communication",
-			"course": "English Composition"
-		},
 
-		{
-			"id": "2",
-			"subject": "English Communication",
-			"course": "Critical Thinking and Writing"
-		},
-
-		{
-			"id": "3",
-			"subject": "English Communication",
-			"course": "Public Speaking"
-		},
-
-		{
-			"id": "4",
-			"subject": "English Communication",
-			"course": "Interpersonal Communication"
-		},
-
-		{
-			"id": "5",
-			"subject": "Humanities",
-			"course": "Introduction to Philosophy"
-		},
-
-		{
-			"id": "6",
-			"subject": "Humanities",
-			"course": "Modern Drama"
-		},
-
-		{
-			"id": "7",
-			"subject": "Humanities",
-			"course": "Introduction to Mythology"
-		},
-
-		{
-			"id": "8",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Physical Anthropology"
-		},
-
-		{
-			"id": "9",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Cultural Anthropology"
-		},
-
-		{
-			"id": "10",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Child Development"
-		},
-
-		{
-			"id": "11",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Introduction to Economics"
-		},
-
-		{
-			"id": "12",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Principles of Macroeconomics"
-		},
-
-		{
-			"id": "13",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Introduction to World Politics"
-		},
-
-		{
-			"id": "14",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Political Theory"
-		},
-
-		{
-			"id": "15",
-			"subject": "Social and Behavioral Sciences",
-			"course": "General Psychology"
-		},
-
-		{
-			"id": "16",
-			"subject": "Social and Behavioral Sciences",
-			"course": "Physiological Psychology"
-		},
-
-		{
-			"id": "17",
-			"subject": "Mathematics",
-			"course": "Calculus I"
-		},
-
-		{
-			"id": "18",
-			"subject": "Mathematics",
-			"course": "Calculus II"
-		},
-
-		{
-			"id": "19",
-			"subject": "Mathematics",
-			"course": "Calculus III"
-		},
-
-		{
-			"id": "20",
-			"subject": "Mathematics",
-			"course": "Differential Equations"
-		},
-
-		{
-			"id": "21",
-			"subject": "Mathematics",
-			"course": "Linear Algebra"
-		},
-
-		{
-			"id": "22",
-			"subject": "Mathematics",
-			"course": "Discrete Mathematics"
-		},
-
-		{
-			"id": "23",
-			"subject": "Mathematics",
-			"course": "Statistics"
-		},
-
-		{
-			"id": "24",
-			"subject": "Mathematics",
-			"course": "College Algebra"
-		},
-
-		{
-			"id": "25",
-			"subject": "Mathematics",
-			"course": "Precalculus"
-		},
-
-		{
-			"id": "26",
-			"subject": "Languages",
-			"course": "French 1"
-		},
-
-		{
-			"id": "27",
-			"subject": "Languages",
-			"course": "French 2"
-		},
-
-		{
-			"id": "28",
-			"subject": "Languages",
-			"course": "French 3"
-		},
-
-		{
-			"id": "29",
-			"subject": "Languages",
-			"course": "Spanish 1"
-		},
-
-		{
-			"id": "30",
-			"subject": "Languages",
-			"course": "Spanish 2"
-		},
-
-		{
-			"id": "31",
-			"subject": "Languages",
-			"course": "Spanish 3"
-		},
-
-		{
-			"id": "32",
-			"subject": "Languages",
-			"course": "Japanese 1"
-		},
-
-		{
-			"id": "33",
-			"subject": "Languages",
-			"course": "Japanese 2"
-		},
-
-		{
-			"id": "34",
-			"subject": "Physical and Biological Sciences",
-			"course": "General Chemistry I"
-		},
-
-		{
-			"id": "35",
-			"subject": "Physical and Biological Sciences",
-			"course": "General Chemistry II"
-		},
-
-		{
-			"id": "36",
-			"subject": "Physical and Biological Sciences",
-			"course": "Organic Chemistry I"
-		},
-
-		{
-			"id": "37",
-			"subject": "Physical and Biological Sciences",
-			"course": "Organic Chemistry II"
-		},
-
-		{
-			"id": "38",
-			"subject": "Physical and Biological Sciences",
-			"course": "Mechanics"
-		},
-
-		{
-			"id": "39",
-			"subject": "Physical and Biological Sciences",
-			"course": "Electricity and Magnetism"
-		},
-
-		{
-			"id": "40",
-			"subject": "Physical and Biological Sciences",
-			"course": "Heat, Light and Waves"
-		},
-
-		{
-			"id": "41",
-			"subject": "Physical and Biological Sciences",
-			"course": "General Biology"
-		},
-
-		{
-			"id": "42",
-			"subject": "Physical and Biological Sciences",
-			"course": "Marine Biology"
-		},
-
-		{
-			"id": "43",
-			"subject": "Physical and Biological Sciences",
-			"course": "General Botany"
-		},
-
-		{
-			"id": "44",
-			"subject": "Physical and Biological Sciences",
-			"course": "Microbiology"
-		},
-
-		{
-			"id": "45",
-			"subject": "Arts",
-			"course": "Fundamentals of Music"
-		},
-
-		{
-			"id": "46",
-			"subject": "Arts",
-			"course": "Mexican Art History"
-		},
-
-		{
-			"id": "47",
-			"subject": "Arts",
-			"course": "Introduction to the Theatre"
-		},
-
-		{
-			"id": "48",
-			"subject": "Arts",
-			"course": "Culture and Civilization"
-		}
+	"English Communication":[
+		{"id":"1", "course":"English Composition"},
+		{"id":"2", "course":"Critical Thinking and Writing"},
+		{"id":"3", "course":"Public Speaking"},
+		{"id":"4", "course":"Interpersonal Communication"}
+	],
+	"Humanities":[
+		{"id":"5", "course":"Introduction to Philosophy"},
+		{"id":"6", "course":"Modern Drama"},
+		{"id":"7", "course":"Introduction to Mythology"}
+	],
+	"Social and Behavioral Sciences":[
+		{"id":"8", "course":"Physical Anthropology"},
+		{"id":"9", "course":"Cultural Anthropology"},
+		{"id":"10", "course":"Child Development"},
+		{"id":"11", "course":"Introduction to Economics"},
+		{"id":"12", "course":"Principles of Macroeconomics"},
+		{"id":"13", "course":"Introduction to World Politics"},
+		{"id":"14", "course":"Political Theory"},
+		{"id":"15", "course":"General Psychology"},
+		{"id":"16", "course":"Physiological Psychology"}
+	],
+	"Mathematics":[
+		{"id":"17", "course":"Calculus I"},
+		{"id":"18", "course":"Calculus II"},
+		{"id":"19", "course":"Calculus III"},
+		{"id":"20", "course":"Differential Equations"},
+		{"id":"21", "course":"Linear Algebra"},
+		{"id":"22", "course":"Discrete Mathematics"},
+		{"id":"23", "course":"Statistics"},
+		{"id":"24", "course":"College Algebra"},
+		{"id":"25", "course":"Precalculus"}
+	],
+	"Languages":[
+		{"id":"26", "course":"French 1"},
+		{"id":"27", "course":"French 2"},
+		{"id":"28", "course":"French 3"},
+		{"id":"29", "course":"Spanish 1"},
+		{"id":"30", "course":"Spanish 2"},
+		{"id":"31", "course":"Spanish 3"},
+		{"id":"32", "course":"Japanese 1"},
+		{"id":"33", "course":"Japanese 2"}
+	],
+	"Physical and Biological Sciences":[
+		{"id":"34", "course":"General Chemistry I"},
+		{"id":"35", "course":"General Chemistry II"},
+		{"id":"36", "course":"Organic Chemistry I"},
+		{"id":"37", "course":"Organic Chemistry II"},
+		{"id":"38", "course":"Mechanics"},
+		{"id":"39", "course":"Electricity and Magnetism"},
+		{"id":"40", "course":"Heat, Light and Waves"},
+		{"id":"41", "course":"General Biology"},
+		{"id":"42", "course":"Marine Biology"},
+		{"id":"43", "course":"General Botany"},
+		{"id":"44", "course":"Microbiology"}
+	],
+	"Arts":[
+		{"id":"45", "course":"Fundamentals of Music"},
+		{"id":"46", "course":"Mexican Art History"},
+		{"id":"47", "course":"Introduction to the Theatre"},
+		{"id":"48", "course":"Culture and Civilization"}
 	]
 }

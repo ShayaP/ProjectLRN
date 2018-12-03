@@ -144,28 +144,16 @@
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>* * *</td>
-                      <td>Math, Spanish</td>
-                      <td>Pending</td>
-                      <td>11/20/2018</td>
-                    </tr>
-                    <tr>
-                      <td>Bob Davis</td>
-                      <td>* * * *</td>
-                      <td>French</td>
-                      <td>Rejected</td>
-                      <td>11/20/2018</td>
-                    </tr>
-                    <tr>
-                      <td>Susan Smith</td>
-                      <td>* * *</td>
-                      <td>History</td>
-                      <td>Pending</td>
-                      <td>11/20/2018</td>
-                    </tr>
-                  </tbody>
+		    <%= for (sentRequest) in sentRequests { %>
+                    	<tr>
+                     	  <td><%= sentRequest[0]  %></td>
+                      	  <td><%= sentRequest[1] %></td>
+                      	  <td><%= sentRequest[2] %></td>
+                      	  <td><%= sentRequest[3] %></td>
+                      	  <td><%= sentRequest[4] %></td>
+                    	</tr>
+		    <% } %>
+                   </tbody>
                 </table>
               </div>
             </div>
@@ -272,15 +260,7 @@
         </div>
         <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © LRN 2018</span>
-            </div>
-          </div>
-        </footer>
-
+      
       </div>
       <!-- /.content-wrapper -->
 
