@@ -24,6 +24,7 @@ type User struct {
 	OtherSpecify string    `json:"other_specify" db:"other_specify"`
 	AvgRating    float32   `json:"avg_rating" db:"avg_rating"`
 	NumRatings   int       `json:"num_ratings" db:"num_ratings"`
+	IsTutor      int       `json:"is_tutor" db:"is_tutor"`
 }
 
 // String is not required by pop and may be deleted
@@ -49,9 +50,10 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
 		&validators.StringIsPresent{Field: u.PhoneNumber, Name: "PhoneNumber"},
 		&validators.StringIsPresent{Field: u.GoogleID, Name: "GoogleID"},
-		&validators.StringIsPresent{Field: u.Email, Name: "Email"},
+		&validators.EmailLike{Field: u.Email, Name: "Email"},
 		&validators.IntIsPresent{Field: u.Gender, Name: "Gender"},
 		&validators.StringIsPresent{Field: u.OtherSpecify, Name: "OtherSpecify"},
+		&validators.IntIsPresent{Field: u.IsTutor, Name: "IsTutor"},
 	), nil
 }
 

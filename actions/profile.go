@@ -1,11 +1,17 @@
 package actions
 
-import "github.com/gobuffalo/buffalo"
+import (
+    "github.com/cileonard/lrn/models"
 
+    "github.com/gobuffalo/buffalo"
+)
 // ProfileHandler is a default handler to serve up
 // a profile page.
 func ProfileHandler(c buffalo.Context) error {
-	// all the user's personal info that needs to be dynamically set
+    user := c.Session().Get("user").(*models.User)
+	//tx := c.Value("tx").(*pop.Connection)
+	//uinfo, err := models.GetInfoByGID(tx, user.GoogleID)
+    // all the user's personal info that needs to be dynamically set
 	// indicates whether user is a tutor
 	isTutor := true
 	// address of the user
@@ -18,11 +24,12 @@ func ProfileHandler(c buffalo.Context) error {
 	c.Set("city", address[1])
 	c.Set("state", address[2])
 	c.Set("zip", address[3])
+	//c.Set("zip", user.Location)
 	// phone number
-	c.Set("phone", ProfileGetPhone(c))
+	c.Set("phone", user.PhoneNumber)
 	// email
 	c.Set("contactEmail", ProfileGetContactEmail(c))
-	c.Set("accountEmail", ProfileGetAccountEmail(c))
+	c.Set("accountEmail", user.Email)
 	//Subjects and Languages - help description
 	c.Set("subjectDescription", ProfileGetSubjectTip(c, isTutor))
 	c.Set("langDescription", ProfileGetLanguageTip(c, isTutor))

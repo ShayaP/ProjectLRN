@@ -22,6 +22,7 @@ type Userinfo struct {
 	Subjects  string    `json:"subjects" db:"subjects"`
 	Courses   string    `json:"courses" db:"courses"`
 	Address   string    `json:"address" db:"address"`
+    GoogleID  uuid.UUID `json:"google_id" db:"google_id"`
 }
 
 // String is not required by pop and may be deleted
@@ -64,15 +65,46 @@ func (u *Userinfo) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) 
 
 
 func (u *Userinfo) GetLanguages() []int {
-    list := strings.Split(u.Languages, tokenSplit)
-    var languages = []int{}
-
-    for _,i := range list {
-        j, _ := strconv.Atoi(i)
-
-        languages = append(languages, j)
-    }
-    return languages
-
+    langs := decodeStringToInts(u.Languages)
+    return langs
 }
 
+func (u *Userinfo) SetLanguages(langs []int) {
+    u.Languages = encodeIntsToString(langs)
+}
+
+func (u *Userinfo) GetSubjects() []int {
+    subjs := decodeStringToInts(u.Subjects)
+    return subjs
+}
+
+func (u *Userinfo) SetSubjects(subjs []int) {
+    u.Subjects = encodeIntsToString(subjs)
+}
+func decodeStringToInts(instring string) []int{
+    list := strings.Split(instring, tokenSplit)
+    var arr = []int{}
+    for _,i := range list{
+        j, _ := strconv.Atoi(i)
+        arr = append(arr, j)
+    }
+    return arr
+}
+
+func encodeIntsToString(arr []int) string{
+    out := tokenSplit
+    for _,num := range arr {
+        out = out + strconv.Itoa(num) + tokenSplit
+    }
+    return out
+}
+
+func GetInfoByGID(tx *pop.Connection, gid string) (*Userinfo, error){
+	query := tx.RawQuery("SELECT * FROM user_infoes WHERE google_id = ?", gid)
+	u := &Userinfo{}
+	if err := query.First(u); err != nil {
+		return nil, err
+	} else {
+		return u, nil
+	}
+}

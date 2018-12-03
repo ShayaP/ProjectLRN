@@ -47,7 +47,7 @@
                   <% let stateCount = 1 %>
 		  <%= for (s) in states{ %>
 			<%= if (s == state) { %>
-			  <option selected><%= s %></option>
+			  <option value="<%= stateCount%>" selected><%= s %></option>
 		  	<% } else { %>
                   	  <option value="<%= stateCount %>"><%= s %></option>
 		  	<% } %>
@@ -98,6 +98,7 @@
                     </thead>
                     <tbody>
 			<%= subjsAndClasses %>
+			<% let courseCount = 1 %>
 			<%= courseChecked %>
 			<%= for (subject) in subjects { %>
                           <tr class="searchable-subject" data-id="<%= subject %>">
@@ -107,10 +108,11 @@
                             <tr class="searchable-course" data-id="<%= subject %>">
                             <td ></td>
                             <td >
-		    		<input name="<%= course %>" id="<%= course %>" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
+		    		<input name="courseId[]" id="<%= course %>" value="courseCount" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
                     		<label for="<%= course %>" class=""><%= course %></label>
 			    </td>
                             </tr>
+			    <% (courseCount = courseCount + 1) %>
 			  <% } %>
 			<% } %>
                     </tbody>
@@ -126,40 +128,29 @@
             <div class="card-body">
               <div class="m_cMulticontainer">
                 <div class="m_cHalfpiece">
+		  <% let languageCount = 1 %>
                   <%= for (language) in languages1 {%>
 		  <% checked %>
 		  <div class="group-checkbox">
-                    <input name="<%=language %>" id="<%= language %>" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
+                    <input name="languageId[]" id="<%= language %>" value="languageCount" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
                     <label for="<%=language %>" class=""><%= language %></label>
                   </div>
+		  <% (languageCount = languageCount + 1) %>
 		  <% } %>
                 </div>
                 <div class="m_cHalfpiece">
                   <%= for (language) in languages2 {%>
 		  <div class="group-checkbox">
-		    <input name="<%=language %>" id="<%= language %>" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
+		    <input name="languageId[]" id="<%= language %>" value="languageCount" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
                     <label for="<%=language %>" class=""><%= language %></label>
                   </div>
+		  <% (languageCount = languageCount + 1) %>
 		  <% } %>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-              <h2 id="m_iTutorSess">Tutoring Sessions</h2>
-              <small class="text-muted">TODO</small>
-            </div>
-            <div class="card-body">
-              <div class="m_cMulticontainer">
-                <div class="m_cHalfpiece">
-                </div>
-                <div class="m_cHalfpiece">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--<small class="text-muted">Posted by Anonymous on 3/1/17</small>-->
+         <!--<small class="text-muted">Posted by Anonymous on 3/1/17</small>-->
           <!-- /.card -->
 	</form>
         </div>
