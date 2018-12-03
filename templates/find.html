@@ -13,22 +13,23 @@
 	<tr><td>Languages:</td><td><input type="text" name="fullname"></td></tr>
 	<tr><td>Location:</td><td><input type="text" name="login"></td></tr>
 	<tr><td>Topics:</td><td><input type="text" name="password"></td></tr>
-<tr><td>&nbsp;</td><td><input type="submit" value="Search Users"> </td></tr>
+<!--<tr><td>&nbsp;</td><td><input href="<%= reviewspagePath() %>" type="submit" value="Search Users"> </td></tr> -->
+<tr><td>&nbsp;</td><td><button  class = "btn center " type= "submit" role= "Find" name = "Find" value="true" href="<%= browseprofilePath() %>">Search Users</button></td></tr>
 
 <!--
 If your page additionally needs its own styling, add the styles here!
 Example (warning! pseudo-syntax):
 
 contentFor(“extrHeadArgs”) {
-	stylesheetTag(“css/customstyle.css”) 
-} 
+	stylesheetTag(“css/customstyle.css”)
+}
 
 (Note that in order for customstyle.css to be found, it must be inside “public/assets/css”).
  Otherwise, keep the contentFor block looking like so:
 
 contentFor(“extrHeadArgs”) {
-	
-} 
+
+}
 -->
 <% contentFor("extraHeadArgs") { %>
 
