@@ -74,6 +74,7 @@ func App() *buffalo.App {
 		app.POST("/update-profile", UpdateProfilePOSTHandler)
 		app.GET("/logout", LogoutHandler)
 		app.GET("/browseprofile", BrowseProfilesHandler)
+		app.POST("/browseprofile", BrowseProfilesPOSTHandler)
 
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
 			FindHandler, RequestPageHandler, ProfileHandler,
