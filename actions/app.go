@@ -71,6 +71,7 @@ func App() *buffalo.App {
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
+		app.POST("/update-profile", UpdateProfilePOSTHandler)
 		app.GET("/logout", LogoutHandler)
 		app.GET("/browseprofile", BrowseProfilesHandler)
 

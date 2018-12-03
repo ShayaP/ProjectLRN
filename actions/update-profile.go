@@ -1,7 +1,12 @@
 package actions
 
-import "github.com/gobuffalo/buffalo"
+import (
+    "fmt"
+    "github.com/cileonard/lrn/models"
 
+    "github.com/gobuffalo/pop"
+    "github.com/gobuffalo/buffalo"
+)
 // UpdateProfileHandler is a default handler to serve up
 // a update-profile page.
 func UpdateProfileHandler(c buffalo.Context) error {
@@ -21,7 +26,7 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	// indicates whether user is a tutor
 	isTutor := (user.IsTutor == 2)
 	// comprehensive list of languages user can choose
-	/**
+	
     languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
 				"German", "Hindi", "Japanese", "Korean", "Persian", "Portugese",
 				"Punjabi", "Russian","Spanish", "Tagalog", "Tai-Ka", "Vietnamese"}
@@ -32,12 +37,12 @@ func UpdateProfileHandler(c buffalo.Context) error {
 		"Chemistry": {"Introduction to Chemistry", "Organic Chemistry"},
 	}
 	//comprehensive list of states user can choose from
-	states := []string{"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
-				  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
-				  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
-				  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
-				  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
-    */
+	//states := []string{"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
+	//			  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
+	//			  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
+	//			  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
+	//			  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
+    
 	// address of the user 
 	//address := ProfileGetAddress(c)
 	// get list of all the subjects asociated with the user
@@ -101,18 +106,19 @@ func UpdateProfileHandler(c buffalo.Context) error {
 
 	c.Set("title", "Update Profile")
 	//display user's name
-	c.Set("username", ProfileGetUsername(c))
-	// address of user
-	c.Set("street", address[0])
-	c.Set("city", address[1])
-	c.Set("state", address[2])
-	c.Set("states", states)
-	c.Set("zip", address[3])
+	//c.Set("username", ProfileGetUsername(c))
+    // address of user
+	//c.Set("street", address[0])
+	//c.Set("city", address[1])
+	//c.Set("state", address[2])
+	//c.Set("states", states)
+	c.Set("zip", uinfo.Address)
+	//c.Set("zip", address[3])
 	// phone number
-	c.Set("phone", ProfileGetPhone(c))
+	c.Set("phone", user.PhoneNumber)
 	// email
-	c.Set("contactEmail", ProfileGetContactEmail(c))
-	c.Set("accountEmail", ProfileGetAccountEmail(c))
+	//c.Set("contactEmail", ProfileGetContactEmail(c))
+	c.Set("accountEmail", user.Email)
 	//Subjects and Languages - help description
 	c.Set("subjectDescription", ProfileGetSubjectTip(c, isTutor))
 	c.Set("langDescription", ProfileGetLanguageTip(c, isTutor))
@@ -127,8 +133,17 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	return c.Render(200, r.HTML("update-profile.html"))
 }
 
-func UpdateProfileHandlerPOSTHandler(c buffalo.Context) error {
-    return nil
+func UpdateProfilePOSTHandler(c buffalo.Context) error {
+    //var test map[string]interface{}
+    /**
+    err := c.Bind(&test)
+    fmt.Println("2222We here!!")
+    if err != nil{
+        fmt.Println("33333We here!!")
+        return c.Render(500, r.String(err.Error()))
+    }*/
+    return c.Render(200, r.JSON(c.Request().Form))
+
 }
 
 
