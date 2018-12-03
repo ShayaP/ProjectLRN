@@ -78,6 +78,10 @@ func (u *User) Create(tx *pop.Connection) (*validate.Errors, error) {
 	return tx.ValidateAndCreate(u)
 }
 
+func (u *User) UpdateEntry(tx *pop.Connection) (*validate.Errors, error){
+    return tx.ValidateAndUpdate(u)
+}
+
 func GetUserByGID(tx *pop.Connection, gid string) (*User, error) {
 	query := tx.RawQuery("SELECT * FROM users WHERE google_id = ?", gid)
 	u := &User{}

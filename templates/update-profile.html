@@ -27,6 +27,11 @@
           </div>
           <!-- /.card -->
 
+<%= if (errors) {%>
+<%= for (key, err) in errors.Errors {%>
+    <div> <%= err %> </div>
+<% } %>
+<%}%>
         <form method="POST">
               <%= csrf() %>
 	  <div class="card card-outline-secondary my-4">
@@ -44,26 +49,26 @@
                 <input name="m_iCity" id="m_iCity" class="m_cInput " type="text" placeholder="City" value="city" required>
                 <label for="m_iState" class="m_cLabel">State</label>
                 <select id="m_iState" name="stateId[]" class="m_cInput" required>
-                  <% state %>
-                  <% let stateCount = 1 %>
-		  <%= for (s) in states{ %>
-			<%= if (s == state) { %>
-			  <option value="<%= stateCount%>" selected><%= s %></option>
-		  	<% } else { %>
-                  	  <option value="<%= stateCount %>"><%= s %></option>
-		  	<% } %>
-			<% (stateCount = stateCount + 1) %>
-		  <% } %>
+                  < state >
+                  < let stateCount = 1 >
+		  <= for (s) in states{ >
+			<= if (s == state) { >
+			  <option value="<= stateCount>" selected><= s ></option>
+		  	< } else { >
+                  	  <option value="<= stateCount >"><= s ></option>
+		  	< } >
+			< (stateCount = stateCount + 1) >
+		  < } >
                 </select>
                 -->
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
-                <input name="Location" id="m_iZip" class="m_cInput" placeholder="Zip code" type="number" value="<%= zip %>" required>
+                <input name="Location" id="m_iZip" value="<%= zip %>" required>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="PhoneNumber" id="m_iPhone" class="m_cInput" type="tel" placeholder="###-###-####" value="<%= phone %>" required>
+                <input name="PhoneNumber" id="m_iPhone" value="<%= phone %>" required>
                 </div>
                 <hr>
               </div>
@@ -110,7 +115,7 @@
                             <tr class="searchable-course" data-id="<%= subject %>">
                             <td ></td>
                             <td >
-                                <input name="courseId[]" id="course" value="<%= course %>" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
+                                <input name="Courses[]" id="<%= course %>" value="<%= course %>" class="lang-checkbox" type="checkbox" <%= courseChecked[course]%> >
                     		<label for="<%= course %>" class=""><%= course %></label>
 			    </td>
                             </tr>
@@ -134,8 +139,8 @@
                   <%= for (language) in languages1 {%>
 		  <% checked %>
 		  <div class="group-checkbox">
-              <input name="languageId[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
-                    <label for="<%=language %>" class=""><%= language %></label>
+              <input name="Languages[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language]%> >
+                    <label for="lang.<%= language %>" class=""><%= language %></label>
                   </div>
 		  <% (languageCount = languageCount + 1) %>
 		  <% } %>
@@ -143,8 +148,8 @@
                 <div class="m_cHalfpiece">
                   <%= for (language) in languages2 {%>
 		  <div class="group-checkbox">
-              <input name="languageId[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
-                    <label for="<%=language %>" class=""><%= language %></label>
+              <input name="Languages[]" id="lang.<%= language %>" value="<%= language%>" class="lang-checkbox" type="checkbox" <%= checked[language] %> >
+                    <label for="lang.<%=language %>" class=""><%= language %></label>
                   </div>
 		  <% (languageCount = languageCount + 1) %>
 		  <% } %>

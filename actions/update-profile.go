@@ -2,8 +2,13 @@ package actions
 
 import (
     "fmt"
+    //"encoding/json"
+    //"io/ioutil"
+
     "github.com/cileonard/lrn/models"
 
+
+	"github.com/gobuffalo/validate"
     "github.com/gobuffalo/pop"
     "github.com/gobuffalo/buffalo"
 )
@@ -18,7 +23,7 @@ func UpdateProfileHandler(c buffalo.Context) error {
         uinfo = &models.Userinfo{
             Languages:  "",
             Courses:    "",
-            Subjects:   "",
+            //Subjects:   "",
             Address:    "",
         }
     }
@@ -26,7 +31,7 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	// indicates whether user is a tutor
 	isTutor := (user.IsTutor == 2)
 	// comprehensive list of languages user can choose
-	
+	/**
     languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
 				"German", "Hindi", "Japanese", "Korean", "Persian", "Portugese",
 				"Punjabi", "Russian","Spanish", "Tagalog", "Tai-Ka", "Vietnamese"}
@@ -42,18 +47,21 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	//			  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
 	//			  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
 	//			  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
-    
-	// address of the user 
+    */
+    languages := ProfileGetLanguages()
+    // address of the user 
 	//address := ProfileGetAddress(c)
 	// get list of all the subjects asociated with the user
-	userSubjects := ProfileGetSubjects(c)
+	//userSubjects := ProfileGetSubjects()
 	// all the subjects and courses affliated with user
-	userSubsAndClasses := ProfileGetSubjsAndClasses(c)
+	subjsAndClasses := ProfileGetSubjsAndClasses()
 	// slice of strings of all the subjects (Gets the names of all the subjects)
-	subjects := make([]string, 0, 15)
+	subjects := ProfileGetSubjects()
+    /**
+    subjects := make([]string, 0, 15)
 	for key, _ := range subjsAndClasses {
 		subjects = append(subjects, key)
-	}
+	}*/
 
 	// maps the user courses to all courses
 	mapUCtoC := make(map[string]string)
@@ -63,11 +71,18 @@ func UpdateProfileHandler(c buffalo.Context) error {
 		}
 	}
 
+    userCourses := uinfo.GetCourses()
 	// Algorithm to put a check on each checkbox course user knows:
 	// 	for each subject in subjsAndClasses affliated with user,
 	//	Go through the user courses one at a time and	
 	// 	run through all the courses under that subject until the user
 	//	course is found
+    for _, course := range userCourses {
+        mapUCtoC[course] = "checked"
+    }
+
+
+    /**
 	for i:=0; i < len(userSubjects); i++ {
 		// all courses under the subject affliated with user
 		var courses = subjsAndClasses[userSubjects[i]]
@@ -82,10 +97,10 @@ func UpdateProfileHandler(c buffalo.Context) error {
 				}
 			}
 		}
-	}
+	}*/
 
 	// retrieve the languages known by the user
-	userLangs := ProfileGetLanguages(c)
+	userLangs := uinfo.GetLanguages()
 	// Algorithm to put a check on each checkbox language user knows:
 	// 	for each language in languages, create a key, value pair k,v
 	// 	such that k = language and v = "checked" if the language is
@@ -120,8 +135,8 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	//c.Set("contactEmail", ProfileGetContactEmail(c))
 	c.Set("accountEmail", user.Email)
 	//Subjects and Languages - help description
-	c.Set("subjectDescription", ProfileGetSubjectTip(c, isTutor))
-	c.Set("langDescription", ProfileGetLanguageTip(c, isTutor))
+	c.Set("subjectDescription", ProfileGetSubjectTip(isTutor))
+	c.Set("langDescription", ProfileGetLanguageTip(isTutor))
 	//Set subjects options
 	c.Set("subjects", subjects)
 	c.Set("subjsAndClasses", subjsAndClasses)
@@ -134,18 +149,101 @@ func UpdateProfileHandler(c buffalo.Context) error {
 }
 
 func UpdateProfilePOSTHandler(c buffalo.Context) error {
-    //var test map[string]interface{}
-    /**
-    err := c.Bind(&test)
-    fmt.Println("2222We here!!")
+    fmt.Println("1,2 Buckle my shoe")
+    //test := &models.UpdateProfileForm{}
+    //var test models.UpdateProfileForm
+    //return c.Render(200, r.JSON(c.Request().Form))
+    var test map[string][]string
+    test = c.Request().Form
+    //fmt.Println(c.Request().Body)
+    //body, err := ioutil.ReadAll(c.Request().Body)
+    //if err != nil {
+    //  return c.Render(500, r.String(err.Error()))
+    //}
+    //fmt.Println(body)
+    //err = json.Unmarshal(body, test)
+    //err := c.Bind(test)
+    //decoder := json.NewDecoder(c.Request().Body)
+    //err = decoder.Decode(&test)
+    /**err := nil
+    fmt.Println("3,4 Shut the door")
     if err != nil{
-        fmt.Println("33333We here!!")
+        fmt.Println("5,6 This is a dick")
         return c.Render(500, r.String(err.Error()))
     }*/
-    return c.Render(200, r.JSON(c.Request().Form))
 
+    fmt.Println("We here boys")
+    user := c.Session().Get("user").(*models.User)
+	tx := c.Value("tx").(*pop.Connection)
+	uinfo, err := models.GetInfoByGID(tx, user.GoogleID)
+    newUser := false
+    if err != nil{
+        //user has not entered any info yet, so uinfo is null
+        uinfo = &models.Userinfo{
+            Languages:  "",
+            Courses:    "",
+            //Subjects:   "",
+            Address:    "",
+            GoogleID:   user.GoogleID,
+        }
+        newUser = true
+    }
+
+    user.PhoneNumber = test["PhoneNumber"][0]
+    uinfo.Address = test["Location"][0]
+    uinfo.SetCourses(test["Courses[]"])
+    uinfo.SetLanguages(test["Languages[]"])
+
+    //fmt.Println(test["Courses[]"])
+    //fmt.Println(test["Languages[]"])
+
+    //return c.Redirect(302,"/update-profile")
+    /**
+    user.PhoneNumber = test.PhoneNumber
+    uinfo.Address = test.Location
+    uinfo.SetCourses(test.Courses)
+    uinfo.SetLanguages(test.Languages)
+    */
+    var verrs *validate.Errors
+    if newUser{
+        verrs, err = uinfo.CreateEntry(tx)
+    }else{
+        verrs, err = uinfo.UpdateEntry(tx)
+    }
+	if err != nil { //Error creating the account
+		return c.Render(500, r.String(err.Error()))
+		//return errors.WithStack(err)
+	}
+
+	if verrs.HasAny() {
+		c.Session().Set("errors", verrs)
+        fmt.Println(verrs)
+        return c.Redirect(302,"/update-profile")
+		//return c.Render(200, r.HTML("register.html"))
+	}
+    verrs, err = user.UpdateEntry(tx)
+
+	if err != nil { //Error creating the account
+		return c.Render(500, r.String(err.Error()))
+		//return errors.WithStack(err)
+	}
+
+	if verrs.HasAny() {
+		c.Session().Set("errors", verrs)
+        printverrs(verrs)
+        return c.Redirect(302,"/update-profile")
+		//return c.Render(200, r.HTML("register.html"))
+	}
+
+    fmt.Println("Well fuck")
+    //return c.Render(200, r.JSON(c.Request().Form))
+    return c.Redirect(302, "/profile")
 }
 
-
+func printverrs(verrs *validate.Errors){
+    for _, val := range verrs.Errors{
+        fmt.Println(val)
+    }
+}
 
 

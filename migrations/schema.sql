@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS "userinfoes" (
 "id" TEXT PRIMARY KEY,
 "google_id" char(36) NOT NULL,
 "languages" TEXT NOT NULL,
-"subjects" TEXT NOT NULL,
 "courses" TEXT NOT NULL,
 "address" TEXT NOT NULL,
 "created_at" DATETIME NOT NULL,

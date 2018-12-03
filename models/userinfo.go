@@ -3,7 +3,6 @@ package models
 import (
 	"encoding/json"
 	"time"
-    "strconv"
     "strings"
 
 	"github.com/gobuffalo/pop"
@@ -19,10 +18,10 @@ type Userinfo struct {
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Languages string    `json:"languages" db:"languages"`
-	Subjects  string    `json:"subjects" db:"subjects"`
+	//Subjects  string    `json:"subjects" db:"subjects"`
 	Courses   string    `json:"courses" db:"courses"`
 	Address   string    `json:"address" db:"address"`
-    GoogleID  uuid.UUID `json:"google_id" db:"google_id"`
+    GoogleID  string    `json:"google_id" db:"google_id"`
 }
 
 // String is not required by pop and may be deleted
@@ -45,7 +44,7 @@ func (u Userinfoes) String() string {
 func (u *Userinfo) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.StringIsPresent{Field: u.Languages, Name: "Languages"},
-		&validators.StringIsPresent{Field: u.Subjects, Name: "Subjects"},
+		//&validators.StringIsPresent{Field: u.Subjects, Name: "Subjects"},
 		&validators.StringIsPresent{Field: u.Courses, Name: "Courses"},
 		&validators.StringIsPresent{Field: u.Address, Name: "Address"},
 	), nil
@@ -63,44 +62,48 @@ func (u *Userinfo) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) 
 	return validate.NewErrors(), nil
 }
 
+func (u *Userinfo) UpdateEntry(tx *pop.Connection) (*validate.Errors, error){
+    return tx.ValidateAndUpdate(u)
+}
 
-func (u *Userinfo) GetLanguages() []int {
-    langs := decodeStringToInts(u.Languages)
+
+func (u *Userinfo) CreateEntry(tx *pop.Connection) (*validate.Errors, error){
+    return tx.ValidateAndCreate(u)
+}
+
+func (u *Userinfo) GetLanguages() []string {
+    langs := decodeStringToIds(u.Languages)
     return langs
 }
 
-func (u *Userinfo) SetLanguages(langs []int) {
-    u.Languages = encodeIntsToString(langs)
+func (u *Userinfo) SetLanguages(langs []string) {
+    u.Languages = encodeIdsToString(langs)
 }
 
-func (u *Userinfo) GetSubjects() []int {
-    subjs := decodeStringToInts(u.Subjects)
-    return subjs
+func (u *Userinfo) GetCourses() []string {
+    courses := decodeStringToIds(u.Courses)
+    return courses
 }
 
-func (u *Userinfo) SetSubjects(subjs []int) {
-    u.Subjects = encodeIntsToString(subjs)
-}
-func decodeStringToInts(instring string) []int{
-    list := strings.Split(instring, tokenSplit)
-    var arr = []int{}
-    for _,i := range list{
-        j, _ := strconv.Atoi(i)
-        arr = append(arr, j)
-    }
-    return arr
+func (u *Userinfo) SetCourses(courses []string) {
+    u.Courses = encodeIdsToString(courses)
 }
 
-func encodeIntsToString(arr []int) string{
-    out := tokenSplit
-    for _,num := range arr {
-        out = out + strconv.Itoa(num) + tokenSplit
-    }
-    return out
+func decodeStringToIds(instring string) []string{
+    list := strings.Split(strings.Trim(instring, tokenSplit), tokenSplit)
+    return list
+}
+
+func encodeIdsToString(arr []string) string{
+    var b strings.Builder
+    b.WriteString(tokenSplit)
+    b.WriteString(strings.Join(arr, tokenSplit))
+    b.WriteString(tokenSplit)
+    return b.String()
 }
 
 func GetInfoByGID(tx *pop.Connection, gid string) (*Userinfo, error){
-	query := tx.RawQuery("SELECT * FROM user_infoes WHERE google_id = ?", gid)
+	query := tx.RawQuery("SELECT * FROM userinfoes WHERE google_id = ?", gid)
 	u := &Userinfo{}
 	if err := query.First(u); err != nil {
 		return nil, err
