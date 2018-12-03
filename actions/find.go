@@ -16,12 +16,3 @@ func FindHandler(c buffalo.Context) error {
 	return c.Render(200, r.HTML("find.html"))
 }
 
-func FindPOSTHandler(c buffalo.Context) error {
-	c.Set("NoShow", true)
-	s := &Search{}
-	if err := c.Bind(s); err != nil {
-		return c.Render(500, r.String(err.Error()))
-	}
-	c.Session().Set("filter_info", s)
-	return c.Redirect(302, "/results")
-}
