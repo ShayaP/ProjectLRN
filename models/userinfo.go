@@ -18,7 +18,7 @@ type Userinfo struct {
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Languages string    `json:"languages" db:"languages"`
-	//Subjects  string    `json:"subjects" db:"subjects"`
+	Subjects  string    `json:"subjects" db:"subjects"`
 	Courses   string    `json:"courses" db:"courses"`
 	Address   string    `json:"address" db:"address"`
     GoogleID  string    `json:"google_id" db:"google_id"`
@@ -44,7 +44,7 @@ func (u Userinfoes) String() string {
 func (u *Userinfo) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.StringIsPresent{Field: u.Languages, Name: "Languages"},
-		//&validators.StringIsPresent{Field: u.Subjects, Name: "Subjects"},
+		&validators.StringIsPresent{Field: u.Subjects, Name: "Subjects"},
 		&validators.StringIsPresent{Field: u.Courses, Name: "Courses"},
 		&validators.StringIsPresent{Field: u.Address, Name: "Address"},
 	), nil
@@ -87,6 +87,15 @@ func (u *Userinfo) GetCourses() []string {
 
 func (u *Userinfo) SetCourses(courses []string) {
     u.Courses = encodeIdsToString(courses)
+}
+
+func (u *Userinfo) GetSubjects() []string {
+    courses := decodeStringToIds(u.Subjects)
+    return courses
+}
+
+func (u *Userinfo) SetSubjects(courses []string) {
+    u.Subjects = encodeIdsToString(courses)
 }
 
 func decodeStringToIds(instring string) []string{

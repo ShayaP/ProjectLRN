@@ -182,7 +182,7 @@ func UpdateProfilePOSTHandler(c buffalo.Context) error {
         uinfo = &models.Userinfo{
             Languages:  "",
             Courses:    "",
-            //Subjects:   "",
+            Subjects:   "",
             Address:    "",
             GoogleID:   user.GoogleID,
         }
@@ -193,6 +193,7 @@ func UpdateProfilePOSTHandler(c buffalo.Context) error {
     uinfo.Address = test["Location"][0]
     uinfo.SetCourses(test["Courses[]"])
     uinfo.SetLanguages(test["Languages[]"])
+    uinfo.SetSubjects([]string{"1","2"})
 
     //fmt.Println(test["Courses[]"])
     //fmt.Println(test["Languages[]"])
