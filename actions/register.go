@@ -29,10 +29,12 @@ func RegisterPOSTHandler(c buffalo.Context) error {
 		return c.Render(500, r.String(err.Error()))
 	}
 	//userPrev := c.Session().Get("user").(*models.User)
-	fmt.Println("FFFFFFFFFFFFFFFFFFff")
 	fmt.Println(c.Session().Get("userID"))
 	u.GoogleID = c.Session().Get("userID").(string)
-	fmt.Println("GGGGGGGGGGGGGGGg")
+
+    if u.Gender != 3 {
+        u.OtherSpecify = "-"
+    }
 
 	tx := c.Value("tx").(*pop.Connection)
 	verrs, err := u.Create(tx)

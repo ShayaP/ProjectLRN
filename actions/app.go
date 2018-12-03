@@ -72,9 +72,11 @@ func App() *buffalo.App {
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
 		app.GET("/logout", LogoutHandler)
+		app.GET("/browseprofile", BrowseProfilesHandler)
+
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
 			FindHandler, RequestPageHandler, ProfileHandler,
-			UpdateProfileHandler, AboutHandler, ReviewHandler)
+			UpdateProfileHandler, AboutHandler, ReviewHandler, BrowseProfilesHandler)
 
 		app.GET("/login", LoginHandler)
 		auth := app.Group("/auth")
@@ -103,6 +105,8 @@ func translations() buffalo.MiddlewareFunc {
 	}
 	return T.Middleware()
 }
+
+
 
 // forceSSL will return a middleware that will redirect an incoming request
 // if it is not HTTPS. "http://example.com" => "https://example.com".

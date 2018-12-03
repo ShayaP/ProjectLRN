@@ -1,7 +1,10 @@
 create_table("userinfoes") {
 	t.Column("id", "uuid", {"primary": true})
+	t.Column("google_id", "uuid", {})
 	t.Column("languages", "string", {})
 	t.Column("subjects", "string", {})
 	t.Column("courses", "string", {})
 	t.Column("address", "string", {})
 }
+
+add_index("userinfoes", "google_id", {"unique": true})
