@@ -5,11 +5,24 @@ import "github.com/gobuffalo/buffalo"
 // UpdateProfileHandler is a default handler to serve up
 // a update-profile page.
 func UpdateProfileHandler(c buffalo.Context) error {
+    user := c.Session().Get("user").(*models.User)
+	tx := c.Value("tx").(*pop.Connection)
+	uinfo, err := models.GetInfoByGID(tx, user.GoogleID)
+    if err != nil{
+        //user has not entered any info yet, so uinfo is null
+        uinfo = &models.Userinfo{
+            Languages:  "",
+            Courses:    "",
+            Subjects:   "",
+            Address:    "",
+        }
+    }
 	// all the user's personal info that needs to be dynamically set
 	// indicates whether user is a tutor
-	isTutor := true
+	isTutor := (user.IsTutor == 2)
 	// comprehensive list of languages user can choose
-	languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
+	/**
+    languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
 				"German", "Hindi", "Japanese", "Korean", "Persian", "Portugese",
 				"Punjabi", "Russian","Spanish", "Tagalog", "Tai-Ka", "Vietnamese"}
 	// comprehensive list of courses user can choose
@@ -24,8 +37,9 @@ func UpdateProfileHandler(c buffalo.Context) error {
 				  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
 				  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
 				  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
+    */
 	// address of the user 
-	address := ProfileGetAddress(c)
+	//address := ProfileGetAddress(c)
 	// get list of all the subjects asociated with the user
 	userSubjects := ProfileGetSubjects(c)
 	// all the subjects and courses affliated with user
