@@ -74,9 +74,6 @@
               <a class="nav-link js-scroll-trigger" href="<%= reviewspagePath() %> ">Review</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="<%= profilePath() %>">Profile</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<%= requestpagePath() %>">Requests</a>
             </li>
              <li class="nav-item">
@@ -85,7 +82,7 @@
             <%= if ((user)) {%>
             <li class="nav-item">
                 <!-- <a class="nav-link" href="/logout">Logout</a> -->
-                <a class="nav-link" href="#"> <%= user.FirstName %>'s Profile</a>
+                <a class="nav-link js-scroll-trigger" href="<%= profilePath() %>"> <%= user.FirstName %>'s Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
