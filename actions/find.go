@@ -5,7 +5,7 @@ import "github.com/gobuffalo/buffalo"
 type Search struct {
 	Name string
 	Languages string
-	Location string
+	Location int
 	Topics string
 }
 
