@@ -7,7 +7,14 @@
 
 <table class='center'>
 	<tr><td>Name:</td><td><input type="text" name="Name"></td></tr>
-	<tr><td>Languages:</td><td><input type="text" name="Languages"></td></tr>
+	<tr><td>Languages:</td><td>
+		<select name="Language">
+			<option value="English" checked> English<br></option>
+			<option value="Spanish"> Spanish<br></option>
+			<option value="Cantonese"> Cantonese<br></option>
+			<option value="Mandarin"> Mandarin<br></option>
+		</select>
+	</td></tr>
 	<tr><td>Location:</td><td>
 	<select name="Location">
 		<option value="92122" checked> UC San Diego (Zip: 92093)<br></option>
@@ -15,13 +22,14 @@
 		<option value="92110"> USD (Zip: 92110)<br></option>
 	</select>
 	</td></tr>
-	<tr><td>Topics:</td><td><input type="text" name="Topics"></td></tr>
-	<select name="Topic">
-		<option value="Math"> Math<br></option>
-		<option value="English"> English<br></option>
-		<option value="Physics"> Physics<br></option>
-		<option value="Chemistry"> Chemistry<br></option>
-	</select>
+	<tr><td>Topic:</td><td>
+		<select name="Topic">
+			<option value="Math"> Math<br></option>
+			<option value="English"> English<br></option>
+			<option value="Physics"> Physics<br></option>
+			<option value="Chemistry"> Chemistry<br></option>
+		</select>
+	</td></tr>
 <!--<tr><td>&nbsp;</td><td><input href="<%= reviewspagePath() %>" type="submit" value="Search Users"> </td></tr> -->
 <tr><td>&nbsp;</td><td><input type="submit" role="Find" name="Find" value="Search Users"></td></tr>
 </table>
