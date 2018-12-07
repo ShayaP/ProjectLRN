@@ -46,10 +46,16 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		fmt.Println()
 		fmt.Println(list)
 		users := []*models.User{} 
+		curr_user := c.Session().Get("user").(*models.User)
+		isTutor := curr_user.IsTutor
 		for _, userinfo := range list {
+			// check if the useres are tutors and tutees here.
 			u, err := models.GetUserByGID(tx, userinfo.GoogleID)
 			if err != nil {
 				return c.Error(401, err)
+			}
+			if u.IsTutor != isTutor {
+				continue
 			}
 			users = append(users, u)
 		}
