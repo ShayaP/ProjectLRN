@@ -13,10 +13,12 @@ CREATE TABLE "users" (
 "other_specify" TEXT NOT NULL,
 "avg_rating" REAL NOT NULL,
 "num_ratings" INTEGER NOT NULL,
+"is_tutor" INTEGER NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
 CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
+CREATE UNIQUE INDEX "users_google_id_idx" ON "users" (google_id);
 CREATE TABLE "requests" (
 "id" TEXT PRIMARY KEY,
 "status" INTEGER NOT NULL,
