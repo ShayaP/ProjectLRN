@@ -1,11 +1,60 @@
 <div style="text-align: center;">
 	<div style="box-sizing: border-box; display: inline-block; width: auto; max-width: 560px; background-color: lavender; border: 4px solid; border-radius: 8px; #0361A8; margin:50px">
 	<div style="background: #0361A8; border-radius: 5px 5px 0px 0px; padding: 15px;"><span style="font-family: verdana; color: #D4D4D4; font-size: 3.00em; font-weight:bold;">Search Users</span></div>
-</style>
+</div>
 <form method="POST" action="/browseprofile">
 <%= csrf() %>
 
-<table class='center'>
+<!--
+<script>
+	$(function () { // wait for page to load
+    var cityDropdown = $("#cities"),
+        countryDropdown = $('<select></select>'), // create a country dropdown
+        countries = []; // ordered list of countries
+
+    // parse the nested dropdown
+    cityDropdown.children().each(function () {
+        var group = $(this),
+            countryName = group.attr('label'),
+            option;
+
+        // create an option for the country
+        option = $('<option></option>').text(countryName);
+
+        // store the associated city options
+        option.data('cities', group.children());
+
+        // check if the country should be selected
+        if( group.find(':selected').length > 0 ) {
+            option.prop('selected', true);
+        }
+
+        // add the country to the dropdown
+        countryDropdown.append(option);
+    });
+
+    // add the country dropdown to the page
+    cityDropdown.before(countryDropdown);
+
+    // this function updates the city dropdown based on the selected country
+    function updateCities() {
+        var country = countryDropdown.find(':selected');
+        cityDropdown.empty().append(country.data('cities'));
+    }
+
+    // call the function to set the initial cities
+    updateCities();
+
+    // and add the change handler
+    countryDropdown.on('change', updateCities);
+});
+</script>
+-->
+
+<%= javascriptTag("jquery.min.js") %>
+
+
+<table align='center'>
 	<tr><td>Name:</td><td><input type="text" name="Name"></td></tr>
 	<tr><td>Languages:</td><td>
 		<select name="Language">
@@ -22,14 +71,42 @@
 		<option value="92110"> USD (Zip: 92110)<br></option>
 	</select>
 	</td></tr>
-	<tr><td>Topic:</td><td>
-		<select name="Topic">
-			<option value="Math"> Math<br></option>
-			<option value="English"> English<br></option>
-			<option value="Physics"> Physics<br></option>
-			<option value="Chemistry"> Chemistry<br></option>
+	<tr><td>Subject:</td><td>
+		<select name="Subject">
+			<option value="1"> English Communication<br></option>
+			<option value="2"> Humanities<br></option>
+			<option value="3"> Mathematics<br></option>
+			<option value="4"> Languages<br></option>
+			<option value="5"> Physical and Biological Sciences<br></option>
+			<option value="6"> Arts<br></option>
 		</select>
 	</td></tr>
+	<!--
+	<tr><td>Course</td><td>
+		<select name="Course">
+			<option value="1"> English Communication<br></option>
+			<option value="2"> Humanities<br></option>
+			<option value="3"> Mathematics<br></option>
+			<option value="4"> Languages<br></option>
+			<option value="5"> Physical and Biological Sciences<br></option>
+			<option value="6"> Arts<br></option>
+		</select>
+	</td></tr>
+
+	<tr><td>City</td><td>
+		<select id="cities">
+	    <optgroup label="Poland">
+	        <option selected>Krakow</option>
+	        <option>Warszawa</option>
+	    </optgroup>
+	    <optgroup label="Germany">
+	        <option>Berlin</option>
+	        <option>Frankfurt</option>
+	    </optgroup>
+		</select>
+	</td></tr>
+	-->
+
 <!--<tr><td>&nbsp;</td><td><input href="<%= reviewspagePath() %>" type="submit" value="Search Users"> </td></tr> -->
 <tr><td>&nbsp;</td><td><input type="submit" role="Find" name="Find" value="Search Users"></td></tr>
 </table>
