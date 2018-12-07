@@ -11,25 +11,30 @@
 
    <div class="col-lg-12">
           <h2 class="my-4">Results: Send a request if you want to interact!</h2>
-        </div>
-       
+    </div>
+
       <!-- Browse Tutor and Tutee Profiles   add this back in after demo --<p>"Bio, subjects"</p>
  -->
+ <table {
+ 	align='center';
+ 	cellpadding="15";
+ 	}>
      <%= for (result) in results { %>
      <% let count = 0 %>
 
       <div class="row">
-          <%=result.FirstName+"   "%> 
+          <%=result.FirstName+"   "%>
           </h3>
           <h3>       </h3>
           <button class = "btn-center" type= "submit" role= "Request" name = "Send Request" value="true">Request</button>
-          <h3> 
+          <h3>
           </h3>
           <br>
           <br>
           <br>
       </div>
         <% } %>
+    </table>
 </form>
 <% contentFor("extraHeadArgs") { %>
 <% }  %>
