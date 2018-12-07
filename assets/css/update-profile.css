@@ -1,0 +1,88 @@
+/*!
+ * Start Bootstrap - Shop Item (https://startbootstrap.com/template-overviews/shop-item)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-item/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+}
+
+.m_cInput{
+  width: 75%;
+}
+.m_cLabel{
+  width: 20%;
+}
+
+.lang-checkbox:checked + label{
+  color: blue;
+}
+.search-table{
+    padding-top: 10%;
+    margin-top: -6%;
+}
+.search-box{
+    background: #c1c1c1;
+    border: 1px solid #ababab;
+    padding: 3%;
+}
+.search-box input:focus{
+    box-shadow:none;
+    border:2px solid #eeeeee;
+}
+.search-list{
+    background: #fff;
+    border: 1px solid #ababab;
+    border-top: none;
+}
+.search-list h3{
+    background: #eee;
+    padding: 3%;
+    margin-bottom: 0%;
+}
+.scrollingTable {
+    height: 300px;
+    overflow-y: auto;
+}
+@media(max-width: 990px) and (min-width: 770px){
+  .m_cBlock{
+    width: 100%;
+  }
+  .m_cMulticontainer{
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .m_cHalfpiece{
+    width: 50%;
+  }
+
+  .m_cCenterBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+
+  .m_cMulticontainer{
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .m_cHalfpiece{
+    width: 50%;
+  }
+  .m_cFixed{
+    position: fixed;
+  }
+  .m_cCenterBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
