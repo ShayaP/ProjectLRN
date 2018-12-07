@@ -1,6 +1,3 @@
-</head>
-
-  <body>
 <form method="POST">
     <%= csrf() %>
 
@@ -33,6 +30,8 @@
           <br>
       </div>
         <% } %>
-      <% contentFor("extraHeadArgs") { %>
-      <% }  %>
 </form>
+<% contentFor("extraHeadArgs") { %>
+<% }  %>
+<% contentFor("jsArgs") { %>
+<% }  %>
