@@ -76,9 +76,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<%= requestpagePath() %>">Requests</a>
             </li>
-             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="<%= browseprofilePath() %> ">Browse</a>
-            </li>
+          
             <%= if ((user)) {%>
             <li class="nav-item">
                 <!-- <a class="nav-link" href="/logout">Logout</a> -->
@@ -101,13 +99,13 @@
       <%= yield %>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer 
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; LRN Fall 2018</p>
       </div>
-      <!-- /.container -->
     </footer>
+ /.container -->
 
     <%= contentOf("jsArgs") %>
     <%= javascriptTag("bootstrap.bundle.min.js") %>

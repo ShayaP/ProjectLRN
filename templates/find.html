@@ -1,11 +1,25 @@
 <div style="text-align: center;">
-	<div style="box-sizing: border-box; display: inline-block; width: auto; max-width: 560px; background-color: lavender; border: 4px solid; border-radius: 8px; #0361A8; margin:50px">
-	<div style="background: #0361A8; border-radius: 5px 5px 0px 0px; padding: 15px;"><span style="font-family: verdana; color: #D4D4D4; font-size: 3.00em; font-weight:bold;">Search Users</span></div>
+
+	
+	<div style="background: #b9d6e4; border-radius: px 5px 0px 0px; padding: 15px;"><span style="font-family: arial; color: #ffffff; font-size: 3.00em; font-weight:bold;">FIND</span>
+		<div class="col-lg-8 mx-auto"> 
+			 <h1 class="text-lowerrcase" >
+			<span style="color: #ffffff;font-size:.7em">search for users</span>
+			</h1>
+
+			</div>
+           
+	</div>
+	<hr>
 </div>
+
+
 <form method="POST" action="/browseprofile">
 <%= csrf() %>
 
 <!--
+	<%= stylesheetTag("css/profile.css") %>
+
 <script>
 	$(function () { // wait for page to load
     var cityDropdown = $("#cities"),
@@ -53,9 +67,12 @@
 
 
 
-<table align='center'>
-	<tr><td>Name:</td><td><input type="text" name="Name"></td></tr>
-	<tr><td>Languages:</td><td>
+<table {
+	align='center'; 
+	cellpadding="15";
+	}>
+	<tr><td><strong>Name (optional):<strong></td><td><input type="text" name="Name"></td></tr>
+	<tr><td><strong>Languages:<strong></td><td>
 		<select name="Languages">
 			<option value="English" checked> English<br></option>
 			<option value="Spanish"> Spanish<br></option>
@@ -63,14 +80,14 @@
 			<option value="Mandarin"> Mandarin<br></option>
 		</select>
 	</td></tr>
-	<tr><td>Location:</td><td>
+	<tr><td><strong>Location:<strong></td><td>
 	<select name="Location">
 		<option value="92122" checked> UC San Diego (Zip: 92093)<br></option>
 		<option value="92182"> SDSU (Zip: 92182)<br></option>
 		<option value="92110"> USD (Zip: 92110)<br></option>
 	</select>
 	</td></tr>
-	<tr><td>Topics:</td><td>
+	<tr><td><strong>Topics:<strong></td><td>
 		<select name="Topics">
 			<option value="1"> English Communication<br></option>
 			<option value="2"> Humanities<br></option>
@@ -108,6 +125,7 @@
 
 <!--<tr><td>&nbsp;</td><td><input href="<%= reviewspagePath() %>" type="submit" value="Search Users"> </td></tr> -->
 <tr><td>&nbsp;</td><td><input type="submit" role="Find" name="Find" value="Search Users"></td></tr>
+ <a class="btn btn-primary btn-xl js-scroll-trigger" href="<%= findPath() %>">Find Tutors/Tutees</a>
 </table>
 </form>
 <!--
