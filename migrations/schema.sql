@@ -19,6 +19,8 @@ CREATE TABLE "users" (
 );
 CREATE UNIQUE INDEX "users_email_idx" ON "users" (email);
 CREATE UNIQUE INDEX "users_google_id_idx" ON "users" (google_id);
+<<<<<<< HEAD
+=======
 CREATE TABLE "requests" (
 "id" TEXT PRIMARY KEY,
 "status" INTEGER NOT NULL,
@@ -68,3 +70,4 @@ CREATE TABLE "userinfoes" (
 FOREIGN KEY (user_id) REFERENCES users (id)
 );
 CREATE UNIQUE INDEX "userinfoes_google_id_idx" ON "userinfoes" (google_id);
+>>>>>>> 892717d993841b8a56f12b9e0ecf8d51eec58aae
