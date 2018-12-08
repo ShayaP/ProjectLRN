@@ -5,6 +5,7 @@ create_table("userinfoes") {
 	t.Column("subjects", "string", {})
 	t.Column("courses", "string", {})
 	t.Column("address", "string", {})
+    t.ForeignKey("user_id", {"users": ["id"]})
 }
 
 add_index("userinfoes", "google_id", {"unique": true})

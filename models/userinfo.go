@@ -23,6 +23,7 @@ type Userinfo struct {
 	Courses   string    `json:"courses" db:"courses"`
 	Address   string    `json:"address" db:"address"`
     GoogleID  string    `json:"google_id" db:"google_id"`
+	UserID    uuid.UUID `json:"user_id" db:"user_id"`
 }
 
 // String is not required by pop and may be deleted
@@ -114,6 +115,16 @@ func encodeIdsToString(arr []string) string{
 
 func GetInfoByGID(tx *pop.Connection, gid string) (*Userinfo, error){
 	query := tx.RawQuery("SELECT * FROM userinfoes WHERE google_id = ?", gid)
+	u := &Userinfo{}
+	if err := query.First(u); err != nil {
+		return nil, err
+	} else {
+		return u, nil
+	}
+}
+
+func GetInfoBySysID(tx *pop.Connection, id uuid.UUID) (*Userinfo, error){
+	query := tx.RawQuery("SELECT * FROM userinfoes WHERE user_id = ?", id)
 	u := &Userinfo{}
 	if err := query.First(u); err != nil {
 		return nil, err

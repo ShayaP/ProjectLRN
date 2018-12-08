@@ -24,6 +24,7 @@ type Request struct {
 	Status      int       `json:"status" db:"status"`
 	SenderID    uuid.UUID `json:"senderid" db:"senderid"`
 	ReceiverID  uuid.UUID `json:"receiverid" db:"receiverid"`
+	Topic       string    `json:"topic" db:"topic"`
 }
 
 // String is not required by pop and may be deleted
@@ -46,6 +47,7 @@ func (r Requests) String() string {
 func (r *Request) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.IntIsPresent{Field: r.Status, Name: "Status"},
+        &validators.StringIsPresent{Field: r.Topic, Name: "Topic"},
 	), nil
 }
 
@@ -65,7 +67,7 @@ func (req *Request) CreateRequest(tx *pop.Connection) (*validate.Errors, error){
     return tx.ValidateAndCreate(req)
 }
 
-func CreateNewRequestData(sender *User, receiver *User) (*Request, error){
+func CreateNewRequestData(sender *User, receiver *User, topic string) (*Request, error){
     if (sender.ID == receiver.ID){
         return nil, errors.New("Cannot send a request to yourself")
     }
@@ -78,6 +80,7 @@ func CreateNewRequestData(sender *User, receiver *User) (*Request, error){
         Status:     3,
         SenderID:   sender.ID,
         ReceiverID: receiver.ID,
+        Topic:      topic,
     }
 
     return request, nil
