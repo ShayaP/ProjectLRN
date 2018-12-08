@@ -11,6 +11,11 @@ import (
 	"github.com/gobuffalo/validate/validators"
 )
 
+/**
+ *  IsTutor: 1 if tutee, 2 if tutor
+ *
+ *
+ */
 type User struct {
 	ID           uuid.UUID `json:"id" db:"id"`
 	CreatedAt    time.Time `json:"created_at" db:"created_at"`

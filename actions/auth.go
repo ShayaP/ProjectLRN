@@ -11,13 +11,14 @@ import (
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/google"
+	"github.com/gobuffalo/envy"
 )
 
 func init() {
 	gothic.Store = App().SessionStore
 	gob.Register(&models.User{})
 	goth.UseProviders(
-		google.New("190043352193-6gosbi41ard6f1itomqnd3u9kb831gtg.apps.googleusercontent.com", "mqkCA9p7dY1eej9TqmhkzFQx", fmt.Sprintf("%s%s", App().Host, "/auth/google/callback")),
+		google.New(envy.Get("CLIENT_ID", ""), envy.Get("SECRET_ID", ""), fmt.Sprintf("%s%s", App().Host, "/auth/google/callback")),
 	)
 }
 

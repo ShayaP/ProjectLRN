@@ -1,6 +1,9 @@
 create_table("requests") {
 	t.Column("id", "uuid", {"primary": true})
 	t.Column("status", "integer", {})
-	t.Column("tutorid", "uuid", {})
-	t.Column("tuteeid", "uuid", {})
+	t.Column("senderid", "uuid", {})
+	t.Column("receiverid", "uuid", {})
+	t.Column("topic", "string", {})
 }
+add_index("requests", "senderid")
+add_index("requests", "receiverid")

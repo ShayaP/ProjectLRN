@@ -13,6 +13,7 @@ func (ms *ModelSuite) Test_User_Create() {
 		Email:        "bruce@wayne.com",
 		Gender:       1,
 		OtherSpecify: "-",
+        IsTutor:      1,
 	}
 	verrs, err := u.Create(ms.DB)
 	ms.NoError(err)
@@ -53,6 +54,7 @@ func (ms *ModelSuite) Test_User_Create_UserExists() {
 		Email:        "bruce@wayne.com",
 		Gender:       1,
 		OtherSpecify: "-",
+        IsTutor:      1,
 	}
 	verrs, err := u.Create(ms.DB)
 	ms.NoError(err)
@@ -70,6 +72,7 @@ func (ms *ModelSuite) Test_User_Create_UserExists() {
 		Email:        "bruce@wayne.com",
 		Gender:       1,
 		OtherSpecify: "-",
+        IsTutor:      2,
 	}
 	verrs, err = u.Create(ms.DB)
 	ms.Error(err)

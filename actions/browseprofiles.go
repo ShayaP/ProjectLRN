@@ -54,9 +54,17 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 			if err != nil {
 				return c.Error(401, err)
 			}
+
+			//automatically show only the other group of people 
 			if u.IsTutor != isTutor {
 				continue
 			}
+
+			//remove the current user from the list
+			if u.GoogleID == curr_user.GoogleID {
+				continue
+			}
+
 			users = append(users, u)
 		}
 		c.Set("results", users)

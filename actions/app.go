@@ -40,6 +40,7 @@ func App() *buffalo.App {
 		app = buffalo.New(buffalo.Options{
 			Env:         ENV,
 			SessionName: "_lrn_session",
+			Host: envy.Get("SERVER_NAME", "http://127.0.0.1:3000"),
 		})
 
 		// app.Use(middleware.SessionSaver)
@@ -77,7 +78,7 @@ func App() *buffalo.App {
 		app.POST("/browseprofile", BrowseProfilesPOSTHandler)
 
 		app.Middleware.Skip(Authorize, PushPayloadHandler, HomeHandler,
-			FindHandler, RequestPageHandler, ProfileHandler,
+			FindHandler, ProfileHandler,
 			UpdateProfileHandler, AboutHandler, ReviewHandler, BrowseProfilesHandler)
 
 		app.GET("/login", LoginHandler)

@@ -2,16 +2,40 @@ package actions
 
 import (
 	"github.com/gobuffalo/buffalo"
-	// "github.com/cileonard/lrn/models"
-	// "github.com/gobuffalo/pop"
+	"github.com/cileonard/lrn/models"
+	"github.com/gobuffalo/pop"
 )
 
 // FindHandler is a default handler to serve up
 // a home page.
 func RequestPageHandler(c buffalo.Context) error {
+    user := c.Session().Get("user").(*models.User)
+
+	tx := c.Value("tx").(*pop.Connection)
+
+    allSentRequests, err := models.GetRequestsSent(user, tx)
+    if err != nil {
+        return c.Render(500, r.String(err.Error()))
+    }
+    allReceivedRequests, err := models.GetRequestsReceived(user, tx)
+    if err != nil {
+        return c.Render(500, r.String(err.Error()))
+    }
+
+
+
+    ParsedSentRequests, err := SplitRequestsByStatus(allSentRequests, true, tx)
+    if err != nil {
+        return c.Render(500, r.String(err.Error()))
+    }
+    ParsedRecievedRequests, err := SplitRequestsByStatus(allReceivedRequests, false, tx)
+    if err != nil {
+        return c.Render(500, r.String(err.Error()))
+    }
+
 	c.Set("title", "RequestPage")
-	c.Set("sentRequests", GetRequestsSent(c))
-	c.Set("receivedRequests", GetRequestsReceived(c))
+	c.Set("sentRequests", ParsedSentRequests)
+	c.Set("receivedRequests", ParsedRecievedRequests)
 	return c.Render(200, r.HTML("requestpage.html"))
 }
 
