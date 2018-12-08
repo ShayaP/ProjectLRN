@@ -87,10 +87,11 @@ func CreateNewRequestData(sender *User, receiver *User, topic string) (*Request,
 }
 
 
-func GetRequestsSent(user *User, tx *pop.Connection) (Requests, error){
-	query := tx.RawQuery("SELECT * FROM requests WHERE senderid = ?", user.GoogleID)
+func GetRequestsSent(user *User, tx *pop.Connection) (*Requests, error){
+	query := tx.RawQuery("SELECT * FROM requests WHERE senderid = ?", user.ID)
 
-    var requests Requests
+    requests := &Requests{}
+
 	if err := query.All(requests); err != nil {
 		return nil, err
 	} else {
@@ -100,10 +101,10 @@ func GetRequestsSent(user *User, tx *pop.Connection) (Requests, error){
 }
 
 
-func GetRequestsReceived(user *User, tx *pop.Connection) (Requests, error){
-	query := tx.RawQuery("SELECT * FROM requests WHERE receiverid = ?", user.GoogleID)
+func GetRequestsReceived(user *User, tx *pop.Connection) (*Requests, error){
+	query := tx.RawQuery("SELECT * FROM requests WHERE receiverid = ?", user.ID)
 
-    var requests Requests
+    requests := &Requests{}
 	if err := query.All(requests); err != nil {
 		return nil, err
 	} else {
