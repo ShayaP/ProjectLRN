@@ -6,4 +6,4 @@ create_table("requests") {
 	t.Column("topic", "string", {})
 }
 add_index("requests", "senderid")
-add_index("requests", "recieverid")
+add_index("requests", "receiverid")
