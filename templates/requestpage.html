@@ -217,11 +217,10 @@ contentFor(“extrHeadArgs”) {
 }
 -->
     <%= contentFor("extraHeadArgs") { %>
-
+      <%= stylesheetTag("all.min.css") %>
+      <%= stylesheetTag("dataTables.bootstrap4.css") %>
     <% } %>
     <%= contentFor("jsArgs") { %>
-      <%= stylesheetTag("dataTables.bootstrap4.css") %>
-      <%= stylesheetTag("css/all.min.css") %>
       <%= javascriptTag("jquery.easing.min.js") %>
       <%= javascriptTag("jquery.dataTables.js") %>
       <%= javascriptTag("Chart.min.js") %>
