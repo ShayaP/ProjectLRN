@@ -3,12 +3,19 @@ package actions
 import (
 	"github.com/gobuffalo/buffalo"
 	// "github.com/cileonard/lrn/models"
-	// "github.com/gobuffalo/pop"
+	"github.com/gobuffalo/pop"
 )
 
 // FindHandler is a default handler to serve up
 // a home page.
 func RequestPageHandler(c buffalo.Context) error {
+    user := c.Session().Get("user")
+
+	tx := c.Value("tx").(*pop.Connection)
+
+    allSentRequests := models.GetRequestsSent(user, tx)
+    allReceivedRequests := models.GetRequestsReceived(user, tx)
+
 	c.Set("title", "RequestPage")
 	c.Set("sentRequests", GetRequestsSent(c))
 	c.Set("receivedRequests", GetRequestsReceived(c))
