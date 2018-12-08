@@ -22,13 +22,14 @@ CREATE UNIQUE INDEX "users_google_id_idx" ON "users" (google_id);
 CREATE TABLE IF NOT EXISTS "requests" (
 "id" TEXT PRIMARY KEY,
 "status" INTEGER NOT NULL,
-"tutorid" char(36) NOT NULL,
-"tuteeid" char(36) NOT NULL,
+"senderid" char(36) NOT NULL,
+"receiverid" char(36) NOT NULL,
+"topic" TEXT NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
 );
-CREATE INDEX "requests_tutorid_idx" ON "requests" (tutorid);
-CREATE INDEX "requests_tuteeid_idx" ON "requests" (tuteeid);
+CREATE INDEX "requests_senderid_idx" ON "requests" (senderid);
+CREATE INDEX "requests_receiverid_idx" ON "requests" (receiverid);
 CREATE TABLE IF NOT EXISTS "reviews" (
 "id" TEXT PRIMARY KEY,
 "rating" INTEGER NOT NULL,
@@ -61,7 +62,9 @@ CREATE TABLE IF NOT EXISTS "userinfoes" (
 "subjects" TEXT NOT NULL,
 "courses" TEXT NOT NULL,
 "address" TEXT NOT NULL,
+"user_id" char(36) NOT NULL,
 "created_at" DATETIME NOT NULL,
-"updated_at" DATETIME NOT NULL
+"updated_at" DATETIME NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users (id)
 );
 CREATE UNIQUE INDEX "userinfoes_google_id_idx" ON "userinfoes" (google_id);
