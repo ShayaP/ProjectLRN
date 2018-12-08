@@ -8,7 +8,6 @@
             <a href="#m_iPersonalInfo" class="list-group-item active">Personal Information</a>
             <a href="#m_iSubjects" class="list-group-item" title="Jump to subjects">Subjects</a>
             <a href="#m_iLanguages" class="list-group-item" title="Jump to languages">Languages</a>
-            <a href="#m_iTutorSess" class="list-group-item" title="Jump to tutoring sessions">Tutoring Sessions</a>
             <a href="<%= updateProfilePath() %>" class="btn btn-success" title="Update profile">Update</a>
           </div>
         </div>
@@ -25,8 +24,6 @@
                     <h1 > <%= username %> </h1>
                   </div>
                 </div>
-                <!--<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                4.0 stars-->
             </div>
           </div>
           <!-- /.card -->
@@ -40,10 +37,8 @@
                 <div class="m_cHalfpiece">
                 <h4>Address</h4>
                 <p class="card-text">
-                <!--<= street >-->
-		  <br>
-          <!--<= city >, <= state > <%= zip %> -->
-          <%= zip %>
+                <!-- Address is just the zip code-->
+		   <%= zip %>
                 </p>
                 </div>
                 <hr>
@@ -114,21 +109,6 @@
               </div>
             </div>
           </div>
-          <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-              <h2 id="m_iTutorSess">Tutoring Sessions</h2>
-              <small class="text-muted">TODO</small>
-            </div>
-            <div class="card-body">
-              <div class="m_cMulticontainer">
-                <div class="m_cHalfpiece">
-                </div>
-                <div class="m_cHalfpiece">
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.card -->
 
         </div>
         <!-- /.col-lg-9 -->
@@ -136,5 +116,7 @@
       </div>
 
       <% contentFor("extraHeadArgs") { %>
-	<%= stylesheetTag("css/profile.css") %>
+	<%= stylesheetTag("profile.css") %>
+      <% }  %>
+      <% contentFor("jsArgs") { %>
       <% }  %>

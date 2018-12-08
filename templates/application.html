@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +9,9 @@
     <%= contentOf("extraHeadArgs") %>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
+    <hr></hr> 
+    <hr></hr> 
+
   </head>
   <body>
 	<!--A basic navigation bar so we can link to the different
@@ -76,9 +80,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="<%= requestpagePath() %>">Requests</a>
             </li>
-             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="<%= browseprofilePath() %> ">Browse</a>
-            </li>
+          
             <%= if ((user)) {%>
             <li class="nav-item">
                 <!-- <a class="nav-link" href="/logout">Logout</a> -->
@@ -101,12 +103,16 @@
       <%= yield %>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer 
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; LRN Fall 2018</p>
       </div>
-      <!-- /.container -->
     </footer>
+ /.container -->
+
+    <%= contentOf("jsArgs") %>
+    <%= javascriptTag("bootstrap.bundle.min.js") %>
+    <%= javascriptTag("jquery.min.js") %>
   </body>
 </html>

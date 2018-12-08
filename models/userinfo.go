@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"time"
     "strings"
+    // "fmt"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -119,4 +120,39 @@ func GetInfoByGID(tx *pop.Connection, gid string) (*Userinfo, error){
 	} else {
 		return u, nil
 	}
+}
+
+func GetFilteredUsers(tx *pop.Connection, location string, language string, subject string) ([]Userinfo, error) {
+	query := tx.RawQuery("SELECT * FROM userinfoes")
+	userList := &[]Userinfo{}
+	if err := query.All(userList); err != nil {
+		return nil, err
+	}
+
+	returnUsers := []Userinfo{}
+	for index, user := range *userList {
+		langs := user.GetLanguages()
+		subs := user.GetSubjects()
+
+		boolLang := false
+		for _, l := range langs {
+			if l == language {
+				boolLang = true
+				break
+			}
+		}
+
+		boolSub := false
+		for _, s := range subs {
+			if s == subject {
+				boolSub = true
+				break
+			}
+		}
+
+		if boolLang == true && boolSub == true {
+			returnUsers = append(returnUsers, (*userList)[index])
+		}
+	}
+	return returnUsers, nil
 }
