@@ -1,41 +1,59 @@
-<form method="POST">
-    <%= csrf() %>
-
-    <!-- Page Content -->
-    <div class="container">
-
-          <!-- Introduction Row -->
-      <h1 class="my-4">Profiles
-        <div-class="row">
+<div style="text-align: center;">
+  <div style="background: #c6ddef; border-radius: px 5px 0px 0px; padding: 15px;">
+    <span style="font-family: arial; color: #ffffff; font-size: 3.00em; font-weight:bold;">RESULTS
+    </span>
+    <div class="col-lg-8 mx-auto">
+      <h1 class="text-lowerrcase" >
+        <span style="color: #ffffff;font-size:.7em">Send a request if you want to interact!</span>
       </h1>
 
-   <div class="col-lg-12">
-          <h2 class="my-4">Results: Send a request if you want to interact!</h2>
     </div>
+  </div>
+</div>
 
-      <!-- Browse Tutor and Tutee Profiles   add this back in after demo --<p>"Bio, subjects"</p>
- -->
- <table {
- 	align='center';
- 	cellpadding="15";
- 	}>
-     <%= for (result) in results { %>
-     <% let count = 0 %>
+  <!-- DataTables Example -->
 
-      <div class="row">
-          <%=result.FirstName+"   "%>
-          </h3>
-          <h3>       </h3>
-          <button class = "btn-center" type= "submit" role= "Request" name = "Send Request" value="true">Request</button>
-          <h3>
-          </h3>
-          <br>
-          <br>
-          <br>
+  <form method="POST">
+    <%= csrf() %>
+
+  <div class="card mb-3">
+    <div class="card-header" align="left">
+      <i class="fas"></i>
+      <strong>Results: </strong></div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Rating</th>
+              <th>Request</th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+
+            
+            <%= for (result) in results { %>
+            <% let count = 0 %>
+            <tr>
+              <td><%=result.FirstName+" "+result.LastName %></td>
+              <td><%=result.Email %></td>
+              <td><%=result.AvgRating %></td>
+              <td><button class = "btn btn-light btn-xl js-scroll-trigger" type= "submit" role= "Request" name = "Send Request" value="true">Request</button></td>
+            </tr>
+            <% } %>
+
+          </tbody>
+        </table>
       </div>
-        <% } %>
-    </table>
-</form>
+    </div>
+  </div>
+  </form>
+</div>
 <% contentFor("extraHeadArgs") { %>
 <% }  %>
 <% contentFor("jsArgs") { %>
