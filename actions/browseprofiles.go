@@ -6,6 +6,7 @@ import (
 	"github.com/cileonard/lrn/models"
 	"fmt"
 	"strconv"
+	"strings"
 	)
 
 type Search struct {
@@ -82,11 +83,9 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		c.Set("courses", courses)
 		c.Set("langs", langs)
 	} else {
-        fmt.Println("111111")
+        name = strings.Split(name, " ")[0]
 		u, err := models.GetUserByName(tx, name)
-        fmt.Println("3333333")
 		if err != nil {
-
 		    users := []*models.User{} 
 		    courses := [][]string{}
 		    langs := [][]string{}
