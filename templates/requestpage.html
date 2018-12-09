@@ -29,6 +29,7 @@
                  <% let dateIndex = 4 %> 
                  <% let phoneIndex = 5 %> 
                  <% let emailIndex = 6 %> 
+                 <% let userIDIndex = 7 %> 
 		 <thead>
                     <tr>
                       <th>Name</th>
@@ -46,13 +47,13 @@
 			      <%= csrf()%>
 		    	     </form>
 		    <%= for (sentRequest) in sentRequests { %>
-                        <tr class="result" uid="<%= result.ID %>">
+                    <tr class="result" uid="<%= sentRequest[userIDIndex] %>">
                      	  <td><%= sentRequest[nameIndex]  %></td>
                       	  <td><%= sentRequest[ratingIndex] %></td>
                       	  <td><%= sentRequest[subjectsIndex] %></td>
                       	  <td><%= sentRequest[statusIndex] %></td>
                       	  <!--Add a button to decline or accept request only in status that are accepted-->
-			  <%= if (sentRequest[statusIndex] != "Accepted") { %>
+			  <%= if (sentRequest[statusIndex] == "Pending") { %>
 			      <td>
 				    <button class="btn btn-light btn-xl js-scroll-trigger btn-sender" type="button">Withdraw Request</button>
 			      </td>
@@ -97,23 +98,20 @@
 
                     <tbody>
                     <%= for (receivedRequest) in receivedRequests { %>
-                    	<tr>
+                        <tr class="result" uid="<%= receivedRequest[userIDIndex] %>">
                      	  <td><%= receivedRequest[nameIndex]  %></td>
                       	  <td><%= receivedRequest[ratingIndex] %></td>
                       	  <td><%= receivedRequest[subjectsIndex] %></td>
                       	  <td><%= receivedRequest[statusIndex] %></td>
 			  <!--Add a button to decline or accept request only in status that are pending-->
 			  <%= if (receivedRequest[statusIndex] == "Pending") { %>
-                      	    <form method="POST">
-			      <%= csrf()%>
 			      <td>
-			        <select name="receivedDecision[]" required>
+                      <select id="<%= receivedRequest[userIDIndex] %>" name="receivedDecision" required>
 				  <option value="1">Accept</option>
 				  <option value="2">Decline</option>
 				</select>
-				<button class="btn btn-light btn-xl js-scroll-trigger" type="submit">Save</button>
+				<button class="btn btn-light btn-xl js-scroll-trigger btn-receiver" type="button">Save</button>
 			      </td>
-		    	     </form>
                             <% } else { %>
 		    	    <td></td>
 			  <% } %>
@@ -230,6 +228,7 @@ contentFor(“extrHeadArgs”) {
       <%= stylesheetTag("dataTables.bootstrap4.css") %>
     <% } %>
     <%= contentFor("jsArgs") { %>
+      <%= javascriptTag("requestsupdate.js") %>
       <%= javascriptTag("jquery.easing.min.js") %>
       <%= javascriptTag("jquery.dataTables.js") %>
       <%= javascriptTag("Chart.min.js") %>
