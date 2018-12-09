@@ -6,6 +6,7 @@ import (
 	"github.com/cileonard/lrn/models"
 	"fmt"
 	"strconv"
+	"strings"
 	)
 
 type Search struct {
@@ -35,6 +36,8 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 	fmt.Println(name)
 	tx := c.Value("tx").(*pop.Connection)
 
+	curr_user := c.Session().Get("user").(*models.User)
+	isTutor := curr_user.IsTutor
 	if name == "" {
 		lang := s.Languages
 		loc := strconv.Itoa(s.Location)
@@ -48,8 +51,6 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		users := []*models.User{} 
 		courses := [][]string{}
 		langs := [][]string{}
-		curr_user := c.Session().Get("user").(*models.User)
-		isTutor := curr_user.IsTutor
 		for _, userinfo := range list {
 			// check if the useres are tutors and tutees here.
 			u, err := models.GetUserByGID(tx, userinfo.GoogleID)
@@ -82,12 +83,23 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		c.Set("courses", courses)
 		c.Set("langs", langs)
 	} else {
-		u, err := models.GetUserByName(tx, name)
+        name = strings.Split(name, " ")[0]
+		u, err := models.GetUserByName(tx, name, isTutor)
 		if err != nil {
-			return c.Error(401, err)
+		    users := []*models.User{} 
+		    courses := [][]string{}
+		    langs := [][]string{}
+            topics := s.Topics
+            c.Set("topic", topics)
+		    c.Set("results", users)
+		    c.Set("courses", courses)
+		    c.Set("langs", langs)
+			return c.Render(200, r.HTML("browseprofiles.html"))
+            //return c.Error(401, err)
 		}
-		temp := []*models.User{u}
-		c.Set("topic", "")
+		fmt.Println("222222")
+        temp := []*models.User{u}
+		c.Set("topic", "Variety")
 		info, err := models.GetInfoByGID(tx, u.GoogleID)
 		if err != nil {
 			return c.Error(401, err)

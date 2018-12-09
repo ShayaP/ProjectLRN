@@ -70,7 +70,7 @@
 	align='center';
 	cellpadding="15";
 	}>
-	<tr><td><strong>Name (optional):<strong></td><td><input type="text" name="Name"></td></tr>
+	<tr><td><strong>Name*:<strong></td><td><input type="text" name="Name"></td></tr>
 	<tr><td><strong>Languages:<strong></td><td>
 		<select name="Languages">
 			<%= for(language) in languages { %>
@@ -95,6 +95,7 @@
 			<option value="Arts"> Arts<br></option>
 		</select>
 	</td></tr>
+    <tr><p>* - using a name overrides the other filters.</p></tr>
 	<!--
 	<tr><td>Course</td><td>
 		<select name="Course">

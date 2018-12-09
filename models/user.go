@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"strings"
 	"time"
+    "errors"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -97,14 +98,18 @@ func GetUserByGID(tx *pop.Connection, gid string) (*User, error) {
 	}
 }
 
-func GetUserByName(tx *pop.Connection, name string) (*User, error) {
+func GetUserByName(tx *pop.Connection, name string, inputUserIsTutor int) (*User, error) {
 	query := tx.RawQuery("SELECT * FROM users WHERE first_name = ?", name)
-	u := &User{}
-	if err := query.First(u); err != nil {
+	users := &[]User{}
+	if err := query.All(users); err != nil {
 		return nil, err
-	} else {
-		return u, nil
 	}
+    for _, u := range *users{
+        if inputUserIsTutor != u.IsTutor {
+            return &u, nil
+        }
+    }
+    return nil, errors.New("No users found")
 }
 
 func GetUserBySysId(tx *pop.Connection, id uuid.UUID) (*User, error) {
