@@ -68,9 +68,8 @@
 
                   <tbody>
                     <%= for (user) in pastUsers { %>
-                    <% let count = 0 %>
                     <tr>
-                      <td>user.FirstName + "  " + user.LastName</td>
+                      <td><input type="text" name="First" value=""></td>
                       <td><input type="text" name="Rating" value=""></td>
                       <td><input type="text" name="Description" value=""></td>
                       <td><input class="btn btn-light btn-xl js-scroll-trigger" type="submit" value="submit"> </td>
@@ -109,7 +108,7 @@
                   <tbody>
                     <%= for (rev) in pastReviews { %>
                     <tr>
-                      <td><%= rev.Reviewee %></td>
+                      <td><%= user.FirstName + " " + user.LastName %></td>
                       <td><%= rev.Rating %></td>
                       <td><%= rev.Description  %></td>
                     </tr>

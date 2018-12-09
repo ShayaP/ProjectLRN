@@ -2,7 +2,7 @@ package models
 
 import (
 	"encoding/json"
-	// "time"
+	"time"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -12,6 +12,8 @@ import (
 
 type Review struct {
 	ID          uuid.UUID `json:"id" db:"id"`
+	CreatedAt   time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
 	Rating      int       `json:"rating" db:"rating"`
 	Description string    `json:"description" db:"description"`
 	Reviewer    string 	  `json:"reviwer" db:"reviewer"`
@@ -57,7 +59,7 @@ func (r *Review) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 }
 
 func GetPastReviews(tx *pop.Connection, gid string) ([]Review, error) {
-	query := tx.RawQuery("SELECT * FROM reviews WHERE reviewer = ?", gid)
+	query := tx.RawQuery("SELECT * FROM reviews WHERE reviewee = ?", gid)
 	reviews := &[]Review{}
 	if err := query.All(reviews); err != nil {
 		return nil, err
