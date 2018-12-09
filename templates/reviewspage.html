@@ -63,36 +63,21 @@
                       <th>Name</th>
                       <th>Rating</th>
                       <th>Feedback</th>
-                      <th>Date</th>
                       <th>Submit Review</th>
 
                     </tr>
                   </thead>
 
                   <tbody>
+                    <%= for (user) in pastUsers { %>
+                    <% let count = 0 %>
                     <tr>
-                      <td>Josh</td>
+                      <td>user.FirstName + "  " + user.LastName</td>
                       <td><input type="text" name="Rating" value=""></td>
                       <td><input type="text" name="Description" value=""></td>
-                      <td>10/14/21</td>
                       <td><input class="btn btn-light btn-xl js-scroll-trigger" type="submit" value="submit"> </td>
                     </tr>
-
-                    <tr>
-                      <td>David</td>
-                      <td><input type="text" name="Rating" value=""></td>
-                      <td><input type="text" name="Description" value=""></td>
-                      <td>10/20/21</td>
-                      <td><input class="btn btn-light btn-xl js-scroll-trigger" type="submit" value="submit"> </td>
-                    </tr>
-
-                    <tr>
-                      <td>Shaya</td>
-                      <td><input type="text" name="Rating" value=""></td>
-                      <td><input type="text" name="Description" value=""></td>
-                      <td>10/28/20</td>
-                      <td><input class="btn btn-light btn-xl js-scroll-trigger" type="submit" value="submit"> </td>
-                    </tr>
+                    <% } %>
 
                   </tbody>
                 </table>
@@ -121,7 +106,6 @@
                       <th>Name</th>
                       <th>Rating</th>
                       <th>Feedback</th>
-                      <th>Date</th>
 
                     </tr>
                   </thead>
@@ -130,13 +114,11 @@
 		    <% let nameIndex = 0 %>
 		    <% let rateIndex = 1 %>
 		    <% let fbIndex = 2 %>
-		    <% let dateIndex = 3 %>
 	   	    <%= for (rating) in pastRatings { %>
                     <tr>
                       <td><%= rating[nameIndex] %></td>
                       <td><%= rating[rateIndex] %></td>
                       <td><%= rating[fbIndex]  %></td>
-                      <td><%= rating[dateIndex] %></td>
                     </tr>
                    <% } %>
                   </tbody>

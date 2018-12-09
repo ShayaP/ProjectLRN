@@ -17,8 +17,16 @@ import (
 func init() {
 	gothic.Store = App().SessionStore
 	gob.Register(&models.User{})
+	client := envy.Get("CLIENT_ID", "")
+	secret := envy.Get("SECRET_ID", "")
+	// fmt.Println("ASDLFNBASLDFN BASLDF")
+	// fmt.Println(client)
+	// fmt.Println(secret)
+	// fmt.Println("ASDLFNBASLDFN BASLDF")
+	// fmt.Println("ASDLFNBASLDFN BASLDF")
+	// fmt.Println("ASDLFNBASLDFN BASLDF")
 	goth.UseProviders(
-		google.New(envy.Get("CLIENT_ID", ""), envy.Get("SECRET_ID", ""), fmt.Sprintf("%s%s", App().Host, "/auth/google/callback")),
+		google.New(client, secret, fmt.Sprintf("%s%s", App().Host, "/auth/google/callback")),
 	)
 }
 
