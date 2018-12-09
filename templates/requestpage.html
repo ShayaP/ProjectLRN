@@ -4,7 +4,7 @@
       <div style="background: #c6ddef; border-radius: px 5px 0px 0px; padding: 15px;"><span style="font-family: arial; color: #ffffff; font-size: 3.00em; font-weight:bold;">REQUESTS</span>
     <div class="col-lg-8 mx-auto">
        <h1 class="text-lowerrcase" >
-      <span style="color: #ffffff;font-size:.7em">send a request to connect!</span>
+      <span style="color: #ffffff;font-size:.7em">notification center</span>
       </h1>
 
     </div>
@@ -30,6 +30,8 @@
                       <th>Status</th>
                       <th>Tools</th>
                       <th>Date</th>
+                      <th>Phone Number</th>
+                      <th>Email</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -45,7 +47,7 @@
 			      <%= csrf()%>
 			      <td>
 			        <select name="sentDecision[]" required>
-				  <option value="1">Confirm</option>
+				  <option value="1">Accept</option>
 				  <option value="2">Decline</option>
 				</select>
 				<button class="btn btn-light btn-xl js-scroll-trigger" type="submit">Save</button>
@@ -83,6 +85,8 @@
                         <th>Status</th>
                         <th>Tools</th>
 		                    <th>Date</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
                     </tr>
                     </thead>
 
