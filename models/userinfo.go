@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
     "strings"
-    // "fmt"
+    "fmt"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -167,6 +167,10 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 
 		boolLang := false
 		for _, l := range langs {
+			fmt.Println("\n")
+			fmt.Println(language)
+			fmt.Println(l)
+			fmt.Println("\n")
 			if l == language {
 				boolLang = true
 				break
@@ -175,6 +179,10 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 
 		boolSub := false
 		for _, s := range subs {
+			fmt.Println("\n")
+			fmt.Println(subject)
+			fmt.Println(s)
+			fmt.Println("\n")
 			if s == subject {
 				boolSub = true
 				break
@@ -185,5 +193,8 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 			returnUsers = append(returnUsers, (*userList)[index])
 		}
 	}
+	fmt.Println("\n")
+	fmt.Println(returnUsers)
+	fmt.Println("\n")
 	return returnUsers, nil
 }
