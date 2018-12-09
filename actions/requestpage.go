@@ -49,10 +49,10 @@ func RequestPageHandler(c buffalo.Context) error {
 func GetRequestsSent(c buffalo.Context) [][]string {
 	// psuedo request data
 	requests := [][]string {
-		{"Bobby Tefla", "5" ,"Zoology", "Pending", "4/2/18"},
-		{"Josh Ben", "4" ,"U.S. History", "Rejected", "6/2/18"},
-		{"Hannah Benson", "4" ,"Linear Algebra", "Accepted", "7/2/18"},
-		{"Lizzy Queen", "5" ,"Introduction to Chemistry", "Accepted", "10/2/18"},
+		{"Bobby Tefla", "5" ,"Zoology", "Pending", "4/2/18", "Unavailable", "Unavailable"},
+		{"Josh Ben", "4" ,"U.S. History", "Rejected", "6/2/18", "Unavailable", "Unavailable"},
+		{"Hannah Benson", "4" ,"Linear Algebra", "Accepted", "7/2/18", "Unavailable", "Unavailable"},
+		{"Lizzy Queen", "5" ,"Introduction to Chemistry", "Accepted", "10/2/18", "931-567-4567","lizqueen@gmail.com"},
 	}
 	return requests
 }
@@ -61,10 +61,10 @@ func GetRequestsSent(c buffalo.Context) [][]string {
 func GetRequestsReceived(c buffalo.Context) [][]string {
 	// psuedo request data
 	requests := [][]string {
-		{"Benny John", "3" ,"Zoology", "Pending", "9/2/18"},
-		{"Eliza Lu", "1" ,"U.S. History", "Pending", "6/2/18"},
-		{"Paddy Pie", "4" ,"Linear Algebra", "Rejected", "7/2/16"},
-		{"Minnie Jane", "5" ,"Introduction to Chemistry", "Rejected", "10/21/18"},
+		{"Benny John", "3" ,"Zoology", "Pending", "9/2/18", "Unavailable", "Unavailable"},
+		{"Eliza Lu", "1" ,"U.S. History", "Pending", "6/2/18", "Unavailable","Unavailable"},
+		{"Paddy Pie", "4" ,"Linear Algebra", "Rejected", "7/2/16", "Unavailable", "Unavailable"},
+		{"Minnie Jane", "5" ,"Introduction to Chemistry", "Rejected", "10/21/18","Unavailable","Unavailable"},
 	}
 	return requests
 }
