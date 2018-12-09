@@ -68,6 +68,7 @@ func App() *buffalo.App {
 		app.GET("/about", AboutHandler)
 		app.GET("/find", FindHandler)
 		app.GET("/requestpage", RequestPageHandler)
+		app.POST("/newrequest", RequestPagePOSTHandler)
 		app.GET("/reviewspage", ReviewHandler)
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)

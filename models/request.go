@@ -63,27 +63,25 @@ func (r *Request) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }
 
-func (req *Request) CreateRequest(tx *pop.Connection) (*validate.Errors, error){
-    return tx.ValidateAndCreate(req)
-}
 
-func CreateNewRequestData(sender *User, receiver *User, topic string) (*Request, error){
+func (req *Request) CreateRequest(tx *pop.Connection, senderid string, receiverid string, topic string) (*Request, error) {
+
     if (sender.ID == receiver.ID){
         return nil, errors.New("Cannot send a request to yourself")
     }
+
     if (sender.IsTutor == receiver.IsTutor){
         return nil, errors.New("Cannot Send a request to a user of the same type")
     }
-    var request *Request
 
-    request = &Request{
-        Status:     3,
-        SenderID:   sender.ID,
-        ReceiverID: receiver.ID,
+    req = &Request{
+        Status:     2,
+        SenderID:   senderid,
+        ReceiverID: receiverid,
         Topic:      topic,
     }
 
-    return request, nil
+    return tx.ValidateAndCreate(req), nil
 }
 
 

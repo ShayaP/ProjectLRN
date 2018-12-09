@@ -77,6 +77,7 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		fmt.Println("\n")
 		fmt.Println(users)
 		fmt.Println("\n")
+		c.Set("topic", topics)
 		c.Set("results", users)
 		c.Set("courses", courses)
 		c.Set("langs", langs)
@@ -86,11 +87,11 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 			return c.Error(401, err)
 		}
 		temp := []*models.User{u}
+		c.Set("topic", "")
 		info, err := models.GetInfoByGID(tx, u.GoogleID)
 		if err != nil {
 			return c.Error(401, err)
 		}
-		
 		courses := [][]string{}
 		langs := [][]string{}
 		langs = append(langs, info.GetLanguages())
