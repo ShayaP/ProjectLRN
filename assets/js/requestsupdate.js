@@ -8,7 +8,7 @@ $(document).ready(function(){
             },
             function(data, status){
                 if (status == "success"){
-                    alert("Successfully sent a request");
+                    alert("Successfully withdrawn a request");
                 }else{
                     alert("Internal error. Please Try Again");
                 }
