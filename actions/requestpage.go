@@ -41,8 +41,12 @@ func RequestPageHandler(c buffalo.Context) error {
 }
 
 
-//func RequestPagePOSTHandler(c buffalo.Context) error {
-//}
+func RequestPagePOSTHandler(c buffalo.Context) error {
+    user := c.Session().Get("user").(*models.User)
+
+    return c.Render(200, r.JSON(user))
+    //return c.Render(200, r.JSON(c.Request().Form))
+}
 
 // Get the requests the user sent
 func GetRequestsSent(c buffalo.Context) [][]string {

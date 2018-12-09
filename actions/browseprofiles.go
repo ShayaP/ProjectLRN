@@ -73,13 +73,15 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		fmt.Println("\n")
 		fmt.Println(users)
 		fmt.Println("\n")
-		c.Set("results", users)
+		c.Set("topic", topics)
+        c.Set("results", users)
 	} else {
 		u, err := models.GetUserByName(tx, name)
 		if err != nil {
 			return c.Error(401, err)
 		}
 		temp := []*models.User{u}
+		c.Set("topic", "")
 		c.Set("results", temp)
 	}
     // c.Set("results", []string{"Samantha B","John S","Gary G","Aaron R","Michael N"})
