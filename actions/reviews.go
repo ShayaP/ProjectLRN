@@ -33,7 +33,11 @@ func ReviewPOSTHandler(c buffalo.Context) error {
 		return c.Render(500, r.String(err.Error()))
 	}
 	first := strings.Split(n.First, " ")[0]
-	u, err := models.GetUserByName(tx, first)
+
+
+	curr_user := c.Session().Get("user").(*models.User)
+
+	u, err := models.GetUserByName(tx, first, curr_user.IsTutor)
 	if err != nil {
 		return c.Error(401, err)
 	}
@@ -42,7 +46,6 @@ func ReviewPOSTHandler(c buffalo.Context) error {
 		fmt.Println("SECOND ERROR@!!#!#")
 		return c.Render(500, r.String(err.Error()))
 	}
-	curr_user := c.Session().Get("user").(*models.User)
 	rev.Reviewer = curr_user.GoogleID
 	rev.Reviewee = u.GoogleID
 	rev.Astutor = 1
