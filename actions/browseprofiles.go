@@ -36,6 +36,8 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 	fmt.Println(name)
 	tx := c.Value("tx").(*pop.Connection)
 
+	curr_user := c.Session().Get("user").(*models.User)
+	isTutor := curr_user.IsTutor
 	if name == "" {
 		lang := s.Languages
 		loc := strconv.Itoa(s.Location)
@@ -49,8 +51,6 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		users := []*models.User{} 
 		courses := [][]string{}
 		langs := [][]string{}
-		curr_user := c.Session().Get("user").(*models.User)
-		isTutor := curr_user.IsTutor
 		for _, userinfo := range list {
 			// check if the useres are tutors and tutees here.
 			u, err := models.GetUserByGID(tx, userinfo.GoogleID)
@@ -84,7 +84,7 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		c.Set("langs", langs)
 	} else {
         name = strings.Split(name, " ")[0]
-		u, err := models.GetUserByName(tx, name)
+		u, err := models.GetUserByName(tx, name, isTutor)
 		if err != nil {
 		    users := []*models.User{} 
 		    courses := [][]string{}
