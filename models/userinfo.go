@@ -102,6 +102,8 @@ func (u *Userinfo) SetSubjects(courses []string) {
     u.Subjects = encodeIdsToString(courses)
 }
 
+
+
 func (u *Userinfo) SetTutors(tutors []string) {
     u.Tutors = encodeIdsToString(tutors)
 }
@@ -163,6 +165,7 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 	returnUsers := []Userinfo{}
 	for index, user := range *userList {
 		langs := user.GetLanguages()
+		loc := user.Address
 		subs := user.GetSubjects()
 
 		boolLang := false
@@ -177,6 +180,9 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 			}
 		}
 
+		// check location
+		boolLoc := (loc == location)
+
 		boolSub := false
 		for _, s := range subs {
 			fmt.Println("\n")
@@ -189,7 +195,7 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 			}
 		}
 
-		if boolLang == true && boolSub == true {
+		if boolLang == true && boolSub == true && boolLoc == true {
 			returnUsers = append(returnUsers, (*userList)[index])
 		}
 	}
