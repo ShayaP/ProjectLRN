@@ -11,14 +11,17 @@ import (
 
 var subjs_and_classes map[string][]string
 var all_langs []string
+var courses_to_subjects map[string]string
 
 func init(){
 
     outputMap := make(map[string][]string, len(models.StaticCourses))
+    courses_to_subjects = make(map[string]string)
     for subj, courses := range models.StaticCourses{
         outputMap[subj] = make([]string, len(courses))
         for i, course := range courses {
             outputMap[subj][i] = course.Course
+            courses_to_subjects[course.Course] = subj
         }
         sort.Strings(outputMap[subj])
     }
@@ -33,6 +36,21 @@ func init(){
     sort.Strings(all_langs)
     //fmt.Println(all_langs)
 }
+
+func GetSubjectsFromCourses(userCourses []string) []string{
+    subjects := make(map[string]int)
+    for _,course := range userCourses {
+        subjects[courses_to_subjects[course]] = 1
+    }
+    subjArr := make([]string, len(subjects))
+    i := 0
+    for k := range subjects{
+        subjArr[i] = k
+        i++
+    }
+    return subjArr
+}
+
 
 //Name: 	ProfileGetSubjectTip
 //Purpose: 	gets the description of what the subjects section in
