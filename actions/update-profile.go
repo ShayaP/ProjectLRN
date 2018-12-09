@@ -76,7 +76,14 @@ func UpdateProfileHandler(c buffalo.Context) error {
 
 	c.Set("title", "Update Profile")
 	//display user's name
-	c.Set("zip", uinfo.Address)
+	//c.Set("username", ProfileGetUsername(c))
+    // address of user
+	//c.Set("street", address[0])
+	//c.Set("city", address[1])
+	//c.Set("state", address[2])
+	//c.Set("states", states)
+	c.Set("zip", UpdateProfileGetSelectedZip(c,uinfo.Address))
+	//c.Set("zip", address[3])
 	// phone number
 	c.Set("phone", user.PhoneNumber)
 	// email
@@ -93,6 +100,35 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	c.Set("languages2", languages[len(languages)/2:len(languages)])
 	c.Set("checked", mapULtoL)
 	return c.Render(200, r.HTML("update-profile.html"))
+}
+
+//Description:	returns slice of 3 strings which contains
+//				1 string which is selected and the other blanks.
+//				In the result slice, 
+//					UCSD zip is at index 0
+//					SDSU zip is at index 1
+//					USD zip is at index 2
+func UpdateProfileGetSelectedZip(c buffalo.Context, zip string) [3]string {
+	result := [3]string{}
+	zipUcsd := "92093"
+	zipSdsu := "92182"
+	zipUsd := "92110"
+	if zip == zipUcsd {
+		result[0] = "selected"
+	} else {
+		result[0] = ""
+	}
+	if zip == zipSdsu{
+		result[1] = "selected"
+	} else {
+		result[1] = ""
+	}
+	if zip == zipUsd {
+		result[2] = "selected"
+	} else {
+		result[2] = ""
+	}
+	return result
 }
 
 func UpdateProfilePOSTHandler(c buffalo.Context) error {

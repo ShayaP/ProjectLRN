@@ -72,13 +72,21 @@
                 </select>
                 -->
                 <label for="m_iZip" class="m_cLabel">Zip Code</label>
-                <input name="Location" id="m_iZip" value="<%= zip %>" required>
+                <select name="Location">
+                  <% zip %>
+                  <% let indexUcsd = 0 %>
+                  <% let indexSdsu = 1 %>
+                  <% let indexUsd = 2 %>
+                  <option value="92093" <%= zip[indexUcsd] %>> UC San Diego (Zip: 92093)</option>
+                  <option value="92182" <%= zip[indexSdsu] %>> SDSU (Zip: 92182)</option>
+                  <option value="92110" <%= zip[indexUsd] %> > USD (Zip: 92110)</option>
+                </select>
                 </div>
                 <hr>
                 <div class="m_cHalfpiece">
                 <h4>Phone</h4>
                 <label for="m_iPhone" class="m_cLabel">Phone Number</label>
-                <input name="PhoneNumber" id="m_iPhone" value="<%= phone %>" required>
+                <input name="PhoneNumber" id="m_iPhone" value="<%= phone %>" placeholder="##########" required>
                 </div>
                 <hr>
               </div>
