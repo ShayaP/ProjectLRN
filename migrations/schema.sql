@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS "reviews" (
 "id" TEXT PRIMARY KEY,
 "rating" INTEGER NOT NULL,
 "description" TEXT NOT NULL,
-"user" char(36) NOT NULL,
+"reviewer" TEXT NOT NULL,
+"reviewee" TEXT NOT NULL,
 "astutor" INTEGER NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL
@@ -63,6 +64,8 @@ CREATE TABLE IF NOT EXISTS "userinfoes" (
 "courses" TEXT NOT NULL,
 "address" TEXT NOT NULL,
 "user_id" char(36) NOT NULL,
+"tutors" TEXT NOT NULL,
+"tutees" TEXT NOT NULL,
 "created_at" DATETIME NOT NULL,
 "updated_at" DATETIME NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users (id)

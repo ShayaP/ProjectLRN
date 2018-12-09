@@ -23,6 +23,8 @@ type Userinfo struct {
 	Courses   string    `json:"courses" db:"courses"`
 	Address   string    `json:"address" db:"address"`
     GoogleID  string    `json:"google_id" db:"google_id"`
+    Tutors	  string 	`json:"tutors" db:"tutors"`
+    Tutees	  string 	`json:"tutees" db:"tutees"`
 	UserID    uuid.UUID `json:"user_id" db:"user_id"`
 }
 
@@ -98,6 +100,24 @@ func (u *Userinfo) GetSubjects() []string {
 
 func (u *Userinfo) SetSubjects(courses []string) {
     u.Subjects = encodeIdsToString(courses)
+}
+
+func (u *Userinfo) SetTutors(tutors []string) {
+    u.Tutors = encodeIdsToString(tutors)
+}
+
+func (u *Userinfo) GetTutors() []string {
+    tutors := decodeStringToIds(u.Tutors)
+    return tutors
+}
+
+func (u *Userinfo) SetTutees(tutors []string) {
+    u.Tutees = encodeIdsToString(tutors)
+}
+
+func (u *Userinfo) GetTutees() []string{
+    tutees := decodeStringToIds(u.Tutees)
+    return tutees
 }
 
 func decodeStringToIds(instring string) []string{
