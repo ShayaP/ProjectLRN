@@ -6,7 +6,6 @@
 			 <h1 class="text-lowerrcase" >
 			<span style="color: #ffffff;font-size:.7em">search for users</span>
 			</h1>
-
 			</div>
            
 	</div>
@@ -74,10 +73,9 @@
 	<tr><td><strong>Name (optional):<strong></td><td><input type="text" name="Name"></td></tr>
 	<tr><td><strong>Languages:<strong></td><td>
 		<select name="Languages">
-			<option value="English" checked> English<br></option>
-			<option value="Spanish"> Spanish<br></option>
-			<option value="Cantonese"> Cantonese<br></option>
-			<option value="Mandarin"> Mandarin<br></option>
+			<%= for(language) in languages { %>
+			  <option value="<%= language %>"> <%= language %></option>
+			<% } %>
 		</select>
 	</td></tr>
 	<tr><td><strong>Location:<strong></td><td>

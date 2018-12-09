@@ -82,6 +82,26 @@ func ProfileGetLanguageTip(isTutor bool) string {
 	}
 }
 
+//Name: 	ProfileGetUserStatus
+//Purpose: 	gets the description of whether user is tutor or tutee
+//Description:	returns a string that specifies if user is tutor or tutee
+//Parameters:	c - a context
+//		isTutor - boolean that is true if the user is a tutor and
+//			false otherwise
+//Result:	returns a string that specifies if user is tutor or tutee
+func ProfileGetUserStatus(isTutor bool) string {
+	// description for tutors
+	tutor := "Tutor"
+	// description for tutees
+	tutee := "Tutee"
+
+	if isTutor {
+		return tutor
+	} else {
+		return tutee
+	}
+}
+
 //Name: 	ProfileGetSubjsAndClasses
 //Purpose: 	gets the subjects and classes associated with the user
 //Description:	returns a pre-fabricated map of key subjects and list of classes

@@ -32,6 +32,8 @@ func ProfileHandler(c buffalo.Context) error {
     b.WriteString(user.LastName)
 	c.Set("username", b.String())
     b.Reset()
+	// user status i.e. whether tutor or tutee
+	c.Set("userstatus", ProfileGetUserStatus(isTutor))
 	// address of user
 	//c.Set("street", address[0])
 	//c.Set("city", address[1])

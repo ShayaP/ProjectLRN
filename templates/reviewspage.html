@@ -1,14 +1,12 @@
-<!DOCTYPE html>
 <!-- Bootstrap core CSS-->
-<%= stylesheetTag("css/bootstrap.min.css") %>
-<%= stylesheetTag("css/all.min.css") %>
-<!-- Custom fonts for this template-->
+
+<!-- Custom fonts for this template
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-<!-- Page level plugin CSS-->
+ Page level plugin CSS
 <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-<html lang="en">
+<html lang="en">-->
 <!--
   <head>
     <div style="text-align: center;">
@@ -172,6 +170,8 @@ contentFor(“extrHeadArgs”) {
 }
 -->
     <% contentFor("extraHeadArgs") { %>
+    <%= stylesheetTag("css/bootstrap.min.css") %>
+  <%= stylesheetTag("css/all.min.css") %>
 	<%= stylesheetTag("sb-admin.css") %>
     <% } %>
    <% contentFor("jsArgs") { %>
