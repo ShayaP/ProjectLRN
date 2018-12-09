@@ -4,13 +4,12 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/cileonard/lrn/models"
 	"github.com/gobuffalo/pop"
-	"fmt"
-	"strings"
-)
+	"github.com/gobuffalo/uuid"
 
-type Name struct {
-	First string
-}
+    "strconv"
+    "fmt"
+	//"strings"
+)
 
 
 // ReviewHandler is a default handler to serve up
@@ -25,33 +24,45 @@ func ReviewHandler(c buffalo.Context) error {
 }
 
 func ReviewPOSTHandler(c buffalo.Context) error {
-    return c.Render(200, r.JSON(c.Request().Form))
-	fmt.Println("Teenage dream")
-    rev := &models.Review{}
-	n := &Name{}
-	tx := c.Value("tx").(*pop.Connection)
-	if err := c.Bind(n); err != nil {
-		fmt.Println("FIRST ERROR@!!#!#")
-		return c.Render(500, r.String(err.Error()))
-	}
-	first := strings.Split(n.First, " ")[0]
+    //return c.Render(200, r.JSON(c.Request().Form))
+	//n := &Name{}
+    ratingStr := c.Request().Form["rating"][0]
+    review := c.Request().Form["review"][0]
+    reviewUsrIDstr := c.Request().Form["reviewedID"][0]
 
-
+    tx := c.Value("tx").(*pop.Connection)
+	//if err := c.Bind(n); err != nil {
+	//	fmt.Println("FIRST ERROR@!!#!#")
+	//	return c.Render(500, r.String(err.Error()))
+	//}
 	curr_user := c.Session().Get("user").(*models.User)
 
-	u, err := models.GetUserByName(tx, first, curr_user.IsTutor)
-	if err != nil {
-		return c.Error(401, err)
-	}
+    //FIrst we are going to update the new users rating
+    reviewedUserID, err := uuid.FromString(reviewUsrIDstr)
+    reviewedUser := &models.User{}
+    err = tx.Find(reviewedUser, reviewedUserID)
+    if err != nil{
+        return c.Render(500, r.String(err.Error()))
+    }
 
-	if err := c.Bind(rev); err != nil {
-		fmt.Println("SECOND ERROR@!!#!#")
-		return c.Render(500, r.String(err.Error()))
-	}
-	rev.Reviewer = curr_user.GoogleID
-	rev.Reviewee = u.GoogleID
-	rev.Astutor = 1
+    rating, err := strconv.Atoi(ratingStr)
+    if err != nil{
+        return c.Render(500, r.String(err.Error()))
+    }
+    newrating := (reviewedUser.AvgRating * float32(reviewedUser.NumRatings)) + float32(rating)
+    reviewedUser.NumRatings = reviewedUser.NumRatings + 1
+    newrating = newrating/float32(reviewedUser.NumRatings)
+    reviewedUser.AvgRating = newrating
 
+
+    //Second we create the review
+    rev := &models.Review{
+        Rating:         rating,
+        Description:    review,
+        Reviewer:       curr_user.GoogleID,
+        Reviewee:       reviewedUser.GoogleID,
+        Astutor:        1,
+    }
 	//push the rev in the db
 	verrs, err := tx.ValidateAndCreate(rev)
 	if err != nil {

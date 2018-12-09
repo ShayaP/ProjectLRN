@@ -10,11 +10,11 @@ $(document).ready(function(){
             },
             function(data, status){
                 if (status == "success"){
-                    alert(JSON.stringify(data));
-                    //alert("Successfully sent a request");
+                    alert("Successfully submitted a review");
                 }else{
                     alert("Internal error. Please Try Again");
                 }
+                location.reload();
             }
         );
     });
