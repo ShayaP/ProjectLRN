@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"time"
-    "errors"
+    //"errors"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -66,22 +66,30 @@ func (r *Request) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 
 func (req *Request) CreateRequest(tx *pop.Connection, senderid string, receiverid string, topic string) (*Request, error) {
 
-    if (sender.ID == receiver.ID){
-        return nil, errors.New("Cannot send a request to yourself")
-    }
+    //if (sender.ID == receiver.ID){
+    //    return nil, errors.New("Cannot send a request to yourself")
+    //}
 
-    if (sender.IsTutor == receiver.IsTutor){
-        return nil, errors.New("Cannot Send a request to a user of the same type")
-    }
+    //if (sender.IsTutor == receiver.IsTutor){
+    //    return nil, errors.New("Cannot Send a request to a user of the same type")
+    //}
 
+    sendID, err := uuid.FromString(senderid)
+    if err != nil {
+        return nil, err
+    }
+    recID, err := uuid.FromString(receiverid)
+    if err != nil {
+        return nil, err
+    }
     req = &Request{
         Status:     2,
-        SenderID:   senderid,
-        ReceiverID: receiverid,
+        SenderID:   sendID,
+        ReceiverID: recID,
         Topic:      topic,
     }
-
-    return tx.ValidateAndCreate(req), nil
+    return nil,nil
+    //return tx.ValidateAndCreate(req), nil
 }
 
 
