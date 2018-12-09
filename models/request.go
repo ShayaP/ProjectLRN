@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"time"
-    "errors"
+    //"errors"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -63,27 +63,33 @@ func (r *Request) ValidateUpdate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.NewErrors(), nil
 }
 
-func (req *Request) CreateRequest(tx *pop.Connection) (*validate.Errors, error){
-    return tx.ValidateAndCreate(req)
-}
 
-func CreateNewRequestData(sender *User, receiver *User, topic string) (*Request, error){
-    if (sender.ID == receiver.ID){
-        return nil, errors.New("Cannot send a request to yourself")
-    }
-    if (sender.IsTutor == receiver.IsTutor){
-        return nil, errors.New("Cannot Send a request to a user of the same type")
-    }
-    var request *Request
+func (req *Request) CreateRequest(tx *pop.Connection, senderid string, receiverid string, topic string) (*Request, error) {
 
-    request = &Request{
-        Status:     3,
-        SenderID:   sender.ID,
-        ReceiverID: receiver.ID,
+    //if (sender.ID == receiver.ID){
+    //    return nil, errors.New("Cannot send a request to yourself")
+    //}
+
+    //if (sender.IsTutor == receiver.IsTutor){
+    //    return nil, errors.New("Cannot Send a request to a user of the same type")
+    //}
+
+    sendID, err := uuid.FromString(senderid)
+    if err != nil {
+        return nil, err
+    }
+    recID, err := uuid.FromString(receiverid)
+    if err != nil {
+        return nil, err
+    }
+    req = &Request{
+        Status:     2,
+        SenderID:   sendID,
+        ReceiverID: recID,
         Topic:      topic,
     }
-
-    return request, nil
+    return nil,nil
+    //return tx.ValidateAndCreate(req), nil
 }
 
 

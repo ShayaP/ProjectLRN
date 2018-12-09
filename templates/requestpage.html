@@ -42,24 +42,20 @@
                     </tr>
                   </thead>
                   <tbody>
+                      	    <form method="POST">
+			      <%= csrf()%>
+		    	     </form>
 		    <%= for (sentRequest) in sentRequests { %>
-                    	<tr>
+                        <tr class="result" uid="<%= result.ID %>">
                      	  <td><%= sentRequest[nameIndex]  %></td>
                       	  <td><%= sentRequest[ratingIndex] %></td>
                       	  <td><%= sentRequest[subjectsIndex] %></td>
                       	  <td><%= sentRequest[statusIndex] %></td>
                       	  <!--Add a button to decline or accept request only in status that are accepted-->
-			  <%= if (sentRequest[statusIndex] == "Accepted") { %>
-                      	    <form method="POST">
-			      <%= csrf()%>
+			  <%= if (sentRequest[statusIndex] != "Accepted") { %>
 			      <td>
-			        <select name="sentDecision[]" required>
-				  <option value="1">Accept</option>
-				  <option value="2">Decline</option>
-				</select>
-				<button class="btn btn-light btn-xl js-scroll-trigger" type="submit">Save</button>
+				    <button class="btn btn-light btn-xl js-scroll-trigger btn-sender" type="button">Withdraw Request</button>
 			      </td>
-		    	     </form>
                             <% } else { %>
 		    	    <td></td>
 			  <% } %>

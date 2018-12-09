@@ -15,7 +15,7 @@
 
   <form method="POST">
     <%= csrf() %>
-
+    <div type="hidden" id="SearchTopic" value="<%= topic %>"></div>
   <div class="card mb-3">
     <div class="card-header" align="left">
       <i class="fas"></i>
@@ -39,7 +39,7 @@
 
             
             <%= for (index, result) in results { %>
-            <tr>
+            <tr class="result" uid="<%= result.ID %>">
               <td><%=result.FirstName+" "+result.LastName %></td>
               <td>
                 <%=for (course) in courses[index] { %>
@@ -52,10 +52,9 @@
                 <% } %>
               </td>
               <td><%=result.AvgRating %></td>
-              <td><button class = "btn btn-light btn-xl js-scroll-trigger" type= "submit" role= "Request" name = "Send Request" value="true">Request</button></td>
+              <td><button class="btn btn-light btn-xl js-scroll-trigger" type="button" role="Request" name="Send Request" value="true">Request</button></td>
             </tr>
             <% } %>
-
           </tbody>
         </table>
       </div>
@@ -66,4 +65,5 @@
 <% contentFor("extraHeadArgs") { %>
 <% }  %>
 <% contentFor("jsArgs") { %>
+<%= javascriptTag("requests.js") %>
 <% }  %>
