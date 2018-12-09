@@ -1,11 +1,22 @@
+<div style="text-align: center;">
 
+  
+  <div style="background: #c6ddef; border-radius: px 5px 0px 0px; padding: 15px;"><span style="font-family: arial; color: #ffffff; font-size: 3.00em; font-weight:bold;">MY PROFILE</span>
+    <div class="col-lg-8 mx-auto"> 
+       <h1 class="text-lowerrcase" >
+      </h1>
+      </div>
+           
+  </div>
+  <hr>
+</div>
     <!-- Page Content -->
       <div class="row">
 
         <div class="col-lg-3">
           <h1 class="my-4"></h1>
           <div class="list-group  m_cFixed m_cBlock">
-            <a href="#m_iPersonalInfo" class="list-group-item active">Personal Information</a>
+            <a href="#m_iPersonalInfo" class="list-group-item">Personal Information</a>
             <a href="#m_iSubjects" class="list-group-item" title="Jump to subjects">Subjects</a>
             <a href="#m_iLanguages" class="list-group-item" title="Jump to languages">Languages</a>
             <a href="<%= updateProfilePath() %>" class="btn btn-success" title="Update profile">Update</a>
@@ -17,10 +28,9 @@
         <div class="col-lg-9">
 
           <div class="card mt-4">
-            <h2 class="card-title">MyProfile</h2>
-            <div class="m_cMulticontainer">
-                <div class="card-header halfpiece">
-                 <div class="card-header">
+           <div class="m_cMulticontainer">
+                <div class="card-header halfpiece m_cCenterBox">
+                  <div class="card-header">
                     <h1 > <%= username %> </h1>
                   </div>
                 </div>
@@ -33,7 +43,7 @@
 
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
-              <h2 id="m_iPersonalInfo" class="card-title">Personal Information</h2>
+              <h3 id="m_iPersonalInfo" class="card-title">Personal Information</h3>
             </div>
             <div class="card-body">
               <div class="m_cMulticontainer">
@@ -64,7 +74,7 @@
 
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
-              <h2 id="m_iSubjects">Subjects</h2>
+              <h3 id="m_iSubjects">Subjects</h3>
               <small class="text-muted"><%= subjectDescription %></small>
             </div>
             <div class="card-body">
@@ -87,10 +97,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          
+
           <div class="card card-outline-secondary my-4">
             <div class="card-header">
-              <h2 id="m_iLanguages">Languages</h2>
+              <h3 id="m_iLanguages">Languages</h3>
               <small class="text-muted"><%= langDescription%></small>
             </div>
             <div class="card-body">
