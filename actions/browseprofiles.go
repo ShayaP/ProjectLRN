@@ -99,7 +99,7 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		}
 		fmt.Println("222222")
         temp := []*models.User{u}
-		c.Set("topic", "")
+		c.Set("topic", "Variety")
 		info, err := models.GetInfoByGID(tx, u.GoogleID)
 		if err != nil {
 			return c.Error(401, err)
