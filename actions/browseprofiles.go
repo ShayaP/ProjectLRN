@@ -51,12 +51,15 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		for _, userinfo := range list {
 			// check if the useres are tutors and tutees here.
 			u, err := models.GetUserByGID(tx, userinfo.GoogleID)
+			fmt.Println("\n")
+			fmt.Println(u.FirstName)
+			fmt.Println("\n")
 			if err != nil {
 				return c.Error(401, err)
 			}
 
 			//automatically show only the other group of people 
-			if u.IsTutor != isTutor {
+			if u.IsTutor == isTutor {
 				continue
 			}
 
@@ -67,6 +70,9 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 
 			users = append(users, u)
 		}
+		fmt.Println("\n")
+		fmt.Println(users)
+		fmt.Println("\n")
 		c.Set("results", users)
 	} else {
 		u, err := models.GetUserByName(tx, name)

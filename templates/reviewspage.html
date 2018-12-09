@@ -85,9 +85,7 @@
           </form>
         </div>
 
-
-
-          <form method="GET">
+        <form method="GET">
             <%= csrf() %>
           <div class="card mb-3">
             <div class="card-header" align="left">
@@ -109,14 +107,11 @@
                   </thead>
 
                   <tbody>
-		    <% let nameIndex = 0 %>
-		    <% let rateIndex = 1 %>
-		    <% let fbIndex = 2 %>
-	   	    <%= for (rating) in pastRatings { %>
+                    <%= for (rev) in pastReviews { %>
                     <tr>
-                      <td><%= rating[nameIndex] %></td>
-                      <td><%= rating[rateIndex] %></td>
-                      <td><%= rating[fbIndex]  %></td>
+                      <td><%= rev.Reviewee %></td>
+                      <td><%= rev.Rating %></td>
+                      <td><%= rev.Description  %></td>
                     </tr>
                    <% } %>
                   </tbody>
