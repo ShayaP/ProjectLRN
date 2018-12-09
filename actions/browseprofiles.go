@@ -82,11 +82,24 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		c.Set("courses", courses)
 		c.Set("langs", langs)
 	} else {
+        fmt.Println("111111")
 		u, err := models.GetUserByName(tx, name)
+        fmt.Println("3333333")
 		if err != nil {
-			return c.Error(401, err)
+
+		    users := []*models.User{} 
+		    courses := [][]string{}
+		    langs := [][]string{}
+            topics := s.Topics
+            c.Set("topic", topics)
+		    c.Set("results", users)
+		    c.Set("courses", courses)
+		    c.Set("langs", langs)
+			return c.Render(200, r.HTML("browseprofiles.html"))
+            //return c.Error(401, err)
 		}
-		temp := []*models.User{u}
+		fmt.Println("222222")
+        temp := []*models.User{u}
 		c.Set("topic", "")
 		info, err := models.GetInfoByGID(tx, u.GoogleID)
 		if err != nil {
