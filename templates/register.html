@@ -12,6 +12,8 @@
       </h1>
 
     </div>
+</div>
+
 </style>
 <%= if (errors) {%>
 <%= for (key, err) in errors.Errors {%>
@@ -21,7 +23,11 @@
 
 <form method="POST">
     <%= csrf() %>
-<table class='center'>
+<table  {
+	class='center'
+	align='center'; 
+	cellpadding="15";
+	}>
     <tr><td>Email:</td><td><input type="text" name="Email" value="<%= userRequest.Email%>"></td></tr>
 	<tr><td>First Name:</td><td><input type="text" name="FirstName" value="<%= userRequest.FirstName%>"></td></tr>
 	<tr><td>Last Name:</td><td><input type="text" name="LastName" value="<%= userRequest.LastName%>"></td></tr>

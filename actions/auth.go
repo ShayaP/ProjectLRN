@@ -25,6 +25,7 @@ func init() {
 func AuthCallback(c buffalo.Context) error {
 	gu, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
+		fmt.Println("I AM THE BANE OF CONNER")
 		return c.Error(401, err)
 	}
 	tx := c.Value("tx").(*pop.Connection)
