@@ -73,7 +73,7 @@
 	<tr><td><strong>Name (optional):<strong></td><td><input type="text" name="Name"></td></tr>
 	<tr><td><strong>Languages:<strong></td><td>
 		<select name="Languages">
-			<%= for(language) in languages %>
+			<%= for(language) in languages { %>
 			  <option value="<%= language %>"> <%= language %></option>
 			<% } %>
 		</select>
