@@ -72,6 +72,7 @@ func App() *buffalo.App {
 		app.POST("/updaterecrequest",UpdateRequestReceivedPOSTHandler )
 		app.POST("/updatesentrequest",UpdateRequestSentPOSTHandler )
 		app.GET("/reviewspage", ReviewHandler)
+		app.POST("/reviewspage", ReviewPOSTHandler)
 		app.POST("/payload", PushPayloadHandler)
 		app.GET("/profile", ProfileHandler)
 		app.GET("/update-profile", UpdateProfileHandler)
