@@ -46,6 +46,8 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 		fmt.Println()
 		fmt.Println(list)
 		users := []*models.User{} 
+		courses := [][]string{}
+		langs := [][]string{}
 		curr_user := c.Session().Get("user").(*models.User)
 		isTutor := curr_user.IsTutor
 		for _, userinfo := range list {
@@ -69,18 +71,33 @@ func BrowseProfilesPOSTHandler(c buffalo.Context) error {
 			}
 
 			users = append(users, u)
+			langs = append(langs, userinfo.GetLanguages())
+			courses = append(courses, userinfo.GetCourses())
 		}
 		fmt.Println("\n")
 		fmt.Println(users)
 		fmt.Println("\n")
 		c.Set("results", users)
+		c.Set("courses", courses)
+		c.Set("langs", langs)
 	} else {
 		u, err := models.GetUserByName(tx, name)
 		if err != nil {
 			return c.Error(401, err)
 		}
 		temp := []*models.User{u}
+		info, err := models.GetInfoByGID(tx, u.GoogleID)
+		if err != nil {
+			return c.Error(401, err)
+		}
+		
+		courses := [][]string{}
+		langs := [][]string{}
+		langs = append(langs, info.GetLanguages())
+		courses = append(courses, info.GetCourses())
 		c.Set("results", temp)
+		c.Set("courses", courses)
+		c.Set("langs", langs)
 	}
     // c.Set("results", []string{"Samantha B","John S","Gary G","Aaron R","Michael N"})
     return c.Render(200, r.HTML("browseprofiles.html"))
