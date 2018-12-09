@@ -1,35 +1,86 @@
-# Welcome to Buffalo!
+#Introduction: 
+LRN is a tutoring app that connects those who want to learn further about academic subjects with those who want to teach others in academic subjects. 
+The goal of the app is to connect these users with each other so they can go offline and start LRN’ing. 
+This app only suggests other tutors and tutees, it is up to the users to connect to each other and see if they are a good fit for each other
 
-Thank you for choosing Buffalo for your web development needs.
+#Login Credentials: 
+There are several accounts that were created for testing purposes:
+Username:  lrnc99913@gmail.com 
+Password: LRNsystem123
 
-## Database Setup
+Username: test1234btefla@gmail.com 
+Password: f65hdsr3$
 
-It looks like you chose to set up your application using a sqlite3 database! Fantastic!
+Username: test988test@gmail.com
+Password: butterskin4%
 
-The first thing you need to do is open up the "database.yml" file and edit it to use the correct usernames, passwords, hosts, etc... that are appropriate for your environment.
+Username: test988atutor@gmail.com 
+Password: butterskin4%
 
-You will also need to make sure that **you** start/install the database of your choice. Buffalo **won't** install and start sqlite3 for you.
+Username: test988bobbytutor@gmail.com
+Password: butterskin4%
 
-### Create Your Databases
+#Requirements: 
+This is a web application and the user must have:
+Internet Connection
+A web browser such as Chrome or Firefox
 
-Ok, so you've edited the "database.yml" file and started sqlite3, now Buffalo can create the databases in that file for you:
+To run the live application, visit
+https://www.lrn-cse110.me
 
-	$ buffalo db create -a
+#Dev Requirements
+This app requires the latest versions of:
+Golang (V. 1.11)
+Sqlite3
+Buffalo
+Goth
+Google metadata
 
-## Starting the Application
+#Installation Instruction: 
+In order to install the requirements follow the steps below:
+1. Install golang and SQLite3:
+    1.1. https://golang.org/doc/install
+    1.2. http://www.sqlitetutorial.net/download-install-sqlite/ 
+2. Install Buffalo w/ SQLite3
+    2.1. Run “go get -u -v -tags sqlite github.com/gobuffalo/buffalo/buffalo”
+    2.2. Run “go get -u -v -tags sqlite github.com/gobuffalo/buffalo-pop”
+3. Install dependencies
+    3.1. Run “go get github.com/markbates/goth”
+    3.2. Run “go get cloud.google.com/go/compute/metadata”
 
-Buffalo ships with a command that will watch your application and automatically rebuild the Go binary and any assets for you. To do that run the "buffalo dev" command:
 
-	$ buffalo dev
+In order to run the app follow the commands below:
+Run “cd ~/go/src/github.com/cileonard/”
+Run “buffalo new lrn-test --db-type sqlite3”
+If ‘Error: exit status 243’ run ‘sudo npm install -g yarn’
+Git clone https://github.com/CILeonard/lrn.git
+Mv lrn-test/node_modules lrn/
+Mv lrn-test/database.yml lrn/
+Run “cd lrn/”
+Run “buffalo dev”
 
-If you point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000) you should see a "Welcome to Buffalo!" page.
 
-**Congratulations!** You now have your Buffalo application up and running.
+Known Bugs:
+If you get a "401" no matching session found, clear your cookies for this website. 
 
-## What Next?
 
-We recommend you heading over to [http://gobuffalo.io](http://gobuffalo.io) and reviewing all of the great documentation there.
+#Contacts:
 
-Good luck!
+Technical Support: 
+Conner Leonard: Software Architect    cileonard08@gmail.com     
+Other: 
+Shaya Parsa:  Software Development Lead     sparsa@ucsd.edu
 
-[Powered by Buffalo](http://gobuffalo.io)
+#FAQs:
+
+I get 401 error saying the session could not be found when logging in:
+clear cookies for localhost and for 127.0.0.1
+then access the site via 127.0.0.1:3000
+
+When I do buffalo dev the app does not start running:
+Run “buffalo-pop pop drop”
+Run “buffalo-pop pop create -a”
+Run “buffalo-pop pop migrate up”
+
+
+
