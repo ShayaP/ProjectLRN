@@ -38,7 +38,7 @@ func SplitRequestsByStatus(requests models.Requests, isSender bool, tx *pop.Conn
         name := user.FirstName + " " + user.LastName
         date := req.CreatedAt.Format("1/2/06")
         rating := strconv.FormatFloat(float64(user.AvgRating), 'f', 2, 32)
-        listRequestStrings[ind] = []string{name, rating, req.Topic, statusmap[req.Status], date}
+        listRequestStrings[ind] = []string{name, rating, req.Topic, statusmap[req.Status], date, user.PhoneNumber, user.Email}
     }
     return listRequestStrings, nil
 }
