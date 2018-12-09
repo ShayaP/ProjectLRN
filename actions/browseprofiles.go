@@ -1,5 +1,5 @@
 package actions
-  
+
 import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop"

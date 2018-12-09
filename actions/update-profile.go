@@ -30,38 +30,11 @@ func UpdateProfileHandler(c buffalo.Context) error {
 	// all the user's personal info that needs to be dynamically set
 	// indicates whether user is a tutor
 	isTutor := (user.IsTutor == 2)
-	// comprehensive list of languages user can choose
-	/**
-    languages := []string{"English", "Arabic", "Armenian", "Austronesian", "Chinese", "French",
-				"German", "Hindi", "Japanese", "Korean", "Persian", "Portugese",
-				"Punjabi", "Russian","Spanish", "Tagalog", "Tai-Ka", "Vietnamese"}
-	// comprehensive list of courses user can choose
-	var subjsAndClasses = map[string][]string{
-		"Applied Arts" : {"Digital Media", "Film Production","Photography"},
-		"Biology": {"Botany", "Marine Biology", "Zoology"},
-		"Chemistry": {"Introduction to Chemistry", "Organic Chemistry"},
-	}
-	//comprehensive list of states user can choose from
-	//states := []string{"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
-	//			  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
-	//			  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
-	//			  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
-	//			  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}
-    */
     languages := ProfileGetLanguages()
-    // address of the user 
-	//address := ProfileGetAddress(c)
-	// get list of all the subjects asociated with the user
-	//userSubjects := ProfileGetSubjects()
 	// all the subjects and courses affliated with user
 	subjsAndClasses := ProfileGetSubjsAndClasses()
 	// slice of strings of all the subjects (Gets the names of all the subjects)
 	subjects := ProfileGetSubjects()
-    /**
-    subjects := make([]string, 0, 15)
-	for key, _ := range subjsAndClasses {
-		subjects = append(subjects, key)
-	}*/
 
 	// maps the user courses to all courses
 	mapUCtoC := make(map[string]string)
@@ -80,24 +53,6 @@ func UpdateProfileHandler(c buffalo.Context) error {
     for _, course := range userCourses {
         mapUCtoC[course] = "checked"
     }
-
-
-    /**
-	for i:=0; i < len(userSubjects); i++ {
-		// all courses under the subject affliated with user
-		var courses = subjsAndClasses[userSubjects[i]]
-		// all the courses the user took
-		var userCourses = userSubsAndClasses[userSubjects[i]]
-		for j:= 0; j < len(userCourses); j++ {
-			//search over all the course until find a match
-			for k := 0; k < len(courses); k++ {
-				if userCourses[j] == courses[k] {
-					mapUCtoC[userCourses[j]] = "checked"
-					break;
-				}
-			}
-		}
-	}*/
 
 	// retrieve the languages known by the user
 	userLangs := uinfo.GetLanguages()
@@ -121,18 +76,10 @@ func UpdateProfileHandler(c buffalo.Context) error {
 
 	c.Set("title", "Update Profile")
 	//display user's name
-	//c.Set("username", ProfileGetUsername(c))
-    // address of user
-	//c.Set("street", address[0])
-	//c.Set("city", address[1])
-	//c.Set("state", address[2])
-	//c.Set("states", states)
 	c.Set("zip", uinfo.Address)
-	//c.Set("zip", address[3])
 	// phone number
 	c.Set("phone", user.PhoneNumber)
 	// email
-	//c.Set("contactEmail", ProfileGetContactEmail(c))
 	c.Set("accountEmail", user.Email)
 	//Subjects and Languages - help description
 	c.Set("subjectDescription", ProfileGetSubjectTip(isTutor))
@@ -150,29 +97,8 @@ func UpdateProfileHandler(c buffalo.Context) error {
 
 func UpdateProfilePOSTHandler(c buffalo.Context) error {
     fmt.Println("1,2 Buckle my shoe")
-    //test := &models.UpdateProfileForm{}
-    //var test models.UpdateProfileForm
-    //return c.Render(200, r.JSON(c.Request().Form))
     var test map[string][]string
     test = c.Request().Form
-    //fmt.Println(c.Request().Body)
-    //body, err := ioutil.ReadAll(c.Request().Body)
-    //if err != nil {
-    //  return c.Render(500, r.String(err.Error()))
-    //}
-    //fmt.Println(body)
-    //err = json.Unmarshal(body, test)
-    //err := c.Bind(test)
-    //decoder := json.NewDecoder(c.Request().Body)
-    //err = decoder.Decode(&test)
-    /**err := nil
-    fmt.Println("3,4 Shut the door")
-    if err != nil{
-        fmt.Println("5,6 This is a dick")
-        return c.Render(500, r.String(err.Error()))
-    }*/
-
-    fmt.Println("We here boys")
     user := c.Session().Get("user").(*models.User)
 	tx := c.Value("tx").(*pop.Connection)
 	uinfo, err := models.GetInfoByGID(tx, user.GoogleID)
@@ -193,18 +119,9 @@ func UpdateProfilePOSTHandler(c buffalo.Context) error {
     uinfo.Address = test["Location"][0]
     uinfo.SetCourses(test["Courses[]"])
     uinfo.SetLanguages(test["Languages[]"])
-    uinfo.SetSubjects([]string{"1","2"})
+    //uinfo.SetSubjects([]string{"1","2"})
+    uinfo.SetSubjects(GetSubjectsFromCourses(test["Courses[]"]))
 
-    //fmt.Println(test["Courses[]"])
-    //fmt.Println(test["Languages[]"])
-
-    //return c.Redirect(302,"/update-profile")
-    /**
-    user.PhoneNumber = test.PhoneNumber
-    uinfo.Address = test.Location
-    uinfo.SetCourses(test.Courses)
-    uinfo.SetLanguages(test.Languages)
-    */
     var verrs *validate.Errors
     if newUser{
         verrs, err = uinfo.CreateEntry(tx)

@@ -1,7 +1,7 @@
 package actions
 
 import (
-    "fmt"
+    //"fmt"
 
 	"github.com/cileonard/lrn/models"
 
@@ -15,25 +15,20 @@ func RequestPageHandler(c buffalo.Context) error {
     user := c.Session().Get("user").(*models.User)
 
 	tx := c.Value("tx").(*pop.Connection)
-    fmt.Println("AAAAA")
     allSentRequests, err := models.GetRequestsSent(user, tx)
     if err != nil {
         return c.Render(500, r.String(err.Error()))
     }
-    fmt.Println("BBBBB")
     allReceivedRequests, err := models.GetRequestsReceived(user, tx)
     if err != nil {
         return c.Render(500, r.String(err.Error()))
     }
 
 
-
-    fmt.Println("CCCCC")
     ParsedSentRequests, err := SplitRequestsByStatus(*allSentRequests, true, tx)
     if err != nil {
         return c.Render(500, r.String(err.Error()))
     }
-    fmt.Println("DDDDD")
     ParsedRecievedRequests, err := SplitRequestsByStatus(*allReceivedRequests, false, tx)
     if err != nil {
         return c.Render(500, r.String(err.Error()))
@@ -44,6 +39,10 @@ func RequestPageHandler(c buffalo.Context) error {
 	c.Set("receivedRequests", ParsedRecievedRequests)
 	return c.Render(200, r.HTML("requestpage.html"))
 }
+
+
+//func RequestPagePOSTHandler(c buffalo.Context) error {
+//}
 
 // Get the requests the user sent
 func GetRequestsSent(c buffalo.Context) [][]string {
