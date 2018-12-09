@@ -9,6 +9,7 @@ import (
 	"github.com/gobuffalo/pop"
 )
 
+
 // FindHandler is a default handler to serve up
 // a home page.
 func RequestPageHandler(c buffalo.Context) error {
@@ -41,11 +42,30 @@ func RequestPageHandler(c buffalo.Context) error {
 }
 
 
-func RequestPagePOSTHandler(c buffalo.Context) error {
-    user := c.Session().Get("user").(*models.User)
+func RequestPagePOSTHandler(c buffalo.Context) error {	
+    //user := c.Session().Get("user").(*models.User)
 
-    return c.Render(200, r.JSON(user))
+    //return c.Render(200, r.JSON(user))
     //return c.Render(200, r.JSON(c.Request().Form))
+
+	request := &models.Request{}
+
+	if err := c.Bind(u); err != nil {
+		return c.Render(500, r.String(err.Error()))
+	}
+
+	sender  = c.Session().Get("user").(string)
+	reciever  =  	
+	topic = 
+
+	tx := c.Value("tx").(*pop.Connection)	
+	verrs, err := request.CreateRequest(tx, sender, reciever, topic)
+
+	if err != nil { //Error creating the request
+		return c.Render(500,  r.String(err.Error()))
+	}
+
+>>>>>>> Stashed changes
 }
 
 // Get the requests the user sent
@@ -71,3 +91,21 @@ func GetRequestsReceived(c buffalo.Context) [][]string {
 	}
 	return requests
 }
+
+func acceptRequest(c Buffalo.Context) error {
+	user := c.Session().Get("user").models(*User)
+	
+	requests := GetRequestRecieved(c)
+
+	allReceivedRequests, err := models.GetRequestsReceived(user, tx)
+    	if err != nil {
+        	return c.Render(500, r.String(err.Error()))
+    	}
+
+
+}
+
+func declineRequest(c Buffalo.context) error {
+
+
+)
