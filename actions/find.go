@@ -1,6 +1,6 @@
 package actions
 
-import "github.com/buffalo/gobuffalo"
+import "github.com/gobuffalo/buffalo"
 
 // FindHandler is a default handler to serve up
 // a home page.
