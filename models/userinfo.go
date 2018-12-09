@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
     "strings"
-    // "fmt"
+    "fmt"
 
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
@@ -102,6 +102,8 @@ func (u *Userinfo) SetSubjects(courses []string) {
     u.Subjects = encodeIdsToString(courses)
 }
 
+
+
 func (u *Userinfo) SetTutors(tutors []string) {
     u.Tutors = encodeIdsToString(tutors)
 }
@@ -163,27 +165,42 @@ func GetFilteredUsers(tx *pop.Connection, location string, language string, subj
 	returnUsers := []Userinfo{}
 	for index, user := range *userList {
 		langs := user.GetLanguages()
+		loc := user.Address
 		subs := user.GetSubjects()
 
 		boolLang := false
 		for _, l := range langs {
+			fmt.Println("\n")
+			fmt.Println(language)
+			fmt.Println(l)
+			fmt.Println("\n")
 			if l == language {
 				boolLang = true
 				break
 			}
 		}
 
+		// check location
+		boolLoc := (loc == location)
+
 		boolSub := false
 		for _, s := range subs {
+			fmt.Println("\n")
+			fmt.Println(subject)
+			fmt.Println(s)
+			fmt.Println("\n")
 			if s == subject {
 				boolSub = true
 				break
 			}
 		}
 
-		if boolLang == true && boolSub == true {
+		if boolLang == true && boolSub == true && boolLoc == true {
 			returnUsers = append(returnUsers, (*userList)[index])
 		}
 	}
+	fmt.Println("\n")
+	fmt.Println(returnUsers)
+	fmt.Println("\n")
 	return returnUsers, nil
 }

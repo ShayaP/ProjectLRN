@@ -27,7 +27,8 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th>Courses</th>
+              <th>Languages</th>
               <th>Rating</th>
               <th>Request</th>
 
@@ -37,12 +38,19 @@
           <tbody>
 
             
-            <% let count = 0 %>
-            <%= for (result) in results { %>
+            <%= for (index, result) in results { %>
             <tr class="result" uid="<%= result.ID %>">
-            <% let count = count+1 %>
               <td><%=result.FirstName+" "+result.LastName %></td>
-              <td><%=result.Email %></td>
+              <td>
+                <%=for (course) in courses[index] { %>
+                  <ul><%= course %></ul>
+                <% } %>
+              </td>
+              <td>
+                <%=for (lang) in langs[index] { %>
+                  <ul><%= lang %></ul>
+                <% } %>
+              </td>
               <td><%=result.AvgRating %></td>
               <td><button class="btn btn-light btn-xl js-scroll-trigger" type="button" role="Request" name="Send Request" value="true">Request</button></td>
             </tr>
