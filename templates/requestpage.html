@@ -61,8 +61,13 @@
 		    	    <td></td>
 			  <% } %>
 			  <td><%= sentRequest[dateIndex] %></td>
-			  <td><%= sentRequest[phoneIndex] %></td>
+              <%= if (sentRequest[statusIndex] == "Accepted") {%>
+              <td><%= sentRequest[phoneIndex] %></td>
 			  <td><%= sentRequest[emailIndex] %></td>
+              <% } else {%>
+                <td></td>
+                <td></td>
+              <% } %>
                     	</tr>
 		    <% } %>
                    </tbody>
@@ -116,8 +121,13 @@
 		    	    <td></td>
 			  <% } %>
                       	  <td><%= receivedRequest[dateIndex] %></td>
-                      	  <td><%= receivedRequest[phoneIndex] %></td>
-                      	  <td><%= receivedRequest[emailIndex] %></td>
+              <%= if (receivedRequest[statusIndex] == "Accepted") {%>
+              <td><%= receivedRequest[phoneIndex] %></td>
+			  <td><%= receivedRequest[emailIndex] %></td>
+              <% } else {%>
+                <td></td>
+                <td></td>
+              <% } %>
                     	</tr>
 		    <% } %>
                     </tbody>
