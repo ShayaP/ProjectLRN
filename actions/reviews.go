@@ -25,7 +25,9 @@ func ReviewHandler(c buffalo.Context) error {
 }
 
 func ReviewPOSTHandler(c buffalo.Context) error {
-	rev := &models.Review{}
+    return c.Render(200, r.JSON(c.Request().Form))
+	fmt.Println("Teenage dream")
+    rev := &models.Review{}
 	n := &Name{}
 	tx := c.Value("tx").(*pop.Connection)
 	if err := c.Bind(n); err != nil {
@@ -71,18 +73,35 @@ func ReviewGetPastUsers(c buffalo.Context) []*models.User {
 	if err != nil {
 		return nil
 	}
+	received, err := models.GetRequestsReceived(curr_user, tx)
+	if err != nil {
+		return nil
+	}
 
-	all_reqs := []models.Request{}
+	all_sent_reqs := []models.Request{}
+	all_rec_reqs := []models.Request{}
 
 	for index, req := range *sent {
 		if req.Status == 1 {
-			all_reqs = append(all_reqs, (*sent)[index])
+			all_sent_reqs = append(all_sent_reqs, (*sent)[index])
+		}
+	}
+	for index, req := range *received {
+		if req.Status == 1 {
+			all_rec_reqs = append(all_rec_reqs, (*received)[index])
 		}
 	}
 
 	users := []*models.User{}
-	for _, req := range all_reqs {
+	for _, req := range all_sent_reqs {
 		user, err := models.GetUserBySysId(tx, req.ReceiverID)
+		if err != nil {
+			return nil
+		}
+		users = append(users, user)
+	}
+	for _, req := range all_rec_reqs {
+		user, err := models.GetUserBySysId(tx, req.SenderID)
 		if err != nil {
 			return nil
 		}

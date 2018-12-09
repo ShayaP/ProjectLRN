@@ -68,11 +68,12 @@
 
                   <tbody>
                     <%= for (user) in pastUsers { %>
-                    <tr>
-                      <td><input type="text" name="First" value=""></td>
-                      <td><input type="text" name="Rating" value=""></td>
+                    <tr class="review" uid="<%= user.ID %>">
+                        <input type="hidden" name="First" value="<%= user.FirstName%>">
+                        <td><p><%= user.FirstName + " " + user.LastName %></p></td>
+                      <td><input type="number" name="Rating" min="1" max="10" value=""></td>
                       <td><input type="text" name="Description" value=""></td>
-                      <td><input class="btn btn-light btn-xl js-scroll-trigger" type="submit" value="submit"> </td>
+                      <td><input class="btn btn-light btn-xl js-scroll-trigger" type="button" value="Submit"> </td>
                     </tr>
                     <% } %>
 
@@ -168,5 +169,6 @@ contentFor(“extrHeadArgs”) {
   <%= stylesheetTag("css/all.min.css") %>
 	<%= stylesheetTag("sb-admin.css") %>
     <% } %>
-   <% contentFor("jsArgs") { %>
+    <%= contentFor("jsArgs") { %>
+      <%= javascriptTag("reviewsubmit.js") %>
     <% } %>
