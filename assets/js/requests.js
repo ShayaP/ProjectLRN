@@ -9,9 +9,9 @@ $(document).ready(function(){
             },
             function(data, status){
                 if (status == "success"){
-                    alert("Successfully sent a request")
+                    alert("Successfully sent a request");
                 }else{
-                    alert("Internal error. Please Try Again")
+                    alert("Internal error. Please Try Again");
                 }
             }
         );

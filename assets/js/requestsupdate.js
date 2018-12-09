@@ -1,17 +1,36 @@
 $(document).ready(function(){
     $(".btn-sender").click(function(){
-        receiverID = $(this).parent().parent(".result").attr("uid");
-        $.post('/newrequest', 
+        requestID = $(this).parent().parent(".result").attr("uid");
+        $.post('/updatesentrequest', 
             {
                 authenticity_token: $("input[name=authenticity_token]").val(),
-                receiver: receiverID,
+                request: requestID,
             },
             function(data, status){
                 if (status == "success"){
-                    alert("Successfully sent a request")
+                    alert("Successfully sent a request");
                 }else{
-                    alert("Internal error. Please Try Again")
+                    alert("Internal error. Please Try Again");
                 }
+                location.reload();
+            }
+        );
+    });
+    $(".btn-receiver").click(function(){
+        requestID = $(this).parent().parent(".result").attr("uid");
+        $.post('/updaterecrequest', 
+            {
+                authenticity_token: $("input[name=authenticity_token]").val(),
+                request: requestID,
+                decision: $(this).siblings("select").val(),
+            },
+            function(data, status){
+                if (status == "success"){
+                    alert("Successfully updated a request");
+                }else{
+                    alert("Internal error. Please Try Again");
+                }
+                location.reload();
             }
         );
     });
