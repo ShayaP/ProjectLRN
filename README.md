@@ -1,9 +1,9 @@
-#Introduction: 
+# Introduction: 
 LRN is a tutoring app that connects those who want to learn further about academic subjects with those who want to teach others in academic subjects. 
 The goal of the app is to connect these users with each other so they can go offline and start LRN’ing. 
 This app only suggests other tutors and tutees, it is up to the users to connect to each other and see if they are a good fit for each other
 
-#Login Credentials: 
+# Login Credentials: 
 There are several accounts that were created for testing purposes:
 Username:  lrnc99913@gmail.com 
 Password: LRNsystem123
@@ -20,7 +20,7 @@ Password: butterskin4%
 Username: test988bobbytutor@gmail.com
 Password: butterskin4%
 
-#Requirements: 
+# Requirements: 
 This is a web application and the user must have:
 Internet Connection
 A web browser such as Chrome or Firefox
@@ -28,7 +28,7 @@ A web browser such as Chrome or Firefox
 To run the live application, visit
 https://www.lrn-cse110.me
 
-#Dev Requirements
+# Dev Requirements
 This app requires the latest versions of:
 Golang (V. 1.11)
 Sqlite3
@@ -36,7 +36,7 @@ Buffalo
 Goth
 Google metadata
 
-#Installation Instruction: 
+# Installation Instruction: 
 In order to install the requirements follow the steps below:
 1. Install golang and SQLite3:
     1.1. https://golang.org/doc/install
@@ -60,18 +60,18 @@ Run “cd lrn/”
 Run “buffalo dev”
 
 
-Known Bugs:
+# Known Bugs:
 If you get a "401" no matching session found, clear your cookies for this website. 
 
 
-#Contacts:
+# Contacts:
 
 Technical Support: 
 Conner Leonard: Software Architect    cileonard08@gmail.com     
 Other: 
 Shaya Parsa:  Software Development Lead     sparsa@ucsd.edu
 
-#FAQs:
+# FAQs:
 
 I get 401 error saying the session could not be found when logging in:
 clear cookies for localhost and for 127.0.0.1
